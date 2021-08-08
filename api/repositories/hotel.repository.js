@@ -1,15 +1,15 @@
 const firebase = require('firebase-admin');
-const collections = require('../common/enum/collections');
+const Collections = require('../common/enum/collections');
 class HotelRepository {
     static async create(newHotel) {
         const { id } = await firebase
             .firestore()
-            .collection(collections.HOTELS)
+            .collection(Collections.HOTELS)
             .add(newHotel);
 
         const hotelDoc = await firebase
             .firestore()
-            .collection(collections.HOTELS)
+            .collection(Collections.HOTELS)
             .doc(id)
             .get();
 
@@ -24,7 +24,7 @@ class HotelRepository {
     static async getAll() {
         const hotelsQuerySnapshot = await firebase
             .firestore()
-            .collection(collections.HOTELS)
+            .collection(Collections.HOTELS)
             .get();
         const hotels = [];
 
@@ -43,7 +43,7 @@ class HotelRepository {
     static async getById(id) {
         const hotelDoc = await firebase
             .firestore()
-            .collection(collections.HOTELS)
+            .collection(Collections.HOTELS)
             .doc(id)
             .get();
 
@@ -62,7 +62,7 @@ class HotelRepository {
     static async delete(id) {
         const hotelRef = firebase
             .firestore()
-            .collection(collections.HOTELS)
+            .collection(Collections.HOTELS)
             .doc(id);
 
         await hotelRef.delete();

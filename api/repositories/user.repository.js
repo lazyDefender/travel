@@ -1,5 +1,5 @@
 const firebase = require('firebase-admin');
-const collections = require('../common/enum/collections');
+const Collections = require('../common/enum/collections');
 class UserRepository {
     static async create(newUser) {
         const { 
@@ -11,7 +11,7 @@ class UserRepository {
 
         const { id } = await firebase
             .firestore()
-            .collection(collections.USERS)
+            .collection(Collections.USERS)
             .add({
                 authIDs: [authID],
                 firstName,
@@ -21,7 +21,7 @@ class UserRepository {
 
         const userDoc = await firebase
             .firestore()
-            .collection(collections.USERS)
+            .collection(Collections.USERS)
             .doc(id)
             .get();
 
@@ -36,7 +36,7 @@ class UserRepository {
     static async getAll() {
         const usersQuerySnapshot = await firebase
             .firestore()
-            .collection(collections.USERS)
+            .collection(Collections.USERS)
             .get();
         const users = [];
 
@@ -55,7 +55,7 @@ class UserRepository {
     static async getById(id) {
         const userDoc = await firebase
             .firestore()
-            .collection(collections.USERS)
+            .collection(Collections.USERS)
             .doc(id)
             .get();
 
@@ -74,7 +74,7 @@ class UserRepository {
     static async getByUid(uid) {
         const usersQuerySnapshot = await firebase
             .firestore()
-            .collection(collections.USERS)
+            .collection(Collections.USERS)
             .where('authIDs', 'array-contains', uid)
             .get();
 
@@ -95,7 +95,7 @@ class UserRepository {
     static async update(id, updatedUser) {
         const userRef = firebase
             .firestore()
-            .collection(collections.USERS)
+            .collection(Collections.USERS)
             .doc(id);
         await userRef.update(updatedUser);
 
@@ -112,7 +112,7 @@ class UserRepository {
     static async delete(id) {
         const userRef = firebase
             .firestore()
-            .collection(collections.USERS)
+            .collection(Collections.USERS)
             .doc(id);
 
         await userRef.delete();

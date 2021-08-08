@@ -1,5 +1,5 @@
 const firebase = require('firebase-admin');
-const collections = require('../common/enum/collections');
+const Collections = require('../common/enum/collections');
 
 class OrderRepository {
     static async create(order) {
@@ -13,11 +13,11 @@ class OrderRepository {
 
         const userRef = await firebase
             .firestore()
-            .collection(collections.USERS)
+            .collection(Collections.USERS)
             .doc(userId)
         const tourRef = await firebase
             .firestore()
-            .collection(collections.TOURS)
+            .collection(Collections.TOURS)
             .doc(tourId)
 
         const fullOrder = {
@@ -30,7 +30,7 @@ class OrderRepository {
 
         const orderRef = await firebase
             .firestore()
-            .collection(collections.ORDERS)
+            .collection(Collections.ORDERS)
             .add(fullOrder)
 
         const createdOrderDoc = await orderRef.get()

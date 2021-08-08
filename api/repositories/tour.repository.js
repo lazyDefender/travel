@@ -1,5 +1,5 @@
 const firebase = require('firebase-admin');
-const collections = require('../common/enum/collections');
+const Collections = require('../common/enum/collections');
 const moment = require('moment');
 
 class TourRepository {
@@ -57,7 +57,7 @@ class TourRepository {
     static async getById(id) {
         const tourRes = await firebase
             .firestore()
-            .collection(collections.TOURS)
+            .collection(Collections.TOURS)
             .doc(id)
             .get()
         const tour = {
@@ -68,7 +68,7 @@ class TourRepository {
 
         const hotelRes = await firebase
             .firestore()
-            .collection(collections.HOTELS)
+            .collection(Collections.HOTELS)
             .doc(tour.hotel.id)
             .get()
         const hotel = {
@@ -78,7 +78,7 @@ class TourRepository {
         }
         const cityRes = await firebase
             .firestore()
-            .collection(collections.CITIES)
+            .collection(Collections.CITIES)
             .doc(tour.toCity.id)
             .get()
         
@@ -89,7 +89,7 @@ class TourRepository {
 
         const bookedDaysRes = await firebase
             .firestore()
-            .collection(collections.ORDERS)
+            .collection(Collections.ORDERS)
             .where('tour', '==', tourRes.ref)
             .get()
         const bookedDaysDocs = bookedDaysRes.docs
@@ -112,12 +112,12 @@ class TourRepository {
     static async getByHotel(hotelId) {
         const hotelRef = await firebase
             .firestore()
-            .collection(collections.HOTELS)
+            .collection(Collections.HOTELS)
             .doc(hotelId)
 
         const toursRes = await firebase
             .firestore()
-            .collection(collections.TOURS)
+            .collection(Collections.TOURS)
             .where('hotel', '==', hotelRef)
             .get()
         
