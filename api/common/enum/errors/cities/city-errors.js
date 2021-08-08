@@ -1,9 +1,9 @@
-const errorCodes = require("./cityErrorCodes");
+const ErrorCodes = require("./city-error-codes");
 
-const errors = {
+const Errors = {
     notFoundById: (id) => {
         const error = {
-            code: errorCodes.CITY_NOT_FOUND_BY_ID,
+            code: ErrorCodes.CITY_NOT_FOUND_BY_ID,
             message: `City ${id} does not exist`,
         };
 
@@ -11,4 +11,4 @@ const errors = {
     },
 }
 
-module.exports = errors;
+module.exports = Errors;

@@ -1,4 +1,4 @@
-const errors = require("../errors/errorCodes")
+const errors = require("../common/enum/errors/error-codes")
 
 const validationError = (error) => {
     const result = {

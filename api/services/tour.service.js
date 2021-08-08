@@ -1,4 +1,4 @@
-const errors = require('../errors');
+const errors = require('../common/enum/errors');
 const TourRepository = require('../repositories/TourRepository');
 
 class TourService {

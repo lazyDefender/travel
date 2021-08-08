@@ -1,4 +1,4 @@
-const errorCodes = require("./userErrorCodes");
+const errorCodes = require("./user-error-codes");
 
 const errors = {
     notFoundById: (id) => {

@@ -1,6 +1,6 @@
 const firebase = require('firebase-admin');
-const errors = require('../errors');
-const errorCodes = require('../errors/errorCodes');
+const errors = require('../common/enum/errors');
+const errorCodes = require('../common/enum/errors/error-codes');
 const UserService = require('./UserService');
 
 class AuthService {

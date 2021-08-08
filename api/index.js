@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const initializeFirebase = require('./firebase');
 const { responseMiddleware } = require('./middlewares/response.middleware');
+const routes = require('./routes');
 
 initializeFirebase();
 
@@ -13,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const routes = require('./routes/index');
+
 routes(app);
 app.use(responseMiddleware);
 

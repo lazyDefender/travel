@@ -1,4 +1,4 @@
-const errors = require('../errors');
+const errors = require('../common/enum/errors');
 const UserRepository = require('../repositories/UserRepository');
 
 class UserService {

@@ -1,4 +1,4 @@
-const errorCodes = require("./hotelErrorCodes");
+const errorCodes = require("./hotel-error-codes");
 
 const errors = {
     notFoundById: (id) => {

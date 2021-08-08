@@ -1,9 +1,9 @@
-const authRoute = require('./authRoute');
-const userRoute = require('./userRoute');
-const cityRoute = require('./cityRoute');
-const hotelRoute = require('./hotelRoute');
-const tourRoute = require('./tourRoute');
-const orderRoute = require('./orderRoute');
+const authRoute = require('./auth.route');
+const userRoute = require('./user.route');
+const cityRoute = require('./city.route');
+const hotelRoute = require('./hotel.route');
+const tourRoute = require('./tour.route');
+const orderRoute = require('./order.route');
 
 module.exports = (app) => {
     app.use('/api/auth', authRoute);

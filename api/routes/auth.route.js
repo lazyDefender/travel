@@ -1,6 +1,5 @@
 const { Router } = require('express');
-const errors = require('../errors');
-const errorCodes = require('../errors/errorCodes');
+const errorCodes = require('../common/enum/errors/error-codes');
 const AuthService = require('../services/AuthService');
 
 const router = Router();

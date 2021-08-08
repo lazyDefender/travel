@@ -1,15 +1,15 @@
 const firebase = require('firebase-admin');
-const collections = require('../collections');
+const Collections = require('../common/enum/collections');
 class CityRepository {
     static async create(newCity) {
         const { id } = await firebase
             .firestore()
-            .collection(collections.CITIES)
+            .collection(Collections.CITIES)
             .add(newCity);
 
         const cityDoc = await firebase
             .firestore()
-            .collection(collections.CITIES)
+            .collection(Collections.CITIES)
             .doc(id)
             .get();
 
@@ -24,7 +24,7 @@ class CityRepository {
     static async getAll() {
         const citiesQuerySnapshot = await firebase
             .firestore()
-            .collection(collections.CITIES)
+            .collection(Collections.CITIES)
             .get();
         const cities = [];
 
@@ -43,7 +43,7 @@ class CityRepository {
     static async getById(id) {
         const cityDoc = await firebase
             .firestore()
-            .collection(collections.CITIES)
+            .collection(Collections.CITIES)
             .doc(id)
             .get();
 
@@ -62,7 +62,7 @@ class CityRepository {
     static async delete(id) {
         const cityRef = firebase
             .firestore()
-            .collection(collections.CITIES)
+            .collection(Collections.CITIES)
             .doc(id);
 
         await cityRef.delete();
