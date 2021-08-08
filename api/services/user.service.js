@@ -1,5 +1,5 @@
 const errors = require('../common/enum/errors');
-const UserRepository = require('../repositories/UserRepository');
+const UserRepository = require('../repositories/user.repository');
 
 class UserService {
     static async create(user) {

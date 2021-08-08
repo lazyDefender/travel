@@ -1,9 +1,9 @@
 const { Router } = require('express');
-const TourService = require('../services/TourService');
+const TourService = require('../services/tour.service');
 const validation = require('../middlewares/validation/hotel.validation.middleware');
 const errorCodes = require('../common/enum/errors/error-codes');
 const { validationResult } = require('express-validator');
-const validationError = require('../utils/validationError');
+const validationError = require('../utils/validation-error');
 
 const router = Router();
 

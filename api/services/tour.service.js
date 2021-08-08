@@ -1,5 +1,5 @@
 const errors = require('../common/enum/errors');
-const TourRepository = require('../repositories/TourRepository');
+const TourRepository = require('../repositories/tour.repository');
 
 class TourService {
     static async getAll(filters) {

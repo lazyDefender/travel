@@ -1,6 +1,6 @@
 const errors = require('../common/enum/errors');
-const HotelRepository = require('../repositories/HotelRepository');
-const TourRepository = require('../repositories/TourRepository');
+const HotelRepository = require('../repositories/hotel.repository');
+const TourRepository = require('../repositories/tour.repository');
 
 class HotelService {
     static async create(hotel) {

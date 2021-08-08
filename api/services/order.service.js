@@ -1,5 +1,5 @@
 const errors = require('../common/enum/errors');
-const OrderRepository = require('../repositories/OrderRepository');
+const OrderRepository = require('../repositories/order.repository');
 
 class OrderService {
     static async create(order) {

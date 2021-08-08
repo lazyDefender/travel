@@ -1,7 +1,7 @@
 const firebase = require('firebase-admin');
 const errors = require('../common/enum/errors');
 const errorCodes = require('../common/enum/errors/error-codes');
-const UserService = require('./UserService');
+const UserService = require('./user.service');
 
 class AuthService {
     static async verifyToken(rawToken = '') {

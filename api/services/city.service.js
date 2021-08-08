@@ -1,5 +1,5 @@
 const errors = require('../common/enum/errors');
-const CityRepository = require('../repositories/CityRepository');
+const CityRepository = require('../repositories/city.repository');
 
 class CityService {
     static async create(city) {
