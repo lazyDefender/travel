@@ -1,5 +1,5 @@
 const firebase = require('firebase-admin');
-const collections = require('../collections');
+const collections = require('../common/enum/collections');
 class UserRepository {
     static async create(newUser) {
         const { 

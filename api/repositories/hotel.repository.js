@@ -1,5 +1,5 @@
 const firebase = require('firebase-admin');
-const collections = require('../collections');
+const collections = require('../common/enum/collections');
 class HotelRepository {
     static async create(newHotel) {
         const { id } = await firebase

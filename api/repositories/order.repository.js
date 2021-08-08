@@ -1,5 +1,5 @@
 const firebase = require('firebase-admin');
-const collections = require('../collections');
+const collections = require('../common/enum/collections');
 
 class OrderRepository {
     static async create(order) {
