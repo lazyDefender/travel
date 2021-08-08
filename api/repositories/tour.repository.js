@@ -14,7 +14,7 @@ class TourRepository {
             
         const toCityRef = await firebase
             .firestore()
-            .collection('cities')
+            .collection(Collections.CITIES)
             .doc(toCity)
 
         const toursQuerySnapshot = await firebase

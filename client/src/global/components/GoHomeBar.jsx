@@ -14,11 +14,10 @@ import {
 } from '@material-ui/core'
 import { book } from '../../navigation/book'
 import useAuth from '../../global/hooks/useAuth'
-import { store } from '../../init/store'
 import { authActions } from '../../redux/auth/actions'
 
 const signOut = () => {
-    store.dispatch(authActions.signOut())
+    // store.dispatch(authActions.signOut())
 }
 
 const useStyles = makeStyles(theme => ({

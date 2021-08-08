@@ -14,24 +14,23 @@ import MomentUtils from '@date-io/moment'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import moment from 'moment'
 
-import { store } from '../../../init/store'
 import useTour from '../hooks/useTour'
 import { reservationActions } from '../../../redux/reservation/actions'
 import { useSelector } from 'react-redux'
 import { history } from '../../../navigation/history'
 
 const disableBookedDays = (date) => {
-    const bookedDays = store.getState().reservation.data?.bookedDays || []
+    // const bookedDays = store.getState().reservation.data?.bookedDays || []
     
-    const jsDate = date.toDate() 
-    jsDate.setHours(0)
-    jsDate.setMinutes(0)
-    jsDate.setSeconds(0)
-    jsDate.setMilliseconds(0)
-    console.log('jsDate',jsDate)
+    // const jsDate = date.toDate() 
+    // jsDate.setHours(0)
+    // jsDate.setMinutes(0)
+    // jsDate.setSeconds(0)
+    // jsDate.setMilliseconds(0)
+    // console.log('jsDate',jsDate)
     
-    const jsBookedDays = bookedDays.map(d => d.toDate())
-    return jsBookedDays.includes(jsDate)
+    // const jsBookedDays = bookedDays.map(d => d.toDate())
+    // return jsBookedDays.includes(jsDate)
 }
 
 const initialDate = moment()
@@ -48,7 +47,7 @@ const ReservationForm = ({tourId}) => {
 
     return (
         <>
-          <Formik
+          {/* <Formik
       initialValues={{
         toCity: '',
         datetime: initialDate,
@@ -166,7 +165,7 @@ const ReservationForm = ({tourId}) => {
           </Form>
         </MuiPickersUtilsProvider>
       )}
-    </Formik>
+    </Formik> */}
     </>
       )
 }

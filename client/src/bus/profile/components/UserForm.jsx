@@ -10,7 +10,6 @@ import {
 import MomentUtils from '@date-io/moment'
 import {MuiPickersUtilsProvider} from '@material-ui/pickers'
 
-import { store } from '../../../init/store'
 import useAuth from '../../../global/hooks/useAuth'
 import { authActions } from '../../../redux/auth/actions'
 import { ordersActions } from '../../../redux/orders/actions'
@@ -22,7 +21,7 @@ const UserForm = ({
         lastName,
     }) => {
     return <>
-        <Formik
+        {/* <Formik
             initialValues={{
                 firstName,
                 lastName,
@@ -83,7 +82,7 @@ const UserForm = ({
             </Form>
         </MuiPickersUtilsProvider>
         )}
-    </Formik>
+    </Formik> */}
     </>
 }
 

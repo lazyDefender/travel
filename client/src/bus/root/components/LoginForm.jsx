@@ -17,7 +17,6 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import Box from '@material-ui/core/Box'
 import { useSelector } from 'react-redux'
 
-import { store } from '../../../init/store'
 import { authActions } from '../../../redux/auth/actions'
 // import { history } from '../../../navigation/history'
 import { book } from '../../../navigation/book'
@@ -27,13 +26,13 @@ import { validationSchema } from '../validation/signIn'
 import useFirstLoadedPage from '../../../global/hooks/useFirstLoadedPage'
 import GoHomeBar from '../../../global/components/GoHomeBar'
 
-const signInWithGoogle = () => {
-  store.dispatch(authActions.signInWithGoogle())
-}
+// const signInWithGoogle = () => {
+//   store.dispatch(authActions.signInWithGoogle())
+// }
 
-const signInWithFacebook = () => {
-  store.dispatch(authActions.signInWithFacebook())
-}
+// const signInWithFacebook = () => {
+//   store.dispatch(authActions.signInWithFacebook())
+// }
 
 const SignUpForm = () => {
   const history = useHistory()
@@ -42,7 +41,7 @@ const SignUpForm = () => {
   const firstLoadedPage = useFirstLoadedPage()
   const formJSX = <div>
     <Typography>Вхід</Typography>
-    <Formik
+    {/* <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
@@ -124,7 +123,7 @@ const SignUpForm = () => {
         </Form>
     </MuiPickersUtilsProvider>
     )}
-    </Formik>
+    </Formik> */}
 </div>
 
   const redirectTo = firstLoadedPage === '/login' ? book.root : firstLoadedPage

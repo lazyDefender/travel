@@ -1,0 +1,20 @@
+import { combineReducers } from '@reduxjs/toolkit';
+
+import { toursFilter } from './toursFilter.slice'    
+import { toursReducer as tours } from './tours/reducer'
+import { authReducer as auth } from './auth/reducer'
+import { hotelReducer as hotel } from './hotels/reducer'
+import { reservationReducer as reservation } from './reservation/reducer'
+import { ordersReducer as orders } from './orders/reducer'
+import { defaultReducer } from './default/reducer'
+
+export const rootReducer = combineReducers({
+    // reducers
+    toursFilter,
+    // tours,
+    // auth,
+    // hotel,
+    // reservation,
+    // orders,
+    // defaultReducer,
+});

@@ -19,7 +19,6 @@ import {
 import MomentUtils from '@date-io/moment'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 
-import { store } from '../../../init/store'
 import { authActions } from '../../../redux/auth/actions'
 import useAuth from '../../../global/hooks/useAuth'
 import { book } from '../../../navigation/book'
@@ -41,7 +40,7 @@ const SignUpForm = () => {
   const firstLoadedPage = useFirstLoadedPage()
   const formJSX = <div>
     <Typography>Зареєструватись</Typography>
-    <Formik
+    {/* <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
@@ -118,7 +117,7 @@ const SignUpForm = () => {
         </Form>
     </MuiPickersUtilsProvider>
     )}
-  </Formik>
+  </Formik> */}
 </div>
   const redirectTo = firstLoadedPage === '/signup' ? book.root : firstLoadedPage
   const page = <>

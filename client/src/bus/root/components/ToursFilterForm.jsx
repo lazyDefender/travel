@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import {Formik, Form, Field} from 'formik'
 import {
   Button,
@@ -18,9 +19,7 @@ import moment from 'moment';
 import firebase from 'firebase'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 
-import useCities from '../hooks/useCities' 
-import { store } from '../../../init/store'
-import { toursFilterActions } from '../../../redux/toursFilter/actions'
+import { toursFilterActions } from '../../../redux/toursFilter.slice'
 import useToursFilterFormState from '../hooks/useToursFilterFormState'
 import '../../../moment-locales/uk';
 
@@ -34,19 +33,13 @@ initialDate.set({
     millisecond: 0,
 })
 
-const ToursFilterForm = () => {
-
-  const citiesRes = useCities()
+const ToursFilterForm = ({ cities }) => {
+  const dispatch = useDispatch()
   const formState = useToursFilterFormState()
-  const citiesData = citiesRes?.data || []
-  const cities = [ ...citiesData]
-
   
 
   return (
-    <Box 
-      // bgcolor="primary.main"
-    >
+    <Box>
       <Formik
         initialValues={{
           toCity: formState?.toCity || cities[0],
@@ -56,7 +49,6 @@ const ToursFilterForm = () => {
           kidsCount: formState?.kidsCount || 1,
         }}
         validate={(values) => {
-          console.log(values)
           const errors = {}
           if(!values.toCity) errors.toCity = 'Виберіть місто'
           return errors
@@ -70,11 +62,11 @@ const ToursFilterForm = () => {
             .fromDate(values.datetime.toDate())
             .toMillis()
 
-          store.dispatch(toursFilterActions.fetchAsync({
+          dispatch(toursFilterActions.getTours({
             ...values,
             datetime, 
           }))
-          store.dispatch(toursFilterActions.setFormState({
+          dispatch(toursFilterActions.setFormState({
             ...values,
             datetime,
           }))

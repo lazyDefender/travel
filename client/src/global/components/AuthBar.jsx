@@ -14,11 +14,10 @@ import {
 } from '@material-ui/core'
 import { book } from '../../navigation/book'
 import useAuth from '../../global/hooks/useAuth'
-import { store } from '../../init/store'
 import { authActions } from '../../redux/auth/actions'
 
 const signOut = () => {
-    store.dispatch(authActions.signOut())
+    // store.dispatch(authActions.signOut())
 }
 
 const useStyles = makeStyles(theme => ({
@@ -27,7 +26,8 @@ const useStyles = makeStyles(theme => ({
 
 const AuthBar = (props) => {
     const classes = useStyles()
-    const auth = useAuth()
+    // const auth = useAuth()
+    // const dispatch = 
     const defaultBar =
     <AppBar
         position="fixed"
@@ -105,9 +105,9 @@ const AuthBar = (props) => {
     </>
 
     const loadingJSX = 'loing auth...'
-    const { data, isFetching } = auth
-    const authBarJSX = data ? signedInBar : defaultBar
-    const authBarContent = isFetching ? loadingJSX : authBarJSX 
+    // const { data, isFetching } = auth
+    const authBarJSX =  defaultBar
+    const authBarContent = authBarJSX 
     return <>
     {/* <Container> */}
         <Box pt={2} pb={2}>

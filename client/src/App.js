@@ -15,34 +15,34 @@ import Progress from './global/components/Progress'
 
 const App = () => {
   const dispatch = useDispatch()
-  const { createdWithEmailAndPassword } = useSelector(state => state.auth)
-  const { data, isFetching } = useAuth()
-  const [isStart, setIsStart] = useState(true)
-  useEffect(() => {
-    console.log('app use effect')
+  // const { createdWithEmailAndPassword } = useSelector(state => state.auth)
+  // const { data, isFetching } = useAuth()
+  // const [isStart, setIsStart] = useState(true)
+  // useEffect(() => {
+  //   console.log('app use effect')
 
-    const { pathname } = history.location
-    dispatch(defaultActions.setFirstLoadedPage(pathname))
+  //   const { pathname } = history.location
+  //   dispatch(defaultActions.setFirstLoadedPage(pathname))
 
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-    firebase.auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        const token = await user.getIdToken()
-        console.log('token: ', token)
-        if(createdWithEmailAndPassword || isStart) {
-          await dispatch(authActions.getUserDataByUID(user.uid))
-          setIsStart(false)
-        } 
-      }
-      else {
-        console.log('not authorized')
-        if(isFetching) dispatch(authActions.stopFetching())
-      }
+  //   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+  //   firebase.auth().onAuthStateChanged(async (user) => {
+  //     if (user) {
+  //       const token = await user.getIdToken()
+  //       console.log('token: ', token)
+  //       if(createdWithEmailAndPassword || isStart) {
+  //         await dispatch(authActions.getUserDataByUID(user.uid))
+  //         setIsStart(false)
+  //       } 
+  //     }
+  //     else {
+  //       console.log('not authorized')
+  //       if(isFetching) dispatch(authActions.stopFetching())
+  //     }
       
-    });
-  }, [dispatch])
+  //   });
+  // }, [dispatch])
 
-  const appJSX = isFetching ?  <Progress/> : <Routes />
+  const appJSX = <Routes />
   
   return (
     <ThemeProvider theme={theme}>

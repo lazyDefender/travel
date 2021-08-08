@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom'
 import ProfileComponent from '../../bus/profile'
 import useAuth from '../../global/hooks/useAuth'
 import { book } from '../../navigation/book'
-import { store } from '../../init/store'
 import useFirstLoadedPage from '../../global/hooks/useFirstLoadedPage'
 
 const Profile = (props) => {
