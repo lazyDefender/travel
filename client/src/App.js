@@ -27,7 +27,8 @@ const App = () => {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
-        console.log('user: ', user)
+        const token = await user.getIdToken()
+        console.log('token: ', token)
         if(createdWithEmailAndPassword || isStart) {
           await dispatch(authActions.getUserDataByUID(user.uid))
           setIsStart(false)

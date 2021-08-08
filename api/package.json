@@ -4,7 +4,8 @@
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "express-validator": "^6.11.1",
-    "firebase-admin": "^9.8.0"
+    "firebase-admin": "^9.8.0",
+    "moment": "^2.29.1"
   },
   "scripts": {
     "start": "nodemon index.js"

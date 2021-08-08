@@ -12,6 +12,7 @@ import {
 } from 'formik-material-ui-pickers'
 import MomentUtils from '@date-io/moment'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
+import moment from 'moment'
 
 import { store } from '../../../init/store'
 import useTour from '../hooks/useTour'
@@ -33,6 +34,14 @@ const disableBookedDays = (date) => {
     return jsBookedDays.includes(jsDate)
 }
 
+const initialDate = moment()
+initialDate.set({
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
+})
+
 const ReservationForm = ({tourId}) => {
     const tour = useTour(tourId)
     const { id } = useSelector(state => state.auth.data || {})
@@ -42,7 +51,7 @@ const ReservationForm = ({tourId}) => {
           <Formik
       initialValues={{
         toCity: '',
-        datetime: new Date(),
+        datetime: initialDate,
         duration: '',
         adultsCount: 1,
         kidsCount: 1,
@@ -97,11 +106,11 @@ const ReservationForm = ({tourId}) => {
             </Box>
             <Box margin={1}>
                 <Field 
-                    component={DatePicker} 
-                    disablePast
-                    name="datetime" 
-                    label="Початок туру" 
-                    shouldDisableDate={disableBookedDays}
+                  component={DatePicker} 
+                  disablePast
+                  name="datetime" 
+                  label="Початок туру" 
+                  shouldDisableDate={disableBookedDays}
                 />
             </Box>
             <Box margin={1}>

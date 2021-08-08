@@ -1,7 +1,59 @@
 const firebase = require('firebase-admin');
 const collections = require('../collections');
+const moment = require('moment');
 
 class TourRepository {
+    static async getAll(filters) {
+        const {
+            toCity,
+            datetime,
+            duration,
+            adultsCount,
+            kidsCount,
+        } = filters
+            
+        const toCityRef = await firebase
+            .firestore()
+            .collection('cities')
+            .doc(toCity)
+
+        const toursQuerySnapshot = await firebase
+            .firestore()
+            .collection('tours')
+            .where('toCity', '==', toCityRef)
+            .where('duration', '==', parseInt(duration))
+            .get()
+        const toursDocs = toursQuerySnapshot.docs
+        let tours = toursDocs.map(doc => {
+            return {
+                id: doc.id,
+                ...doc.data(),
+            }
+        })
+
+        const toursWithHotels = [];
+
+        for(let tour of tours) {
+            const hotelDocumentSnapshot = await tour.hotel.get();
+            const hotel = {
+                id: hotelDocumentSnapshot.id,
+                ...hotelDocumentSnapshot.data(),
+            };
+
+            toursWithHotels.push({
+                ...tour,
+                hotel,
+            });
+        }
+
+        const finalTours = toursWithHotels.filter(tour => (
+            adultsCount <= tour.hotel.maxAdultsCount && 
+            kidsCount <= tour.hotel.maxAdultsCount)
+        )
+
+        return finalTours;
+    }
+
     static async getById(id) {
         const tourRes = await firebase
             .firestore()

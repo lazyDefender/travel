@@ -1,13 +1,10 @@
 import firebase from 'firebase'
-// Api
-import { api } from '../../api';
 // Types
 import { types } from './types';
 // Fire
 import fire from '../../firebase'
 import moment from 'moment';
-import { getPlace } from '../../global/getPlace';
-import { hotelActions } from '../hotels/actions';
+import axios from 'axios';
 
 export const toursFilterActions = Object.freeze({
     //Sync
@@ -85,170 +82,25 @@ export const toursFilterActions = Object.freeze({
         dispatch(toursFilterActions.stopFetching())
     },
 
-    fetchAsync: (filters) => async (dispatch) => {
-        const {
-            toCity,
-            datetime,
-            duration,
-            adultsCount,
-            kidsCount,
-        } = filters
-
+    fetchAsync: ({
+        toCity,
+        datetime,
+        duration,
+        adultsCount,
+        kidsCount,
+    }) => async (dispatch) => {
         dispatch(toursFilterActions.startFetching())
-            
-        const toCityRef = await fire
-            .firestore()
-            .collection('cities')
-            .doc(toCity)
+        const params = new URLSearchParams()
+        params.set('toCity', toCity)
+        params.set('datetime', datetime)
+        params.set('duration', duration)
+        params.set('adultsCount', adultsCount)
+        params.set('kidsCount', kidsCount)
 
-        const toursResponse = await fire
-            .firestore()
-            .collection('tours')
-            .where('toCity', '==', toCityRef)
-            .where('duration', '==', duration)
-            .get()
-        const toursDocs = toursResponse.docs
-        const tours = toursDocs.map(doc => {
-            return {
-                id: doc.id,
-                ...doc.data(),
-            }
-        })
-
-        const badOrders = []
-        for(let toursDoc of toursDocs) {
-            const datetimeMoment = moment(datetime)
-            datetimeMoment.set({
-                hour: 0,
-                minute: 0,
-                second: 0,
-                millisecond: 0,
-            })
-            const dat = datetimeMoment.toDate()
-            const d = firebase.firestore.Timestamp.fromDate(dat)
-            const badOrdersRes = await fire
-                .firestore()
-                .collection('orders')
-                .where('tour', '==', toursDoc.ref)
-                .where('datetime', '==', d)
-                .get()
-            const badOrdersDocs = badOrdersRes.docs
-            badOrders.push(...badOrdersDocs.map(o => {
-                return {
-                    id: o.id,
-                    ...o.data(),
-                }
-            }))
-        }
-
-        const foundToursIds = tours.map(t => t.id)
-
-        const foundTours = []
-        
-        for(let tourId of foundToursIds) {
-            const tourDoc = await fire
-                .firestore()
-                .collection('tours')
-                .doc(tourId)
-                .get()
-            const tour = {
-                id: tourDoc.id,
-                ...tourDoc.data(),
-            }
-            foundTours.push(tour)
-        }
-        
-        const hotelIds = foundTours.map(t => t.hotel.id)
-        const hotels = []
-        for(let hotelId of hotelIds) {
-            const hotelDoc = await fire
-            .firestore()
-            .collection('hotels')
-            .doc(hotelId)
-            .get()
-            const hotel = {
-                id: hotelDoc.id,
-                ...hotelDoc.data(),
-            }
-            hotels.push(hotel)
-        }
-
-        const hotelsIdsFilteredByPeopleCount = 
-            hotels
-                .filter(h => h.maxAdultsCount >= adultsCount && h.maxKidsCount >= kidsCount)
-                .map(h => h.id)
-
-        const finalTours = foundTours.filter(t => hotelsIdsFilteredByPeopleCount.includes(t.hotel.id))
-
-        
-
-        const finalToursWithHotels = []
-        for(let t of finalTours) {
-            const {id} = t.hotel
-            const hotelDoc = await fire
-                .firestore()
-                .collection('hotels')
-                .doc(id)
-                .get()
-            
-
-
-
-            const h = {
-                ...t,
-                hotel: {
-                    ...hotelDoc.data(),
-                    id: hotelDoc.id,
-                    // ...data.candidates[0],
-                }
-            } 
-
-            // const p = await getPlace(h.hotel.name)
-            // console.log(p)
-            finalToursWithHotels.push({
-                ...h,
-                hotel: {
-                    ...h.hotel,
-                    // ...p.candidates[0],
-                }
-            })
-        }
-
-        // console.log('finalToursWithHotels', finalToursWithHotels)
-
-        dispatch(toursFilterActions.fill(finalToursWithHotels))
-        dispatch(toursFilterActions.stopFetching())
-    },
-    fetchByHotel: (id) => async (dispatch) => {
-        dispatch(toursFilterActions.startFetching())
-        const hotel = await fire
-            .firestore()
-            .collection('hotels')
-            .doc(id)
-            .get()
-
-
-        const toursRes = await fire
-            .firestore()
-            .collection('tours')
-            .where('hotel', '==', hotel.ref)
-            .get()
-        
-        
-        const toursDocs = toursRes.docs
-        const tours = []
-        for(const t of toursDocs) {
-            tours.push({
-                id: t.id,
-                ...t.data(),
-            })
-        }
-
-        console.log('tours',tours)
+        const toursUrl = `${process.env.REACT_APP_API_URL}/tours?${params.toString()}`
+        const { data: tours } = await axios.get(toursUrl)
 
         dispatch(toursFilterActions.fill(tours))
         dispatch(toursFilterActions.stopFetching())
-    }
-
-    
+    },   
 })

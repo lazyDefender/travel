@@ -7,9 +7,20 @@ const validationError = require('../utils/validationError');
 
 const router = Router();
 
+router.get('/', async (req, res, next) => {
+    const { data: tours, error } = await TourService.getAll(req.query);
+    
+    req.result = {
+        status: 200,
+        body: tours,
+    }
+
+    next();
+})
+
 router.get('/:id', async (req, res, next) => {
     const { id } = req.params;  
-    const { data: hotel, error } = await TourService.getById(id);
+    const { data: tour, error } = await TourService.getById(id);
 
     if(error && error.code === errorCodes.TOURS.TOUR_NOT_FOUND_BY_ID) {
         const body = {
@@ -25,7 +36,7 @@ router.get('/:id', async (req, res, next) => {
     else {
         req.result = {
             status: 200,
-            body: hotel,
+            body: tour,
         }
     }
      

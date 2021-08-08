@@ -28,10 +28,18 @@ class OrderRepository {
             user: userRef,
         }
 
-        const ordersRes = await firebase
+        const orderRef = await firebase
             .firestore()
             .collection(collections.ORDERS)
             .add(fullOrder)
+
+        const createdOrderDoc = await orderRef.get()
+        const createdOrder = {
+            id: createdOrderDoc.id,
+            ...createdOrderDoc.data(),
+        }
+
+        return createdOrder
     }
 }
 

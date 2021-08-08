@@ -31,7 +31,7 @@ const ToursListItem = ({hotel, adultPrice, kidPrice}) => {
   const classes = useStyles()
   const [image, setImage] = useState(null)
 
-  const { photos, rating, id } = hotel
+  const { rating, id } = hotel
   
   const onImageError = (e) => {
     setImage(`${process.env.PUBLIC_URL}/image-not-found.svg`)
@@ -47,7 +47,7 @@ const ToursListItem = ({hotel, adultPrice, kidPrice}) => {
           <Link to={`${book.hotels}/${id}`}>
             <CardActionArea>
               <ImageWithFallback
-                image={hotel?.image.source}
+                image={hotel?.image?.source || image}
                 alt={hotel.name}
                 title={hotel.name}
                 onError={onImageError}
