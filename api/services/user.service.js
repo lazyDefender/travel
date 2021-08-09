@@ -1,5 +1,6 @@
 const errors = require('../common/enum/errors');
 const UserRepository = require('../repositories/user.repository');
+const OrderRepository = require('../repositories/order.repository');
 
 class UserService {
     static async create(user) {
@@ -33,6 +34,22 @@ class UserService {
         
         return {
             data: user,
+            error: null,
+        };
+    }
+
+    static async getOrdersByUser(id) {
+        const user = await UserRepository.getById(id);
+        if(!user) {
+            return {
+                data: null,
+                error: errors.USERS.notFoundById(id),
+            };
+        }
+
+        const orders = await OrderRepository.getByUser(id);
+        return {
+            data: orders,
             error: null,
         };
     }

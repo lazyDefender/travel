@@ -1,5 +1,6 @@
 import { AuthService } from "./auth.service";
 import { CityService } from "./city.service";
+import { HotelService } from "./hotel.service";
 import { TourService } from "./tour.service";
 import { UserService } from "./user.service";
 
@@ -9,10 +10,12 @@ const authService = new AuthService({ apiUrl });
 const userService = new UserService({ apiUrl });
 const cityService = new CityService({ apiUrl });
 const tourService = new TourService({ apiUrl });
+const hotelService = new HotelService({ apiUrl });
 
 export {
     authService,
     userService,
     cityService,
     tourService,
+    hotelService,
 };

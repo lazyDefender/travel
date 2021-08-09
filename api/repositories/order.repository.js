@@ -41,6 +41,20 @@ class OrderRepository {
 
         return createdOrder
     }
+
+    static async getByUser(userId) {
+        const userRef = await firebase
+            .firestore()
+            .collection(Collections.USERS)
+            .doc(userId);
+
+        const ordersQuerySnapshot = await firebase
+            .firestore()
+            .collection(Collections.ORDERS)
+            .where('user', '==', userRef)
+            .get();
+        const orders = ordersQuerySnapshot.docs
+    }
 }
 
 module.exports = OrderRepository;

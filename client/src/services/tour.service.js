@@ -25,4 +25,8 @@ export class TourService {
 
         return axios.get(`${this.apiUrl}/tours?${paramsStr}`);
     }
+
+    getByHotel(hotelId) {
+        return axios.get(`${this.apiUrl}/hotels/${hotelId}/tours`);
+    }
 }

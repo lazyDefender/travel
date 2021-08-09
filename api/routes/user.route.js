@@ -66,6 +66,31 @@ router.get('/:id', async (req, res, next) => {
     next();
 });
 
+router.get('/:id/orders', async (req, res, next) => {
+    const { id } = req.params;  
+    const { data: orders, error } = await UserService.getOrdersByUser(id);
+
+    if(error && error.code === errorCodes.USERS.USER_NOT_FOUND_BY_ID) {
+        const body = {
+            errors: [error],
+        }
+
+        req.result = {
+            body,
+            status: 404,
+        }
+    }
+
+    else {
+        req.result = {
+            status: 200,
+            body: orders,
+        }
+    }
+     
+    next();
+});
+
 router.patch('/:id', validation.update, async (req, res, next) => {
     const errors = validationResult(req)
         .errors
