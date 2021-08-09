@@ -3,7 +3,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import { toursFilter } from './toursFilter.slice'    
 import { toursReducer as tours } from './tours/reducer'
 import { auth } from './auth.slice'
-import { hotelReducer as hotel } from './hotels/reducer'
+import { hotel } from './hotel.slice'
 import { reservationReducer as reservation } from './reservation/reducer'
 import { ordersReducer as orders } from './orders/reducer'
 import { defaultReducer } from './default/reducer'
@@ -13,7 +13,7 @@ export const rootReducer = combineReducers({
     toursFilter,
     // tours,
     auth,
-    // hotel,
+    hotel,
     // reservation,
     // orders,
     // defaultReducer,

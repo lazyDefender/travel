@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom'
 
 import { book } from '../../../navigation/book'
 
-const HotelToursList = ({tours}) => {
+const HotelToursList = ({ tours }) => {
     return <>
         <TableContainer component={Paper}>
       <Table aria-label="simple table">

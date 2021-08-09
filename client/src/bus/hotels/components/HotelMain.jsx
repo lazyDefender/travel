@@ -10,7 +10,7 @@ import { Rating } from '@material-ui/lab'
 import { getPhotoUri } from '../../../global/getPhotoUri'
 import ImageWithFallback from '../../../global/components/ImageWithFallback'
 
-const HotelMain = ({hotel}) => {
+const HotelMain = ({ hotel }) => {
     const {
         name,
         description,

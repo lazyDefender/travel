@@ -1,12 +1,14 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { toursActions } from '../../../redux/tours/actions'
+import { hotelActions } from '../../../redux/hotel.slice'
+
 const useToursByHotel = (hotelId) => {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(toursActions.fetchByHotel(hotelId))
+        dispatch(hotelActions.getTours(hotelId))
     }, [dispatch, hotelId])
-    const tours = useSelector(state => state.tours.data || [])
+
+    const { tours } = useSelector(state => state.hotel)
     return tours
 }
 
