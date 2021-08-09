@@ -11,9 +11,9 @@ import MomentUtils from '@date-io/moment'
 import {MuiPickersUtilsProvider} from '@material-ui/pickers'
 
 import useAuth from '../../../global/hooks/useAuth'
-import { authActions } from '../../../redux/auth/actions'
+import { authActions } from '../../../redux/auth.slice'
 import { ordersActions } from '../../../redux/orders/actions'
-
+import store from '../../../redux/store'
 
 const UserForm = ({ 
         id,
@@ -21,7 +21,7 @@ const UserForm = ({
         lastName,
     }) => {
     return <>
-        {/* <Formik
+        <Formik
             initialValues={{
                 firstName,
                 lastName,
@@ -31,11 +31,12 @@ const UserForm = ({
                 return errors
             }}
             onSubmit={(values, {setSubmitting}) => {
-                store.dispatch(authActions.updateUser({
-                    ...values,
+                const payload = {
                     id,
-                }))
-                store.dispatch(ordersActions.fetchByUser(id))
+                    ...values,
+                };
+                store.dispatch(authActions.updateUser(payload));
+                // store.dispatch(ordersActions.fetchByUser(id))
             }}
         >
         {({submitForm, isSubmitting, touched, errors}) => (
@@ -73,7 +74,7 @@ const UserForm = ({
                     variant="contained"
                     color="primary"
                     onClick={() => {
-                        store.dispatch(authActions.deleteUser())
+                        // store.dispatch(authActions.deleteUser())
                     }}
                     >
                     Видалити акаунт
@@ -82,7 +83,7 @@ const UserForm = ({
             </Form>
         </MuiPickersUtilsProvider>
         )}
-    </Formik> */}
+    </Formik>
     </>
 }
 

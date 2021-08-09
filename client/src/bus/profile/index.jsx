@@ -23,15 +23,13 @@ const Profile = (props) => {
         setValue(newValue)
     }
 
-    const { isFetching } = useSelector(state => state.orders || {})
-    const auth = useAuth()
-    const id = auth?.data.id
-    const orders = useOrdersByUser(id)
-    const ordersJSX = isFetching ? <CircularProgress/> : <OrdersList orders={orders}/>
+    // const { isFetching } = useSelector(state => state.orders || {})
+    const { user } = useAuth()
+    // const orders = useOrdersByUser(id)
+    // const ordersJSX = isFetching ? <CircularProgress/> : <OrdersList orders={orders}/>
     const tabsJSX = <Tabs
         value={value}
         onChange={handleChange}
-        // variant="fullWidth"
         indicatorColor="primary"
         textColor="primary"
     >
@@ -42,11 +40,11 @@ const Profile = (props) => {
 
     switch(value) {
         case 0:
-            tabContentJSX = <UserForm {...auth.data}/>
+            tabContentJSX = <UserForm {...user}/>
             break
         case 1:
             tabContentJSX = <>
-                {ordersJSX}
+                {/* {ordersJSX} */}
             </>
             break
         default:

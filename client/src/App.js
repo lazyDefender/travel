@@ -20,9 +20,7 @@ const App = () => {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
-        const token = await user.getIdToken()
-        const bearerToken = `Bearer ${token}`
-        dispatch(authActions.getCurrentUser(bearerToken))
+        dispatch(authActions.getCurrentUser())
       }
       
     });

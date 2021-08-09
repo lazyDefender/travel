@@ -2,15 +2,15 @@ import axios from 'axios';
 import firebase from 'firebase';
 import { getBearerToken } from '../helpers/getBearerToken';
 
-export class AuthService {
+export class UserService {
     constructor({ apiUrl }) {
         this.apiUrl = apiUrl;
     }
 
-    async getCurrentUser() {
+    async update(id, payload) {
         const token = await getBearerToken();
-            
-        return axios.get(`${this.apiUrl}/auth/currentUser`, {
+        
+        return axios.patch(`${this.apiUrl}/users/${id}`, payload, {
             headers: {
                 'Authorization': token,
             },
@@ -20,6 +20,6 @@ export class AuthService {
     async signIn(email, password) {
         const authRes = await firebase
             .auth()
-            .signInWithEmailAndPassword(email, password)
+            .signInWithEmailAndPassword(email, password);
     }
 }
