@@ -1,10 +1,7 @@
-// Api
-import { api } from '../../api';
 // Types
 import { types } from './types';
 // Fire
 import fire from '../../firebase'
-import { store } from '../../init/store';
 import firebase from 'firebase'
 
 export const authActions = Object.freeze({

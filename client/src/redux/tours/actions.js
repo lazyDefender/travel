@@ -1,6 +1,4 @@
 import firebase from 'firebase'
-// Api
-import { api } from '../../api';
 // Types
 import { types } from './types';
 // Fire

@@ -39,7 +39,7 @@ const Root = () => {
     
     return citiesFetching ? <Progress /> : (
         <div>
-            <AuthBar/>
+            <AuthBar />
             <ToursFilterForm cities={cities} />
             <Grid 
                 container 

@@ -17,7 +17,8 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import Box from '@material-ui/core/Box'
 import { useSelector } from 'react-redux'
 
-import { authActions } from '../../../redux/auth/actions'
+import { authActions } from '../../../redux/auth.slice'
+import store from '../../../redux/store'
 // import { history } from '../../../navigation/history'
 import { book } from '../../../navigation/book'
 import useAuth from '../../../global/hooks/useAuth'
@@ -38,25 +39,25 @@ const SignUpForm = () => {
   const history = useHistory()
   const [open, setOpen] = React.useState(true)
   const auth = useAuth()
-  const firstLoadedPage = useFirstLoadedPage()
+  // const firstLoadedPage = useFirstLoadedPage()
   const formJSX = <div>
     <Typography>Вхід</Typography>
-    {/* <Formik
+    <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
             await store.dispatch(authActions.signIn(values))
             const { error } = store.getState().auth
             if(!error) {
-              if(['/login', '/signup'].includes(firstLoadedPage)) {
-                history.replace('/')
-              }
-              else if(firstLoadedPage === '/profile') {
-                history.replace('/profile')
-              }
-              else {
-                history.goBack()
-              }
+              // if(['/login', '/signup'].includes(firstLoadedPage)) {
+              //   history.replace('/')
+              // }
+              // else if(firstLoadedPage === '/profile') {
+              //   history.replace('/profile')
+              // }
+              // else {
+              //   history.goBack()
+              // }
             }
             
         }}
@@ -101,7 +102,7 @@ const SignUpForm = () => {
                 Зареєструватись
                 </Button>
             </Box>
-            <Box margin={1}>
+            {/* <Box margin={1}>
                 <Button
                 variant="contained"
                 color="primary"
@@ -119,20 +120,20 @@ const SignUpForm = () => {
                 Увійти через Facebook
                 </Button>
                 
-            </Box>
+            </Box> */}
         </Form>
     </MuiPickersUtilsProvider>
     )}
-    </Formik> */}
+    </Formik>
 </div>
 
-  const redirectTo = firstLoadedPage === '/login' ? book.root : firstLoadedPage
+  // const redirectTo = firstLoadedPage === '/login' ? book.root : firstLoadedPage
 
   const page = <>
     <GoHomeBar/>
     {formJSX}
   </>
-  const content = auth.data && !auth.error ? <Redirect to={redirectTo}/> : page 
+  const content = page 
   return <>
     {content}
   </>
