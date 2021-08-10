@@ -1,0 +1,46 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: saefefs
+        firstName:
+          type: string
+          example: Vasya
+        lastName:
+          type: string
+          example: Pupkin
+        email:
+          type: string
+          example: vasya@gmail.com
+        authID:
+          type: string
+          description: User's uid from Firebase Auth
+          example: blablablablablab
+    CreateUserInput:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: Vasya
+        lastName:
+          type: string
+          example: Pupkin
+        email:
+          type: string
+          example: vasya@gmail.com
+        authID:
+          type: string
+          description: User's uid from Firebase Auth
+          example: blablablablablab
+    UpdateUserInput:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: Petro
+        lastName:
+          type: string
+          example: Petrenko   

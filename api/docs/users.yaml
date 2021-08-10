@@ -1,0 +1,111 @@
+/api/users:
+  post:
+    tags:
+      - Users
+    summary: Create a user
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateUserInput'
+    responses:
+      201:
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+  get:
+    tags:
+      - Users
+    summary: Retrieve a list of users
+    responses:
+      200:
+        description: A list of users
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
+
+/api/users/{id}/orders:
+  get:
+    tags:
+      - Users
+    summary: Retrieve orders by user
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: ID of the user
+    responses:
+      200:
+        description: The user's orders
+        content:
+          application/json:
+            schema:
+              type: array
+ 
+/api/users/{id}:
+  get:
+      tags:
+        - Users
+      summary: Retrieve a user by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the user
+      responses:
+        200:
+          description: The found user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  patch:
+    tags:
+      - Users
+    summary: Update a user
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: ID of the user to update
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateUserInput'
+    responses:
+      200:
+        description: Updated
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+  delete:
+        tags:
+          - Users
+        summary: Delete a user
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: string
+            required: true
+            description: ID of the user to delete
+        responses:
+          204:
+            description: Deleted
