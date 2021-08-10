@@ -1,6 +1,8 @@
-const firebase = require('firebase-admin');
-const Collections = require('../common/enum/collections');
-class UserRepository {
+import firebase from 'firebase-admin';
+
+import { Collections } from '../common/enum/collections';
+
+export default class UserRepository {
     static async create(newUser) {
         const { 
             authID,
@@ -19,7 +21,7 @@ class UserRepository {
                 email,
             });
 
-        const userDoc = await firebase
+        const userDoc: FirebaseFirestore.DocumentSnapshot = await firebase
             .firestore()
             .collection(Collections.USERS)
             .doc(id)
@@ -34,13 +36,13 @@ class UserRepository {
     }
 
     static async getAll() {
-        const usersQuerySnapshot = await firebase
+        const usersQuerySnapshot: FirebaseFirestore.QuerySnapshot = await firebase
             .firestore()
             .collection(Collections.USERS)
             .get();
         const users = [];
 
-        usersQuerySnapshot.forEach(userDoc => {
+        usersQuerySnapshot.forEach((userDoc: FirebaseFirestore.QueryDocumentSnapshot) => {
             const user = {
                 id: userDoc.id,
                 ...userDoc.data(),
@@ -52,8 +54,8 @@ class UserRepository {
         return users;
     }
 
-    static async getById(id) {
-        const userDoc = await firebase
+    static async getById(id: string) {
+        const userDoc: FirebaseFirestore.DocumentSnapshot = await firebase
             .firestore()
             .collection(Collections.USERS)
             .doc(id)
@@ -71,18 +73,18 @@ class UserRepository {
         return null;
     }
 
-    static async getByUid(uid) {
-        const usersQuerySnapshot = await firebase
+    static async getByUid(uid: string) {
+        const usersQuerySnapshot: FirebaseFirestore.QuerySnapshot = await firebase
             .firestore()
             .collection(Collections.USERS)
             .where('authIDs', 'array-contains', uid)
             .get();
 
         if(!usersQuerySnapshot.empty) {
-            const userDocumentSnapshot = usersQuerySnapshot.docs[0];
-            const userDoc = userDocumentSnapshot.data();
+            const userQueryDocumentSnapshot: FirebaseFirestore.QueryDocumentSnapshot = usersQuerySnapshot.docs[0];
+            const userDoc = userQueryDocumentSnapshot.data();
             const user = {
-                id: userDocumentSnapshot.id,
+                id: userQueryDocumentSnapshot.id,
                 ...userDoc,
             }
 
@@ -92,14 +94,14 @@ class UserRepository {
         return null;
     }
 
-    static async update(id, updatedUser) {
-        const userRef = firebase
+    static async update(id: string, updatedUser) {
+        const userRef: FirebaseFirestore.DocumentReference = firebase
             .firestore()
             .collection(Collections.USERS)
             .doc(id);
         await userRef.update(updatedUser);
 
-        const userDoc = await userRef.get();
+        const userDoc: FirebaseFirestore.DocumentSnapshot = await userRef.get();
 
         const user = {
             id: userDoc.id,
@@ -109,8 +111,8 @@ class UserRepository {
         return user;
     }
 
-    static async delete(id) {
-        const userRef = firebase
+    static async delete(id: string) {
+        const userRef: FirebaseFirestore.DocumentReference = firebase
             .firestore()
             .collection(Collections.USERS)
             .doc(id);
@@ -118,5 +120,3 @@ class UserRepository {
         await userRef.delete();
     }
 }
-
-module.exports = UserRepository;

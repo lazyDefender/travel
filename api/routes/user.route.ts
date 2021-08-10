@@ -1,15 +1,15 @@
-const { Router } = require('express');
-const UserService = require('../services/user.service');
-const validation = require('../middlewares/validation/user.validation.middleware');
-const errorCodes = require('../common/enum/errors/error-codes');
-const { validationResult } = require('express-validator');
-const validationError = require('../utils/validation-error');
+import { Router } from 'express';
+import UserService from '../services/user.service';
+import validation from '../middlewares/validation/user.validation.middleware';
+import { errorCodes } from '../common/enum/errors/error-codes';
+import { validationResult } from 'express-validator';
+import validationError from '../utils/validation-error';
 
 const router = Router();
 
 router.post('/', validation.save, async (req, res, next) => {
     const errors = validationResult(req)
-        .errors
+        .array()
         .map(error => validationError(error));
 
     if(errors.length > 0) {
@@ -93,7 +93,7 @@ router.get('/:id/orders', async (req, res, next) => {
 
 router.patch('/:id', validation.update, async (req, res, next) => {
     const errors = validationResult(req)
-        .errors
+        .array()
         .map(error => validationError(error));
 
     if(errors.length > 0) {
@@ -152,4 +152,4 @@ router.delete('/:id', async (req, res, next) => {
     next();
 });
 
-module.exports = router;
+export { router };

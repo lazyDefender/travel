@@ -1,8 +1,8 @@
-const errors = require('../common/enum/errors');
-const TourRepository = require('../repositories/tour.repository');
+import { errors } from '../common/enum/errors';
+import TourRepository from '../repositories/tour.repository';
 
-class TourService {
-    static async getAll(filters) {
+export default class TourService {
+    static async getAll(filters): Promise<ServiceResponse> {
         const tours = await TourRepository.getAll(filters);
 
         return {
@@ -10,7 +10,7 @@ class TourService {
             error: null,
         };
     }
-    static async getById(id) {
+    static async getById(id: string): Promise<ServiceResponse> {
         const hotel = await TourRepository.getById(id);
         if(!hotel) {
             return {
@@ -25,5 +25,3 @@ class TourService {
         };
     }
 }
-
-module.exports = TourService;

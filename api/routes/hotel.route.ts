@@ -1,15 +1,15 @@
-const { Router } = require('express');
-const HotelService = require('../services/hotel.service');
-const validation = require('../middlewares/validation/hotel.validation.middleware');
-const errorCodes = require('../common/enum/errors/error-codes');
-const { validationResult } = require('express-validator');
-const validationError = require('../utils/validation-error');
+import { Router } from 'express';
+import HotelService from '../services/hotel.service';
+import validation from '../middlewares/validation/hotel.validation.middleware';
+import { errorCodes } from '../common/enum/errors/error-codes';
+import { validationResult } from 'express-validator';
+import validationError from '../utils/validation-error';
 
 const router = Router();
 
 router.post('/', validation.save, async (req, res, next) => {
     const errors = validationResult(req)
-        .errors
+        .array()
         .map(error => validationError(error));
 
     if(errors.length > 0) {
@@ -115,4 +115,4 @@ router.delete('/:id', async (req, res, next) => {
     next();
 });
 
-module.exports = router;
+export { router };

@@ -1,15 +1,15 @@
-const { Router } = require('express');
-const CityService = require('../services/city.service');
-const validation = require('../middlewares/validation/city.validation.middleware');
-const errorCodes = require('../common/enum/errors/error-codes');
-const { validationResult } = require('express-validator');
-const validationError = require('../utils/validation-error');
+import { Router } from 'express';
+import CityService from '../services/city.service';
+import validation from '../middlewares/validation/city.validation.middleware';
+import { errorCodes } from '../common/enum/errors/error-codes';
+import { validationResult } from 'express-validator';
+import validationError from '../utils/validation-error';
 
 const router = Router();
 
 router.post('/', validation.save, async (req, res, next) => {
     const errors = validationResult(req)
-        .errors
+        .array()
         .map(error => validationError(error));
 
     if(errors.length > 0) {
@@ -90,4 +90,4 @@ router.delete('/:id', async (req, res, next) => {
     next();
 });
 
-module.exports = router;
+export { router };

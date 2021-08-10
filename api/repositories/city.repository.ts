@@ -1,6 +1,8 @@
-const firebase = require('firebase-admin');
-const Collections = require('../common/enum/collections');
-class CityRepository {
+import firebase from 'firebase-admin';
+
+import { Collections } from '../common/enum/collections';
+
+export default class CityRepository {
     static async create(newCity) {
         const { id } = await firebase
             .firestore()
@@ -40,7 +42,7 @@ class CityRepository {
         return cities;
     }
 
-    static async getById(id) {
+    static async getById(id: string) {
         const cityDoc = await firebase
             .firestore()
             .collection(Collections.CITIES)
@@ -59,7 +61,7 @@ class CityRepository {
         return null;
     }
 
-    static async delete(id) {
+    static async delete(id: string) {
         const cityRef = firebase
             .firestore()
             .collection(Collections.CITIES)
@@ -68,5 +70,3 @@ class CityRepository {
         await cityRef.delete();
     }
 }
-
-module.exports = CityRepository;

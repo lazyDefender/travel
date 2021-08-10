@@ -1,10 +1,10 @@
-const { Router } = require('express');
-const OrderService = require('../services/order.service');
-const validation = require('../middlewares/validation/order.validation.middleware');
-const errorCodes = require('../common/enum/errors/error-codes');
-const { validationResult } = require('express-validator');
-const validationError = require('../utils/validation-error');
-const isAuth = require('../middlewares/auth.middleware');
+import { Router } from 'express';
+import OrderService from '../services/order.service';
+import validation from '../middlewares/validation/order.validation.middleware';
+import { errorCodes } from '../common/enum/errors/error-codes';
+import { validationResult } from 'express-validator';
+import validationError from '../utils/validation-error';
+import isAuth from '../middlewares/auth.middleware';
 
 const router = Router();
 
@@ -13,7 +13,7 @@ router.post('/', isAuth, validation.save, async (req, res, next) => {
         next();
     }
     const errors = validationResult(req)
-        .errors
+        .array()
         .map(error => validationError(error));
 
     if(errors.length > 0) {
@@ -35,4 +35,4 @@ router.post('/', isAuth, validation.save, async (req, res, next) => {
     }
 });
 
-module.exports = router;
+export { router };

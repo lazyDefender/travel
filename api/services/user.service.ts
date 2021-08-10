@@ -1,9 +1,9 @@
-const errors = require('../common/enum/errors');
-const UserRepository = require('../repositories/user.repository');
-const OrderRepository = require('../repositories/order.repository');
+import { errors } from '../common/enum/errors';
+import UserRepository from '../repositories/user.repository';
+import OrderRepository from '../repositories/order.repository';
 
-class UserService {
-    static async create(user) {
+export default class UserService {
+    static async create(user): Promise<ServiceResponse> {
         const createdUser = await UserRepository.create(user);
 
         return {
@@ -12,18 +12,16 @@ class UserService {
         };
     }
 
-    static async getAll() {
+    static async getAll(): Promise<ServiceResponse> {
         const users = await UserRepository.getAll();
-        if(!users) {
-            return [];
-        }
+
         return {
             data: users,
             error: null,
         };
     }
 
-    static async getById(id) {
+    static async getById(id: string): Promise<ServiceResponse> {
         const user = await UserRepository.getById(id);
         if(!user) {
             return {
@@ -38,7 +36,7 @@ class UserService {
         };
     }
 
-    static async getOrdersByUser(id) {
+    static async getOrdersByUser(id: string): Promise<ServiceResponse> {
         const user = await UserRepository.getById(id);
         if(!user) {
             return {
@@ -54,7 +52,7 @@ class UserService {
         };
     }
 
-    static async getByUid(uid) {
+    static async getByUid(uid: string): Promise<ServiceResponse> {
         const user = await UserRepository.getByUid(uid);
         if(!user) {
             return {
@@ -69,7 +67,7 @@ class UserService {
         };
     }
 
-    static async update(id, dataToUpdate) {
+    static async update(id: string, dataToUpdate): Promise<ServiceResponse> {
         const user = await UserRepository.getById(id);
         if(user) {
             const updatedUser = await UserRepository.update(id, dataToUpdate);
@@ -91,7 +89,7 @@ class UserService {
         
     }
 
-    static async delete(id) {
+    static async delete(id: string): Promise<ServiceResponse> {
         const user = await UserRepository.getById(id);
 
         if(user) {
@@ -110,5 +108,3 @@ class UserService {
         }
     }
 }
-
-module.exports = UserService;

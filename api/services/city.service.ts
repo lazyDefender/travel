@@ -1,8 +1,8 @@
-const errors = require('../common/enum/errors');
-const CityRepository = require('../repositories/city.repository');
+import { errors } from '../common/enum/errors';
+import CityRepository from '../repositories/city.repository';
 
-class CityService {
-    static async create(city) {
+export default class CityService {
+    static async create(city): Promise<ServiceResponse> {
         const createdCity = await CityRepository.create(city);
 
         return {
@@ -11,18 +11,16 @@ class CityService {
         };
     }
 
-    static async getAll() {
+    static async getAll(): Promise<ServiceResponse> {
         const cities = await CityRepository.getAll();
-        if(!cities) {
-            return [];
-        }
+
         return {
             data: cities,
             error: null,
         };
     }
 
-    static async getById(id) {
+    static async getById(id: string): Promise<ServiceResponse> {
         const city = await CityRepository.getById(id);
         if(!city) {
             return {
@@ -32,12 +30,12 @@ class CityService {
         }
         
         return {
-            data: user,
+            data: city,
             error: null,
         };
     }
 
-    static async update(id, dataToUpdate) {
+    static async update(id: string, dataToUpdate): Promise<ServiceResponse> {
         const city = await CityRepository.getById(id);
         if(city) {
             const updatedCity = await CityRepository.update(id, dataToUpdate);
@@ -59,7 +57,7 @@ class CityService {
         
     }
 
-    static async delete(id) {
+    static async delete(id: string): Promise<ServiceResponse> {
         const city = await CityRepository.getById(id);
 
         if(city) {
@@ -78,5 +76,3 @@ class CityService {
         }
     }
 }
-
-module.exports = CityService;

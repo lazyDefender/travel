@@ -1,7 +1,17 @@
-const firebase = require('firebase-admin');
-const Collections = require('../common/enum/collections');
+import firebase from 'firebase-admin';
 
-class OrderRepository {
+import { Collections } from '../common/enum/collections';
+
+interface IOrder {
+    id: string;
+    adultsCount?: number;
+    datetime?: FirebaseFirestore.Timestamp;
+    kidsCount?: number;
+    tour: FirebaseFirestore.DocumentReference;
+    user: FirebaseFirestore.DocumentReference;
+}
+
+export default class OrderRepository {
     static async create(order) {
         const {
             adultsCount,
@@ -11,11 +21,11 @@ class OrderRepository {
             userId,
         } = order
 
-        const userRef = await firebase
+        const userRef = firebase
             .firestore()
             .collection(Collections.USERS)
             .doc(userId)
-        const tourRef = await firebase
+        const tourRef = firebase
             .firestore()
             .collection(Collections.TOURS)
             .doc(tourId)
@@ -42,7 +52,7 @@ class OrderRepository {
         return createdOrder
     }
 
-    static async getByUser(userId) {
+    static async getByUser(userId: string) {
         const userRef = await firebase
             .firestore()
             .collection(Collections.USERS)
@@ -58,15 +68,15 @@ class OrderRepository {
         const orders = [];
 
         for(let orderDoc of orderDocs) {
-            const order = {
+            const order: IOrder = {
                 id: orderDoc.id,
                 ...orderDoc.data(),
                 user: null,
-            };
+            } as IOrder;
 
             const tourRef = await order.tour.get();
 
-            const tour = {
+            const tour: ITour = {
                 id: tourRef.id,
                 ...tourRef.data(),
                 toCity: null,
@@ -74,7 +84,7 @@ class OrderRepository {
             };
 
             const hotelRef = await tour.hotel.get();
-            const hotel = {
+            const hotel: IHotel = {
                 id: hotelRef.id,
                 ...hotelRef.data(),
             };
@@ -100,5 +110,3 @@ class OrderRepository {
         return orders;
     }
 }
-
-module.exports = OrderRepository;

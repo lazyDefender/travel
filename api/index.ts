@@ -1,10 +1,10 @@
 require('dotenv').config();
 
-const express = require('express');
+import express from 'express';
 const cors = require('cors');
 const initializeFirebase = require('./firebase');
 const { responseMiddleware } = require('./middlewares/response.middleware');
-const routes = require('./routes');
+import routes from './routes';
 
 initializeFirebase();
 

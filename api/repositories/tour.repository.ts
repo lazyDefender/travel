@@ -1,8 +1,7 @@
-const firebase = require('firebase-admin');
-const Collections = require('../common/enum/collections');
-const moment = require('moment');
+import firebase from 'firebase-admin';
+import { Collections } from '../common/enum/collections';
 
-class TourRepository {
+export default class TourRepository {
     static async getAll(filters) {
         const {
             toCity,
@@ -10,31 +9,31 @@ class TourRepository {
             duration,
             adultsCount,
             kidsCount,
-        } = filters
+        } = filters;
             
-        const toCityRef = await firebase
+        const toCityRef: FirebaseFirestore.DocumentReference = await firebase
             .firestore()
             .collection(Collections.CITIES)
-            .doc(toCity)
+            .doc(toCity);
 
-        const toursQuerySnapshot = await firebase
+        const toursQuerySnapshot: FirebaseFirestore.QuerySnapshot = await firebase
             .firestore()
             .collection('tours')
             .where('toCity', '==', toCityRef)
             .where('duration', '==', parseInt(duration))
-            .get()
-        const toursDocs = toursQuerySnapshot.docs
-        let tours = toursDocs.map(doc => {
+            .get();
+        const toursDocs: FirebaseFirestore.QueryDocumentSnapshot<FirebaseFirestore.DocumentData>[] = toursQuerySnapshot.docs;
+        let tours: ITour[] = toursDocs.map(doc => {
             return {
                 id: doc.id,
                 ...doc.data(),
-            }
-        })
+            };
+        });
 
         const toursWithHotels = [];
 
         for(let tour of tours) {
-            const hotelDocumentSnapshot = await tour.hotel.get();
+            const hotelDocumentSnapshot: FirebaseFirestore.DocumentSnapshot = await tour.hotel.get();
             const hotel = {
                 id: hotelDocumentSnapshot.id,
                 ...hotelDocumentSnapshot.data(),
@@ -49,89 +48,75 @@ class TourRepository {
         const finalTours = toursWithHotels.filter(tour => (
             adultsCount <= tour.hotel.maxAdultsCount && 
             kidsCount <= tour.hotel.maxAdultsCount)
-        )
+        );
 
         return finalTours;
     }
 
-    static async getById(id) {
-        const tourRes = await firebase
+    static async getById(id: string) {
+        const tourDoc: FirebaseFirestore.DocumentSnapshot = await firebase
             .firestore()
             .collection(Collections.TOURS)
             .doc(id)
-            .get()
-        const tour = {
+            .get();
+        const tour: ITour = {
             id,
-            ...tourRes.data(),
-            city: null,
-        }
+            ...tourDoc.data(),
+        };
 
-        const hotelRes = await firebase
+        const hotelDoc: FirebaseFirestore.DocumentSnapshot = await firebase
             .firestore()
             .collection(Collections.HOTELS)
             .doc(tour.hotel.id)
-            .get()
-        const hotel = {
-            id: hotelRes.id,
-            ...hotelRes.data(),
+            .get();
+        const hotel: IHotel = {
+            id: hotelDoc.id,
+            ...hotelDoc.data(),
             city: null,
-        }
-        const cityRes = await firebase
+        };
+
+        const cityDoc: FirebaseFirestore.DocumentSnapshot = await firebase
             .firestore()
             .collection(Collections.CITIES)
             .doc(tour.toCity.id)
-            .get()
+            .get();
         
-        const toCity = {
-            id: cityRes.id,
-            ...cityRes.data(),
-        }
-
-        const bookedDaysRes = await firebase
-            .firestore()
-            .collection(Collections.ORDERS)
-            .where('tour', '==', tourRes.ref)
-            .get()
-        const bookedDaysDocs = bookedDaysRes.docs
-        const bookedDays = bookedDaysDocs.map(item => {
-            const { datetime } = item.data()
-            const jsDate = datetime.toDate()
-            return jsDate
-            
-        })
+        const toCity: ICity = {
+            id: cityDoc.id,
+            ...cityDoc.data(),
+        };
 
         const result = {
             ...tour,
             hotel,
             toCity,
-            bookedDays,
-        }
+        };
         return result;
     }
 
-    static async getByHotel(hotelId) {
-        const hotelRef = await firebase
+    static async getByHotel(hotelId: string) {
+        const hotelRef = firebase
             .firestore()
             .collection(Collections.HOTELS)
-            .doc(hotelId)
+            .doc(hotelId);
 
         const toursRes = await firebase
             .firestore()
             .collection(Collections.TOURS)
             .where('hotel', '==', hotelRef)
-            .get()
+            .get();
         
-        const toursDocs = toursRes.docs
-        const tours = []
+        const toursDocs = toursRes.docs;
+        const tours = [];
         for(const t of toursDocs) {
-            const tour = t.data()
-            const toCityDoc = await tour.toCity.get()
-            const toCity = toCityDoc.data()
+            const tour = t.data();
+            const toCityDoc = await tour.toCity.get();
+            const toCity = toCityDoc.data();
             const { 
                 adultPrice, 
                 kidPrice, 
                 duration,
-            } = tour
+            } = tour;
 
             tours.push({
                 id: t.id,
@@ -139,11 +124,9 @@ class TourRepository {
                 kidPrice,
                 duration,
                 toCity,
-            })
+            });
         }
 
-        return tours
+        return tours;
     }
 }
-
-module.exports = TourRepository;

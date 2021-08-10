@@ -1,9 +1,10 @@
-const firebase = require('firebase-admin');
-const errors = require('../common/enum/errors');
-const errorCodes = require('../common/enum/errors/error-codes');
-const UserService = require('./user.service');
+import firebase from 'firebase-admin';
+import { errors } from '../common/enum/errors';
+import { errorCodes } from '../common/enum/errors/error-codes';
 
-class AuthService {
+import UserService from './user.service';
+
+export default class AuthService {
     static async verifyToken(rawToken = '') {
         const token = rawToken.split(' ')[1];
         try {
@@ -34,5 +35,3 @@ class AuthService {
         
     }
 }
-
-module.exports = AuthService;
