@@ -1,6 +1,6 @@
 import { NextFunction } from "express";
 
-const responseMiddleware = (req, res, next: NextFunction) => {
+export const responseMiddleware = (req, res, next: NextFunction) => {
     if(req.validationErrors) {
         const body = {
             errors: req.validationErrors,
@@ -16,5 +16,3 @@ const responseMiddleware = (req, res, next: NextFunction) => {
         return res.status(status).json(body);
     }
 }
-
-exports.responseMiddleware = responseMiddleware;
