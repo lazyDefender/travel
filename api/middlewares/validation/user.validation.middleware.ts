@@ -42,5 +42,3 @@ export const validation = {
             .isEmail().withMessage('Should be valid email'),
     ],
 }
-
-module.exports = validation;
