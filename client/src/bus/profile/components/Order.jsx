@@ -13,24 +13,27 @@ import { book } from '../../../navigation/book'
 
 const Order = (props) => {
     const { 
-      hotel,
       adultsCount,
       kidsCount,
       datetime,
       tour, 
     } = props
-    const { 
-      name,
-      id,
-    } = hotel
+    
     const {
       duration,
       kidPrice,
       adultPrice,
+      hotel,
     } = tour
+
+    const { 
+      name,
+      id,
+    } = hotel
+
     const total = kidPrice * kidsCount + adultPrice * adultsCount 
 
-    const date = new Date(datetime.seconds * 1000)
+    const date = new Date(datetime._seconds * 1000)
     
     return <>
         <Link to={`${book.hotels}/${id}`}>

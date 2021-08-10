@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { authService, cityService, tourService, userService } from '../services';
+import { orderService } from '../services';
 
 const ActionTypes = {
     GET_BY_USER: 'orders/get-by-user',
@@ -33,7 +33,7 @@ export const ordersSlice = createSlice({
     },
 });
 
-export const orders = authSlice.reducer;
+export const orders = ordersSlice.reducer;
 // const {
 //     setFormState,
 // } = toursFilterSlice.actions;

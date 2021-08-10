@@ -1,15 +1,15 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { ordersActions } from '../../../redux/orders/actions'
+import { ordersActions } from '../../../redux/orders.slice'
 
 
 const useOrdersByUser = (userId) => {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(ordersActions.fetchByUser(userId))
+        dispatch(ordersActions.getByUser(userId))
     }, [dispatch, userId])
-    const orders = useSelector(state => state.orders.data)
+    const orders = useSelector(state => state.orders)
     return orders
 }
 

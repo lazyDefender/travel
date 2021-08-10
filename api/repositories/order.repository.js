@@ -53,7 +53,51 @@ class OrderRepository {
             .collection(Collections.ORDERS)
             .where('user', '==', userRef)
             .get();
-        const orders = ordersQuerySnapshot.docs
+        const orderDocs = ordersQuerySnapshot.docs;
+
+        const orders = [];
+
+        for(let orderDoc of orderDocs) {
+            const order = {
+                id: orderDoc.id,
+                ...orderDoc.data(),
+                user: null,
+            };
+
+            const tourRef = await order.tour.get();
+
+            const tour = {
+                id: tourRef.id,
+                ...tourRef.data(),
+                toCity: null,
+                fromCity: null,
+            };
+
+            const hotelRef = await tour.hotel.get();
+            const hotel = {
+                id: hotelRef.id,
+                ...hotelRef.data(),
+            };
+
+            const cityRef = await hotel.city.get();
+            const city = {
+                id: cityRef.id,
+                ...cityRef.data(),
+            };
+
+            orders.push({
+                ...order,
+                tour: {
+                    ...tour,
+                    hotel: {
+                        ...hotel,
+                        city,
+                    },
+                },
+            });
+        }
+
+        return orders;
     }
 }
 
