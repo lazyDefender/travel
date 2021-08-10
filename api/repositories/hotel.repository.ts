@@ -30,14 +30,26 @@ export default class HotelRepository {
             .get();
         const hotels = [];
 
-        hotelsQuerySnapshot.forEach(hotelDoc => {
-            const hotel = {
+        for(let hotelDoc of hotelsQuerySnapshot.docs) {
+            const hotel: IHotel = {
                 id: hotelDoc.id,
                 ...hotelDoc.data(),
             };
+    
+            const cityDoc = await hotel.city.get();
+    
+            const city = {
+                id: cityDoc.id,
+                ...cityDoc.data(),
+            };
+    
+            const result = {
+                ...hotel,
+                city,
+            }
 
-            hotels.push(hotel);
-        });
+            hotels.push(result);
+        };
 
         return hotels;
     }
@@ -50,12 +62,24 @@ export default class HotelRepository {
             .get();
 
         if(hotelDoc.exists) {
-            const hotel = {
-                id: hotelDoc.id,
+            const hotel: IHotel = {
+                id,
                 ...hotelDoc.data(),
             };
     
-            return hotel;
+            const cityDoc = await hotel.city.get();
+    
+            const city = {
+                id: cityDoc.id,
+                ...cityDoc.data(),
+            };
+    
+            const result = {
+                ...hotel,
+                city,
+            }
+    
+            return result;
         }
 
         return null;
