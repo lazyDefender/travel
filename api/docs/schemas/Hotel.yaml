@@ -1,0 +1,40 @@
+components:
+  schemas:
+    Hotel:
+      type: object
+      properties:
+        id:
+          type: string
+          example: saefefs
+        name:
+          type: string
+          example: Cool Hotel
+        description:
+          type: string
+          example: awesome hotel
+        image:
+          $ref: '#/components/schemas/Image'
+        maxAdultsCount:
+          type: number
+          example: 2
+        maxKidsCount:
+          type: number
+          example: 2
+        city: 
+          $ref: '#/components/schemas/City'
+        
+    CreateHotelInput:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Cool Hotel
+        description: 
+          type: string
+          example: awesome hotel
+        maxAdultsCount:
+          type: number
+          example: 2
+        maxKidsCount:
+          type: number
+          example: 2

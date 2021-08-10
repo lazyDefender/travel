@@ -21,7 +21,6 @@ components:
         isFrom:
           type: boolean
           example: false
-          Order:
     
     CreateCityInput:
       type: object
