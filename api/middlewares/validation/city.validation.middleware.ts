@@ -1,6 +1,6 @@
-const { body } = require('express-validator');
+import { body } from 'express-validator';
 
-const validation = {
+export const validation = {
     save: [
         body('continent')
             .isLength({
@@ -21,5 +21,3 @@ const validation = {
             }).withMessage('name should be 1 to 255 characters long'),
     ],
 }
-
-module.exports = validation;

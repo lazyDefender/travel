@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import HotelService from '../services/hotel.service';
-import validation from '../middlewares/validation/hotel.validation.middleware';
+import { hotelValidation } from '../middlewares/validation';
 import { errorCodes } from '../common/enum/errors/error-codes';
 import { validationResult } from 'express-validator';
-import validationError from '../utils/validation-error';
+import { validationError } from '../utils/validation-error';
 
 const router = Router();
 
-router.post('/', validation.save, async (req, res, next) => {
+router.post('/', hotelValidation.save, async (req, res, next) => {
     const errors = validationResult(req)
         .array()
         .map(error => validationError(error));

@@ -1,4 +1,4 @@
-const { body } = require('express-validator');
+import { body } from 'express-validator';
 
             // adultsCount,
             // kidsCount,
@@ -6,7 +6,7 @@ const { body } = require('express-validator');
             // tourId,
             // userId,
 
-const validation = {
+export const validation = {
     save: [
         body('adultsCount')
             .isInt({
@@ -19,5 +19,3 @@ const validation = {
             }).withMessage('Should be an non-negative integer'),
     ],
 }
-
-module.exports = validation;

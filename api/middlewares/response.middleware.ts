@@ -1,4 +1,6 @@
-const responseMiddleware = (req, res, next) => {
+import { NextFunction } from "express";
+
+const responseMiddleware = (req, res, next: NextFunction) => {
     if(req.validationErrors) {
         const body = {
             errors: req.validationErrors,

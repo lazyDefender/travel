@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import UserService from '../services/user.service';
-import validation from '../middlewares/validation/user.validation.middleware';
+import { userValidation } from '../middlewares/validation';
 import { errorCodes } from '../common/enum/errors/error-codes';
 import { validationResult } from 'express-validator';
-import validationError from '../utils/validation-error';
+import { validationError } from '../utils/validation-error';
 
 const router = Router();
 
-router.post('/', validation.save, async (req, res, next) => {
+router.post('/', userValidation.save, async (req, res, next) => {
     const errors = validationResult(req)
         .array()
         .map(error => validationError(error));
@@ -91,7 +91,7 @@ router.get('/:id/orders', async (req, res, next) => {
     next();
 });
 
-router.patch('/:id', validation.update, async (req, res, next) => {
+router.patch('/:id', userValidation.update, async (req, res, next) => {
     const errors = validationResult(req)
         .array()
         .map(error => validationError(error));

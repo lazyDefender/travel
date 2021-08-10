@@ -1,6 +1,6 @@
-const { body } = require('express-validator');
+import { body } from 'express-validator';
 
-const validation = {
+export const validation = {
     save: [
         body('name')
             .isLength({
@@ -15,5 +15,3 @@ const validation = {
             .isInt().withMessage('maxKidsCount should be an integer'),
     ],
 }
-
-module.exports = validation;

@@ -1,6 +1,6 @@
 const AuthService = require('../services/auth.service');
 
-const isAuth = async (req, res, next) => {
+export const isAuth = async (req, res, next) => {
     const token = req.header('authorization');
 
     const { data: user, error } = await AuthService.verifyToken(token);
@@ -16,5 +16,3 @@ const isAuth = async (req, res, next) => {
 
     next();
 };
-
-module.exports = isAuth;

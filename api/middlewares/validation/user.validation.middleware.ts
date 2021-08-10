@@ -1,6 +1,6 @@
-const { body, param } = require('express-validator');
+import { body, param } from 'express-validator';
 
-const validation = {
+export const validation = {
     save: [
         body('firstName')
             .isLength({
@@ -37,15 +37,9 @@ const validation = {
         body('newPassword')
             .isLength({
                 min: 6,
-            }).withMessage('Password should be 6 or more characters long')
-        ,
+            }).withMessage('Password should be 6 or more characters long'),
         body('email')
-            .isEmail().withMessage('Should be valid email')
-            .custom((value, { req }) => {
-                return UserRepository.existsWithEmail(value, req.id).then(user => {
-                    if(user._exists === 0) return Promise.reject('Email does not exist')
-                })
-            }).withMessage('Email does not exist')
+            .isEmail().withMessage('Should be valid email'),
     ],
 }
 
