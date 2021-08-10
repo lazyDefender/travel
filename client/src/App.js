@@ -11,12 +11,14 @@ import { history } from './navigation/history'
 import { authActions } from './redux/auth.slice'
 import useAuth from './global/hooks/useAuth'
 import Progress from './global/components/Progress'
+import { firebaseConfig } from './firebase'
 
 const App = () => {
   const dispatch = useDispatch()
   const { isFetching } = useAuth()
   
   useEffect(() => {
+    firebase.initializeApp(firebaseConfig)
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {

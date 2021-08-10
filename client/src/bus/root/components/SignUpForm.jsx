@@ -19,7 +19,7 @@ import {
 import MomentUtils from '@date-io/moment'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 
-import { authActions } from '../../../redux/auth/actions'
+import { authActions } from '../../../redux/auth.slice'
 import useAuth from '../../../global/hooks/useAuth'
 import { book } from '../../../navigation/book'
 import { initialValues } from '../initialValues/signUp'

@@ -1,7 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { toursFilter } from './toursFilter.slice'    
-import { toursReducer as tours } from './tours/reducer'
+import { toursFilter } from './toursFilter.slice'
 import { auth } from './auth.slice'
 import { hotel } from './hotel.slice'
 import { reservation } from './reservation.slice'

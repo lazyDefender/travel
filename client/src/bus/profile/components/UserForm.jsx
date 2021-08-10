@@ -12,7 +12,6 @@ import {MuiPickersUtilsProvider} from '@material-ui/pickers'
 
 import useAuth from '../../../global/hooks/useAuth'
 import { authActions } from '../../../redux/auth.slice'
-import { ordersActions } from '../../../redux/orders/actions'
 import store from '../../../redux/store'
 
 const UserForm = ({ 
