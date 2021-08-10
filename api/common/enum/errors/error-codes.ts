@@ -1,8 +1,8 @@
-const UserErrorCodes = require('./users/user-error-codes');
-const CityErrorCodes = require('./cities/city-error-codes');
-const AuthErrorCodes = require('./auth/auth-error-codes');
-const HotelErrorCodes = require('./hotels/hotel-error-codes');
-const TourErrorCodes = require('./tours/tour-error-codes');
+import { ErrorCodes as UserErrorCodes } from './users/user-error-codes';
+import { ErrorCodes as CityErrorCodes } from './cities/city-error-codes';
+import { ErrorCodes as AuthErrorCodes } from './auth/auth-error-codes';
+import { ErrorCodes as HotelErrorCodes } from './hotels/hotel-error-codes';
+import { ErrorCodes as TourErrorCodes } from './tours/tour-error-codes';
 
 export const errorCodes = {
     USERS: UserErrorCodes,

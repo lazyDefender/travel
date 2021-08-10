@@ -1,8 +1,8 @@
-const UserErrors = require('./users/user-errors');
-const CityErrors = require('./cities/city-errors');
-const AuthErrors = require('./auth/auth-errors');
-const HotelErrors = require('./hotels/hotel-errors');
-const TourErrors = require('./tours/tour-errors');
+import { Errors as UserErrors} from './users/user-errors';
+import { Errors as CityErrors } from './cities/city-errors';
+import { Errors as AuthErrors } from './auth/auth-errors';
+import { Errors as HotelErrors } from './hotels/hotel-errors';
+import { Errors as TourErrors } from './tours/tour-errors';
 
 export const errors = {
     USERS: UserErrors,

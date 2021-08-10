@@ -1,7 +1,7 @@
-const ErrorCodes = require("./city-error-codes");
+import { ErrorCodes } from './city-error-codes';
 
-const Errors = {
-    notFoundById: (id) => {
+export const Errors = {
+    notFoundById: (id: string) => {
         const error = {
             code: ErrorCodes.CITY_NOT_FOUND_BY_ID,
             message: `City ${id} does not exist`,
@@ -10,5 +10,3 @@ const Errors = {
         return error;
     },
 }
-
-module.exports = Errors;

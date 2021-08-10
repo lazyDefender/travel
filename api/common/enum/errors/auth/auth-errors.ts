@@ -1,6 +1,6 @@
-const ErrorCodes = require("./auth-error-codes");
+import { ErrorCodes } from './auth-error-codes';
 
-const Errors = {
+export const Errors = {
     invalidToken: () => {
         const error = {
             code: ErrorCodes.INVALID_TOKEN,
@@ -10,5 +10,3 @@ const Errors = {
         return error;
     },
 }
-
-module.exports = Errors;

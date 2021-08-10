@@ -1,14 +1,12 @@
-const errorCodes = require("./tour-error-codes");
+import { ErrorCodes } from './tour-error-codes';
 
-const errors = {
+export const Errors = {
     notFoundById: (id) => {
         const error = {
-            code: errorCodes.TOUR_NOT_FOUND_BY_ID,
+            code: ErrorCodes.TOUR_NOT_FOUND_BY_ID,
             message: `Tour ${id} does not exist`,
         };
 
         return error;
     },
 }
-
-module.exports = errors;
