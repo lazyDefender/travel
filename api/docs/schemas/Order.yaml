@@ -20,3 +20,20 @@ components:
         userId:
           type: string
           example: ojkljljlj
+    CreateOrderInput:
+      type: object
+      properties:
+        adultsCount:
+          type: number
+          example: 1
+        kidsCount:
+          type: number
+          example: 1
+        datetime:
+          type: object
+        tourId:
+          type: string
+          example: blablablablablab
+        userId:
+          type: string
+          example: ojkljljlj
