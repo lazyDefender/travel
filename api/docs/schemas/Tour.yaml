@@ -16,5 +16,4 @@ components:
           type: number
           example: 8
         toCity:
-          type:
             $ref: '#/components/schemas/City'
