@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Redirect, useHistory } from 'react-router-dom'
 import {
   Formik, 
@@ -26,6 +26,8 @@ import { initialValues } from '../initialValues/signIn'
 import { validationSchema } from '../validation/signIn'
 import useFirstLoadedPage from '../../../global/hooks/useFirstLoadedPage'
 import GoHomeBar from '../../../global/components/GoHomeBar'
+import { snackbarActions } from '../../../redux/snackbar.slice'
+import useSnackbar from '../../../global/hooks/useSnackbar'
 
 // const signInWithGoogle = () => {
 //   store.dispatch(authActions.signInWithGoogle())
@@ -36,30 +38,33 @@ import GoHomeBar from '../../../global/components/GoHomeBar'
 // }
 
 const SignUpForm = () => {
-  const history = useHistory()
-  const [open, setOpen] = React.useState(true)
-  const auth = useAuth()
-  // const firstLoadedPage = useFirstLoadedPage()
+  const history = useHistory();
+  const { error } = useAuth();
+  const snackbar = useSnackbar();
+
+  useEffect(() => {
+    if(!snackbar.open) {
+      store.dispatch(authActions.setError(null));
+    }
+  }, [snackbar]);
+
+  useEffect(() => {
+    if(error) {
+      store.dispatch(snackbarActions.show({
+        message: error.message,
+        severity: 'error',
+        open: true,
+      }));
+    }
+  }, [error]);
+
   const formJSX = <div>
     <Typography>Вхід</Typography>
     <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
-            await store.dispatch(authActions.signIn(values))
-            const { error } = store.getState().auth
-            if(!error) {
-              // if(['/login', '/signup'].includes(firstLoadedPage)) {
-              //   history.replace('/')
-              // }
-              // else if(firstLoadedPage === '/profile') {
-              //   history.replace('/profile')
-              // }
-              // else {
-              //   history.goBack()
-              // }
-            }
-            
+            store.dispatch(authActions.signIn(values));
         }}
     >
     {({submitForm, isSubmitting, touched, errors}) => (
@@ -82,9 +87,7 @@ const SignUpForm = () => {
                 disabled={false}
                 />
             </Box>
-            {auth.error === 'auth/wrong-password' ? 'Неправильний пароль' : ''}
-            {auth.error === 'auth/user-not-found' ? 'Користувача із введеним email не знайдено' : ''}
-            <Box margin={1}>
+           <Box margin={1}>
                 <Button
                 variant="contained"
                 color="primary"
@@ -102,41 +105,18 @@ const SignUpForm = () => {
                 Зареєструватись
                 </Button>
             </Box>
-            {/* <Box margin={1}>
-                <Button
-                variant="contained"
-                color="primary"
-                onClick={signInWithGoogle}
-                >
-                Увійти через Google
-                </Button>
-            </Box>
-            <Box margin={1}>
-                <Button
-                variant="contained"
-                color="primary"
-                onClick={signInWithFacebook}
-                >
-                Увійти через Facebook
-                </Button>
-                
-            </Box> */}
         </Form>
     </MuiPickersUtilsProvider>
     )}
     </Formik>
 </div>
 
-  // const redirectTo = firstLoadedPage === '/login' ? book.root : firstLoadedPage
-
   const page = <>
     <GoHomeBar/>
     {formJSX}
   </>
-  const content = page 
-  return <>
-    {content}
-  </>
+
+  return page;
 }
 
 export default SignUpForm

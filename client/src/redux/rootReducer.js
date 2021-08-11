@@ -5,6 +5,7 @@ import { auth } from './auth.slice'
 import { hotel } from './hotel.slice'
 import { reservation } from './reservation.slice'
 import { orders } from './orders.slice'
+import { snackbar } from './snackbar.slice';
 import { defaultReducer } from './default/reducer'
 
 export const rootReducer = combineReducers({
@@ -15,5 +16,6 @@ export const rootReducer = combineReducers({
     hotel,
     reservation,
     orders,
+    snackbar,
     // defaultReducer,
 });
