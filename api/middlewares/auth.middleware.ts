@@ -1,4 +1,4 @@
-const AuthService = require('../services/auth.service');
+import AuthService from '../services/auth.service';
 
 export const isAuth = async (req, res, next) => {
     const token = req.header('authorization');

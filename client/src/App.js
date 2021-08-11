@@ -18,14 +18,21 @@ const App = () => {
   const { isFetching } = useAuth()
   
   useEffect(() => {
-    firebase.initializeApp(firebaseConfig)
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-    firebase.auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        dispatch(authActions.getCurrentUser())
-      }
+    (async () => {
+      firebase.initializeApp(firebaseConfig)
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+      const { currentUser } = firebase.auth();
       
-    });
+      if(currentUser === null) {
+        dispatch(authActions.setFetching(false));
+      }
+
+      firebase.auth().onAuthStateChanged(async (user) => {
+        if (user) {
+          dispatch(authActions.getCurrentUser())
+        }
+      });
+    })();
   }, [dispatch])
 
   const appJSX = <Routes />

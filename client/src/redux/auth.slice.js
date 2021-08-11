@@ -3,6 +3,7 @@ import { authService, cityService, tourService, userService } from '../services'
 
 const ActionTypes = {
     SIGN_IN: 'auth/sign-in',
+    SIGN_OUT: 'auth/sign-out',
     GET_CURRENT_USER: 'auth/get-current-user',
     UPDATE_USER: 'auth/update-user',
 }
@@ -18,6 +19,13 @@ const signIn = createAsyncThunk(
 
         const response = await authService.signIn(email, password);
     } 
+)
+
+const signOut = createAsyncThunk(
+    ActionTypes.SIGN_OUT,
+    async (_, thunkAPI) => {
+        await authService.signOut();
+    }
 )
 
 const getCurrentUser = createAsyncThunk(
@@ -44,7 +52,9 @@ export const authSlice = createSlice({
         isFetching: true,
     },
     reducers: {
-
+        setFetching: (state, action) => {
+            state.isFetching = action.payload;
+        }
     },
     extraReducers: {
         [signIn.pending]: (state, action) => {
@@ -52,6 +62,14 @@ export const authSlice = createSlice({
         },
         [signIn.fulfilled]: (state, action) => {
             state.isFetching = false;
+        },
+
+        [signOut.pending]: (state, action) => {
+            state.isFetching = true;
+        },
+        [signOut.fulfilled]: (state, action) => {
+            state.isFetching = false;
+            state.user = null;
         },
 
         [getCurrentUser.pending]: (state, action) => {
@@ -73,12 +91,15 @@ export const authSlice = createSlice({
 });
 
 export const auth = authSlice.reducer;
-// const {
-//     setFormState,
-// } = toursFilterSlice.actions;
+
+const {
+    setFetching,
+} = authSlice.actions;
 
 export const authActions = {
     signIn,
+    signOut,
     getCurrentUser,
     updateUser,
+    setFetching,
 };

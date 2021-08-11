@@ -15,9 +15,10 @@ import {
 import { book } from '../../navigation/book'
 import useAuth from '../../global/hooks/useAuth'
 import { authActions } from '../../redux/auth.slice'
+import store from '../../redux/store'
 
 const signOut = () => {
-    // store.dispatch(authActions.signOut())
+    store.dispatch(authActions.signOut())
 }
 
 const useStyles = makeStyles(theme => ({
