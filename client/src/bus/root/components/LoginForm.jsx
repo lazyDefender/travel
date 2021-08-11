@@ -29,9 +29,9 @@ import GoHomeBar from '../../../global/components/GoHomeBar'
 import { snackbarActions } from '../../../redux/snackbar.slice'
 import useSnackbar from '../../../global/hooks/useSnackbar'
 
-// const signInWithGoogle = () => {
-//   store.dispatch(authActions.signInWithGoogle())
-// }
+const signInWithGoogle = () => {
+  store.dispatch(authActions.signInWithProvider('google'))
+}
 
 const signInWithFacebook = () => {
   store.dispatch(authActions.signInWithProvider('facebook'))
@@ -103,6 +103,15 @@ const SignUpForm = () => {
                 }}
                 >
                 Зареєструватись
+                </Button>
+            </Box>
+            <Box margin={1}>
+                <Button
+                variant="contained"
+                color="primary"
+                onClick={signInWithGoogle}
+                >
+                Увійти через Google
                 </Button>
             </Box>
             <Box margin={1}>

@@ -29,8 +29,11 @@ export class AuthService {
             case 'facebook':
                 provider = new firebase.auth.FacebookAuthProvider();
                 break;
+            case 'google':
+                provider = new firebase.auth.GoogleAuthProvider();
+                break;
         }
-        
+
         provider.addScope('email');
         const result = await firebase.auth().signInWithPopup(provider);
         
