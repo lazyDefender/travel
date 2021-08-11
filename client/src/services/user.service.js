@@ -7,6 +7,20 @@ export class UserService {
         this.apiUrl = apiUrl;
     }
 
+    create(payload) {
+        return axios.post(`${this.apiUrl}/users`, payload, {
+            'Content-Type': 'application/json',
+        });
+    } 
+
+    async search(query) {
+        const params = new URLSearchParams();
+        params.set('email', query.email);
+        const paramsStr = params.toString();
+
+        return axios.get(`${this.apiUrl}/users/search?${paramsStr}`);
+    }
+
     async update(id, payload) {
         const token = await getBearerToken();
         
@@ -14,7 +28,7 @@ export class UserService {
             headers: {
                 'Authorization': token,
             },
-        })
+        });
     }
 
     async signIn(email, password) {

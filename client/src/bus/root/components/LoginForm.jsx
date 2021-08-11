@@ -33,9 +33,9 @@ import useSnackbar from '../../../global/hooks/useSnackbar'
 //   store.dispatch(authActions.signInWithGoogle())
 // }
 
-// const signInWithFacebook = () => {
-//   store.dispatch(authActions.signInWithFacebook())
-// }
+const signInWithFacebook = () => {
+  store.dispatch(authActions.signInWithFacebook())
+}
 
 const SignUpForm = () => {
   const history = useHistory();
@@ -104,6 +104,16 @@ const SignUpForm = () => {
                 >
                 Зареєструватись
                 </Button>
+            </Box>
+            <Box margin={1}>
+                <Button
+                variant="contained"
+                color="primary"
+                onClick={signInWithFacebook}
+                >
+                Увійти через Facebook
+                </Button>
+                
             </Box>
         </Form>
     </MuiPickersUtilsProvider>

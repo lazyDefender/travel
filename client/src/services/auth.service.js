@@ -23,6 +23,30 @@ export class AuthService {
             .signInWithEmailAndPassword(email, password)
     }
 
+    async signInWithFacebook() {
+        const provider = new firebase.auth.FacebookAuthProvider();
+        provider.addScope('email');
+        const result = await firebase.auth().signInWithPopup(provider);
+        
+        const {
+            uid,
+        } = result.user;
+        const {
+            email,
+            first_name: firstName,
+            last_name: lastName,
+        } = result.additionalUserInfo.profile;
+
+        const user = {
+            uid,
+            email,
+            firstName,
+            lastName,
+        };
+
+        return user;
+    }
+
     async signOut() {
         await firebase.auth().signOut();
     }

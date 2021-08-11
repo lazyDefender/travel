@@ -9,7 +9,6 @@ const ActionTypes = {
     UPDATE_USER: 'auth/update-user',
 }
 
-
 const signIn = createAsyncThunk(
     ActionTypes.SIGN_IN,
     async (payload, thunkAPI) => {
@@ -25,6 +24,46 @@ const signIn = createAsyncThunk(
 const signInWithFacebook = createAsyncThunk(
     ActionTypes.SIGN_IN_WITH_FACEBOOK,
     async (_, thunkAPI) => {
+        const { 
+            uid, 
+            email,
+            firstName,
+            lastName, 
+        } = await authService.signInWithFacebook();
+        const userResponse = await userService.search({ email });
+        const [user] = userResponse.data;
+
+        // if user with specified email exists
+        if(user) {
+            const { 
+                id,
+                authIDs,
+            } = user;
+    
+            let result = user;
+    
+            if(!authIDs.includes(uid)) {
+                const updatedUserResponse = await userService.update(id, {
+                    authIDs: [...user.authIDs, uid],
+                })
+    
+                result = updatedUserResponse.data;
+            }
+            
+            return result;
+        }
+
+        // create new user
+        else {
+            const { data: newUser } = await userService.create({
+                email,
+                firstName,
+                lastName,
+                authID: uid,
+            })
+
+            return newUser;
+        }
         
     }
 )
@@ -81,6 +120,19 @@ export const authSlice = createSlice({
             state.error = action.error;
         },
 
+        [signInWithFacebook.pending]: (state, action) => {
+            state.isFetching = true;
+        },
+        [signInWithFacebook.fulfilled]: (state, action) => {
+            state.isFetching = false;
+            state.user = action.payload;
+        },
+        [signInWithFacebook.rejected]: (state, action) => {
+            state.isFetching = false;
+            state.user = null;
+            state.error = action.error;
+        },
+
         [signOut.pending]: (state, action) => {
             state.isFetching = true;
         },
@@ -116,6 +168,7 @@ const {
 
 export const authActions = {
     signIn,
+    signInWithFacebook,
     signOut,
     getCurrentUser,
     updateUser,

@@ -22,16 +22,21 @@ export const validation = {
     ],
     update: [
         body('firstName')
+            .optional()
             .isLength({
                 min: 1,
                 max: 255,
             }).withMessage('firstName should be 1 to 255 characters long'),
 
         body('lastName')
+            .optional()
             .isLength({
                 min: 1,
                 max: 255,
             }).withMessage('lastName should be 1 to 255 characters long'),
+        body('authIDs')
+            .optional()
+            .isArray()
     ],
     setPassword: [
         body('newPassword')
