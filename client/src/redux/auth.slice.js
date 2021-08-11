@@ -20,6 +20,20 @@ const signIn = createAsyncThunk(
     } 
 )
 
+const signInWithFacebook = createAsyncThunk(
+    ActionTypes.SIGN_IN_WITH_FACEBOOK,
+    async (_, thunkAPI) => {
+        
+    }
+)
+
+const signOut = createAsyncThunk(
+    ActionTypes.SIGN_OUT,
+    async (_, thunkAPI) => {
+        await authService.signOut();
+    }
+)
+
 const getCurrentUser = createAsyncThunk(
     ActionTypes.GET_CURRENT_USER,
     async (_, thunkAPI) => {
