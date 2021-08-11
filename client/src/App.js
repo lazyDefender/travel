@@ -12,11 +12,20 @@ import { authActions } from './redux/auth.slice'
 import useAuth from './global/hooks/useAuth'
 import Progress from './global/components/Progress'
 import { firebaseConfig } from './firebase'
+import Snackbar from './global/components/Snackbar'
+import useSnackbar from './global/hooks/useSnackbar'
+import store from './redux/store'
+import { snackbarActions } from './redux/snackbar.slice'
 
 const App = () => {
   const dispatch = useDispatch()
   const { isFetching } = useAuth()
+  const snackbar = useSnackbar();
   
+  const resetSnackbar = () => {
+    store.dispatch(snackbarActions.reset());
+  }
+
   useEffect(() => {
     (async () => {
       firebase.initializeApp(firebaseConfig)
@@ -45,6 +54,14 @@ const App = () => {
           <CssBaseline/>
           <Container>
             {isFetching ? <Progress /> : appJSX}
+            {snackbar.message && <Snackbar 
+                message={snackbar.message} 
+                severity={snackbar.severity} 
+                open={snackbar.open}
+                onClose={resetSnackbar} 
+              />
+            }
+            
           </Container>
         </Router>
     </ThemeProvider>
