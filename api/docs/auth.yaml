@@ -1,0 +1,18 @@
+/api/auth/currentUser:
+  get:
+    tags:
+      - Auth
+    summary: Get user by JWT
+    parameters:
+      - in: headers
+        name: Authorization
+        schema:
+          type: string
+        required: true
+        example: Bearer fpighafiorsioehripahepgoj
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'

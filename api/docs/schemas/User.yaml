@@ -15,10 +15,12 @@ components:
         email:
           type: string
           example: vasya@gmail.com
-        authID:
-          type: string
-          description: User's uid from Firebase Auth
-          example: blablablablablab
+        authIDs:
+          type: array
+          items: 
+            type: string
+          description: User's uids from Firebase Auth
+          example: [blablablablablab, jlkjl, lkjkljlk]
     CreateUserInput:
       type: object
       properties:
