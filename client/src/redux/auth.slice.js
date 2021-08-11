@@ -3,7 +3,7 @@ import { authService, cityService, tourService, userService } from '../services'
 
 const ActionTypes = {
     SIGN_IN: 'auth/sign-in',
-    SIGN_IN_WITH_FACEBOOK: 'auth/sign-in-with-facebook',
+    SIGN_IN_WITH_PROVIDER: 'auth/sign-in-with-provider',
     SIGN_OUT: 'auth/sign-out',
     GET_CURRENT_USER: 'auth/get-current-user',
     UPDATE_USER: 'auth/update-user',
@@ -22,7 +22,7 @@ const signIn = createAsyncThunk(
 )
 
 const signInWithProvider = createAsyncThunk(
-    ActionTypes.SIGN_IN_WITH_FACEBOOK,
+    ActionTypes.SIGN_IN_WITH_PROVIDER,
     async (providerName, thunkAPI) => {
         const { 
             uid, 
