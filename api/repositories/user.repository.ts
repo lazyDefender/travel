@@ -94,6 +94,22 @@ export default class UserRepository {
         return null;
     }
 
+    static async search(query) {
+        const { email } = query;
+        const usersQuerySnapshot: FirebaseFirestore.QuerySnapshot = await firebase
+            .firestore()
+            .collection(Collections.USERS)
+            .where('email', '==', email)
+            .get()
+
+        const users = usersQuerySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+
+        return users;
+    }
+
     static async update(id: string, updatedUser) {
         const userRef: FirebaseFirestore.DocumentReference = firebase
             .firestore()

@@ -91,6 +91,17 @@ router.get('/:id/orders', async (req, res, next) => {
     next();
 });
 
+router.get('/search', async (req, res, next) => {
+    const { data: users, error } = await UserService.search(req.query);
+
+    req.result = {
+        status: 200,
+        body: users,
+    };
+
+    next();
+});
+
 router.patch('/:id', userValidation.update, async (req, res, next) => {
     const errors = validationResult(req)
         .array()

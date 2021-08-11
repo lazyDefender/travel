@@ -67,6 +67,14 @@ export default class UserService {
         };
     }
 
+    static async search(query) {
+        const users = await UserRepository.search(query);
+        return {
+            data: users,
+            error: null,
+        };
+    }
+
     static async update(id: string, dataToUpdate): Promise<ServiceResponse> {
         const user = await UserRepository.getById(id);
         if(user) {
