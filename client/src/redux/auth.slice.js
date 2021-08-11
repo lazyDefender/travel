@@ -21,15 +21,15 @@ const signIn = createAsyncThunk(
     } 
 )
 
-const signInWithFacebook = createAsyncThunk(
+const signInWithProvider = createAsyncThunk(
     ActionTypes.SIGN_IN_WITH_FACEBOOK,
-    async (_, thunkAPI) => {
+    async (providerName, thunkAPI) => {
         const { 
             uid, 
             email,
             firstName,
             lastName, 
-        } = await authService.signInWithFacebook();
+        } = await authService.signInWithProvider(providerName);
         const userResponse = await userService.search({ email });
         const [user] = userResponse.data;
 
@@ -120,14 +120,14 @@ export const authSlice = createSlice({
             state.error = action.error;
         },
 
-        [signInWithFacebook.pending]: (state, action) => {
+        [signInWithProvider.pending]: (state, action) => {
             state.isFetching = true;
         },
-        [signInWithFacebook.fulfilled]: (state, action) => {
+        [signInWithProvider.fulfilled]: (state, action) => {
             state.isFetching = false;
             state.user = action.payload;
         },
-        [signInWithFacebook.rejected]: (state, action) => {
+        [signInWithProvider.rejected]: (state, action) => {
             state.isFetching = false;
             state.user = null;
             state.error = action.error;
@@ -168,7 +168,7 @@ const {
 
 export const authActions = {
     signIn,
-    signInWithFacebook,
+    signInWithProvider,
     signOut,
     getCurrentUser,
     updateUser,

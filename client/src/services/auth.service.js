@@ -23,8 +23,14 @@ export class AuthService {
             .signInWithEmailAndPassword(email, password)
     }
 
-    async signInWithFacebook() {
-        const provider = new firebase.auth.FacebookAuthProvider();
+    async signInWithProvider(providerName) {
+        let provider;
+        switch(providerName) {
+            case 'facebook':
+                provider = new firebase.auth.FacebookAuthProvider();
+                break;
+        }
+        
         provider.addScope('email');
         const result = await firebase.auth().signInWithPopup(provider);
         

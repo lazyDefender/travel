@@ -34,7 +34,7 @@ import useSnackbar from '../../../global/hooks/useSnackbar'
 // }
 
 const signInWithFacebook = () => {
-  store.dispatch(authActions.signInWithFacebook())
+  store.dispatch(authActions.signInWithProvider('facebook'))
 }
 
 const SignUpForm = () => {
