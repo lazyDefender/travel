@@ -9,7 +9,7 @@ export default class CityRepository {
             .collection(Collections.CITIES)
             .add(newCity);
 
-        const cityDoc = await firebase
+        const cityDoc: FirebaseFirestore.DocumentSnapshot = await firebase
             .firestore()
             .collection(Collections.CITIES)
             .doc(id)
@@ -24,7 +24,7 @@ export default class CityRepository {
     }
 
     static async getAll() {
-        const citiesQuerySnapshot = await firebase
+        const citiesQuerySnapshot: FirebaseFirestore.QuerySnapshot = await firebase
             .firestore()
             .collection(Collections.CITIES)
             .get();
@@ -43,7 +43,7 @@ export default class CityRepository {
     }
 
     static async getById(id: string) {
-        const cityDoc = await firebase
+        const cityDoc: FirebaseFirestore.DocumentSnapshot = await firebase
             .firestore()
             .collection(Collections.CITIES)
             .doc(id)
@@ -62,7 +62,7 @@ export default class CityRepository {
     }
 
     static async delete(id: string) {
-        const cityRef = firebase
+        const cityRef: FirebaseFirestore.DocumentReference = firebase
             .firestore()
             .collection(Collections.CITIES)
             .doc(id);
