@@ -17,6 +17,14 @@ export class AuthService {
         })
     }
 
+    async signUp(email, password) {
+        const authRes = await firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password);
+
+        return authRes;
+    }
+
     async signIn(email, password) {
         const authRes = await firebase
             .auth()

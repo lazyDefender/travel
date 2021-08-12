@@ -2,12 +2,35 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authService, cityService, tourService, userService } from '../services';
 
 const ActionTypes = {
+    SIGN_UP: 'auth/sign-up',
     SIGN_IN: 'auth/sign-in',
     SIGN_IN_WITH_PROVIDER: 'auth/sign-in-with-provider',
     SIGN_OUT: 'auth/sign-out',
     GET_CURRENT_USER: 'auth/get-current-user',
     UPDATE_USER: 'auth/update-user',
 }
+
+const signUp = createAsyncThunk(
+    ActionTypes.SIGN_UP,
+    async (payload, thunkAPI) => {
+        const {
+            email,
+            password,
+            firstName,
+            lastName,
+        } = payload;
+
+        const { user: { uid } } = await authService.signUp(email, password);
+        const userResponse = await userService.create({
+            firstName,
+            lastName,
+            email,
+            authID: uid,
+        })
+
+        return userResponse.data;
+    }
+)
 
 const signIn = createAsyncThunk(
     ActionTypes.SIGN_IN,
@@ -108,6 +131,18 @@ export const authSlice = createSlice({
         },
     },
     extraReducers: {
+        [signUp.pending]: (state, action) => {
+            state.isFetching = true;
+        },
+        [signUp.fulfilled]: (state, action) => {
+            state.isFetching = false;
+        },
+        [signUp.rejected]: (state, action) => {
+            state.isFetching = false;
+            state.user = null;
+            state.error = action.error;
+        },
+
         [signIn.pending]: (state, action) => {
             state.isFetching = true;
         },
@@ -167,6 +202,7 @@ const {
 } = authSlice.actions;
 
 export const authActions = {
+    signUp,
     signIn,
     signInWithProvider,
     signOut,
