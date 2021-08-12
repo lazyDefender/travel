@@ -21,11 +21,11 @@ export default class OrderRepository {
             userId,
         } = order
 
-        const userRef = firebase
+        const userRef: FirebaseFirestore.DocumentReference = firebase
             .firestore()
             .collection(Collections.USERS)
             .doc(userId)
-        const tourRef = firebase
+        const tourRef: FirebaseFirestore.DocumentReference = firebase
             .firestore()
             .collection(Collections.TOURS)
             .doc(tourId)
@@ -38,7 +38,7 @@ export default class OrderRepository {
             user: userRef,
         }
 
-        const orderRef = await firebase
+        const orderRef: FirebaseFirestore.DocumentReference = await firebase
             .firestore()
             .collection(Collections.ORDERS)
             .add(fullOrder)
@@ -53,12 +53,12 @@ export default class OrderRepository {
     }
 
     static async getByUser(userId: string) {
-        const userRef = await firebase
+        const userRef: FirebaseFirestore.DocumentReference = await firebase
             .firestore()
             .collection(Collections.USERS)
             .doc(userId);
 
-        const ordersQuerySnapshot = await firebase
+        const ordersQuerySnapshot: FirebaseFirestore.QuerySnapshot = await firebase
             .firestore()
             .collection(Collections.ORDERS)
             .where('user', '==', userRef)
@@ -83,16 +83,16 @@ export default class OrderRepository {
                 fromCity: null,
             };
 
-            const hotelRef = await tour.hotel.get();
+            const hotelDoc: FirebaseFirestore.DocumentSnapshot = await tour.hotel.get();
             const hotel: IHotel = {
-                id: hotelRef.id,
-                ...hotelRef.data(),
+                id: hotelDoc.id,
+                ...hotelDoc.data(),
             };
 
-            const cityRef = await hotel.city.get();
+            const cityDoc: FirebaseFirestore.DocumentSnapshot = await hotel.city.get();
             const city = {
-                id: cityRef.id,
-                ...cityRef.data(),
+                id: cityDoc.id,
+                ...cityDoc.data(),
             };
 
             orders.push({
