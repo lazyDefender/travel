@@ -35,28 +35,6 @@ export default class CityService {
         };
     }
 
-    static async update(id: string, dataToUpdate): Promise<ServiceResponse> {
-        const city = await CityRepository.getById(id);
-        if(city) {
-            const updatedCity = await CityRepository.update(id, dataToUpdate);
-            if(!updatedCity) {
-                return null;
-            }
-
-            return {
-                data: updatedCity,
-                error: null,
-            };
-        }
-        else {
-            return {
-                data: null,
-                error: errors.CITIES.notFoundById(id),
-            }    
-        }
-        
-    }
-
     static async delete(id: string): Promise<ServiceResponse> {
         const city = await CityRepository.getById(id);
 
