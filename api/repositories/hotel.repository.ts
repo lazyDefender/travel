@@ -9,7 +9,7 @@ export default class HotelRepository {
             .collection(Collections.HOTELS)
             .add(newHotel);
 
-        const hotelDoc = await firebase
+        const hotelDoc: FirebaseFirestore.DocumentSnapshot = await firebase
             .firestore()
             .collection(Collections.HOTELS)
             .doc(id)
@@ -24,7 +24,7 @@ export default class HotelRepository {
     }
 
     static async getAll() {
-        const hotelsQuerySnapshot = await firebase
+        const hotelsQuerySnapshot: FirebaseFirestore.QuerySnapshot = await firebase
             .firestore()
             .collection(Collections.HOTELS)
             .get();
@@ -55,7 +55,7 @@ export default class HotelRepository {
     }
 
     static async getById(id: string) {
-        const hotelDoc = await firebase
+        const hotelDoc: FirebaseFirestore.DocumentSnapshot = await firebase
             .firestore()
             .collection(Collections.HOTELS)
             .doc(id)
@@ -86,7 +86,7 @@ export default class HotelRepository {
     }
 
     static async delete(id: string) {
-        const hotelRef = firebase
+        const hotelRef: FirebaseFirestore.DocumentReference = firebase
             .firestore()
             .collection(Collections.HOTELS)
             .doc(id);
