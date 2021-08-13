@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'; 
 
-import express from 'express';
+import express, { Router } from 'express';
 import cors from 'cors';
 
 import swaggerUI from 'swagger-ui-express';
@@ -8,7 +8,7 @@ import { swaggerSpec } from './config/swagger';
 
 import { initializeFirebase} from './firebase';
 import { responseMiddleware } from './middlewares/response.middleware';
-import routes from './routes';
+import { initApi } from './routes';
 
 dotenv.config();
 
@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
-routes(app);
+app.use('/api', initApi(Router));
 app.use(responseMiddleware);
 
 const port = 3050;

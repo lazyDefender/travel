@@ -1,17 +1,22 @@
 import { errors } from '../common/enum/errors';
-import TourRepository from '../repositories/tour.repository';
 
 export default class TourService {
-    static async getAll(filters): Promise<ServiceResponse> {
-        const tours = await TourRepository.getAll(filters);
+    _tourRepository;
+
+    constructor({ tourRepository }) {
+        this._tourRepository = tourRepository;
+    }
+
+    async getAll(filters): Promise<ServiceResponse> {
+        const tours = await this._tourRepository.getAll(filters);
 
         return {
             data: tours,
             error: null,
         };
     }
-    static async getById(id: string): Promise<ServiceResponse> {
-        const hotel = await TourRepository.getById(id);
+    async getById(id: string): Promise<ServiceResponse> {
+        const hotel = await this._tourRepository.getById(id);
         if(!hotel) {
             return {
                 data: null,

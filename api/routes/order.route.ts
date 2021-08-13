@@ -1,38 +1,39 @@
-import { Router } from 'express';
-import OrderService from '../services/order.service';
 import { orderValidation } from '../middlewares/validation';
 import { errorCodes } from '../common/enum/errors/error-codes';
 import { validationResult } from 'express-validator';
 import { validationError } from '../utils/validation-error';
 import { isAuth } from '../middlewares/auth.middleware';
 
-const router = Router();
+export const initOrder = (Router, services) => {
+    const router = Router();
+    const { orderService } = services;
 
-router.post('/', isAuth, orderValidation.save, async (req, res, next) => {
-    if(!req.userId) {
-        next();
-    }
-    const errors = validationResult(req)
-        .array()
-        .map(error => validationError(error));
+    router.post('/', isAuth, orderValidation.save, async (req, res, next) => {
+        if(!req.userId) {
+            next();
+        }
+        const errors = validationResult(req)
+            .array()
+            .map(error => validationError(error));
 
-    if(errors.length > 0) {
-        req.validationErrors = errors;
-    }
-    
-    if(req.validationErrors) {
-        next();
-    }
-
-    else {
-        const { data: createdOrder, error } = await OrderService.create(req.body);
-        req.result = {
-            status: 201,
-            body: createdOrder,
-        };
+        if(errors.length > 0) {
+            req.validationErrors = errors;
+        }
         
-        next(); 
-    }
-});
+        if(req.validationErrors) {
+            next();
+        }
 
-export { router };
+        else {
+            const { data: createdOrder, error } = await orderService.create(req.body);
+            req.result = {
+                status: 201,
+                body: createdOrder,
+            };
+            
+            next(); 
+        }
+    });
+
+    return router;
+}

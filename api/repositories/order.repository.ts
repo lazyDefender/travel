@@ -12,7 +12,7 @@ interface IOrder {
 }
 
 export default class OrderRepository {
-    static async create(order) {
+    async create(order) {
         const {
             adultsCount,
             kidsCount,
@@ -52,7 +52,7 @@ export default class OrderRepository {
         return createdOrder
     }
 
-    static async getByUser(userId: string) {
+    async getByUser(userId: string) {
         const userRef: FirebaseFirestore.DocumentReference = await firebase
             .firestore()
             .collection(Collections.USERS)

@@ -2,7 +2,7 @@ import firebase from 'firebase-admin';
 import { Collections } from '../common/enum/collections';
 
 export default class TourRepository {
-    static async getAll(filters) {
+    async getAll(filters) {
         const {
             toCity,
             datetime,
@@ -53,7 +53,7 @@ export default class TourRepository {
         return finalTours;
     }
 
-    static async getById(id: string) {
+    async getById(id: string) {
         const tourDoc: FirebaseFirestore.DocumentSnapshot = await firebase
             .firestore()
             .collection(Collections.TOURS)
@@ -94,7 +94,7 @@ export default class TourRepository {
         return result;
     }
 
-    static async getByHotel(hotelId: string) {
+    async getByHotel(hotelId: string) {
         const hotelRef = firebase
             .firestore()
             .collection(Collections.HOTELS)

@@ -3,7 +3,7 @@ import firebase from 'firebase-admin';
 import { Collections } from '../common/enum/collections';
 
 export default class UserRepository {
-    static async create(newUser) {
+    async create(newUser) {
         const { 
             authID,
             firstName,
@@ -35,7 +35,7 @@ export default class UserRepository {
         return user;
     }
 
-    static async getAll() {
+    async getAll() {
         const usersQuerySnapshot: FirebaseFirestore.QuerySnapshot = await firebase
             .firestore()
             .collection(Collections.USERS)
@@ -54,7 +54,7 @@ export default class UserRepository {
         return users;
     }
 
-    static async getById(id: string) {
+    async getById(id: string) {
         const userDoc: FirebaseFirestore.DocumentSnapshot = await firebase
             .firestore()
             .collection(Collections.USERS)
@@ -73,7 +73,7 @@ export default class UserRepository {
         return null;
     }
 
-    static async getByUid(uid: string) {
+    async getByUid(uid: string) {
         const usersQuerySnapshot: FirebaseFirestore.QuerySnapshot = await firebase
             .firestore()
             .collection(Collections.USERS)
@@ -94,7 +94,7 @@ export default class UserRepository {
         return null;
     }
 
-    static async search(query) {
+    async search(query) {
         const { email } = query;
         const usersQuerySnapshot: FirebaseFirestore.QuerySnapshot = await firebase
             .firestore()
@@ -110,7 +110,7 @@ export default class UserRepository {
         return users;
     }
 
-    static async update(id: string, updatedUser) {
+    async update(id: string, updatedUser) {
         const userRef: FirebaseFirestore.DocumentReference = firebase
             .firestore()
             .collection(Collections.USERS)
@@ -127,7 +127,7 @@ export default class UserRepository {
         return user;
     }
 
-    static async delete(id: string) {
+    async delete(id: string) {
         const userRef: FirebaseFirestore.DocumentReference = firebase
             .firestore()
             .collection(Collections.USERS)

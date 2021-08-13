@@ -1,10 +1,16 @@
 import { errors } from '../common/enum/errors';
-import UserRepository from '../repositories/user.repository';
-import OrderRepository from '../repositories/order.repository';
 
 export default class UserService {
-    static async create(user): Promise<ServiceResponse> {
-        const createdUser = await UserRepository.create(user);
+    _userRepository;
+    _orderRepository;
+
+    constructor({ userRepository, orderRepository }) {
+        this._userRepository = userRepository;
+        this._orderRepository = orderRepository;
+    }
+
+    async create(user): Promise<ServiceResponse> {
+        const createdUser = await this._userRepository.create(user);
 
         return {
             data: createdUser,
@@ -12,8 +18,8 @@ export default class UserService {
         };
     }
 
-    static async getAll(): Promise<ServiceResponse> {
-        const users = await UserRepository.getAll();
+    async getAll(): Promise<ServiceResponse> {
+        const users = await this._userRepository.getAll();
 
         return {
             data: users,
@@ -21,8 +27,8 @@ export default class UserService {
         };
     }
 
-    static async getById(id: string): Promise<ServiceResponse> {
-        const user = await UserRepository.getById(id);
+    async getById(id: string): Promise<ServiceResponse> {
+        const user = await this._userRepository.getById(id);
         if(!user) {
             return {
                 data: null,
@@ -36,8 +42,8 @@ export default class UserService {
         };
     }
 
-    static async getOrdersByUser(id: string): Promise<ServiceResponse> {
-        const user = await UserRepository.getById(id);
+    async getOrdersByUser(id: string): Promise<ServiceResponse> {
+        const user = await this._userRepository.getById(id);
         if(!user) {
             return {
                 data: null,
@@ -45,15 +51,15 @@ export default class UserService {
             };
         }
 
-        const orders = await OrderRepository.getByUser(id);
+        const orders = await this._orderRepository.getByUser(id);
         return {
             data: orders,
             error: null,
         };
     }
 
-    static async getByUid(uid: string): Promise<ServiceResponse> {
-        const user = await UserRepository.getByUid(uid);
+    async getByUid(uid: string): Promise<ServiceResponse> {
+        const user = await this._userRepository.getByUid(uid);
         if(!user) {
             return {
                 data: null,
@@ -67,18 +73,18 @@ export default class UserService {
         };
     }
 
-    static async search(query) {
-        const users = await UserRepository.search(query);
+    async search(query) {
+        const users = await this._userRepository.search(query);
         return {
             data: users,
             error: null,
         };
     }
 
-    static async update(id: string, dataToUpdate): Promise<ServiceResponse> {
-        const user = await UserRepository.getById(id);
+    async update(id: string, dataToUpdate): Promise<ServiceResponse> {
+        const user = await this._userRepository.getById(id);
         if(user) {
-            const updatedUser = await UserRepository.update(id, dataToUpdate);
+            const updatedUser = await this._userRepository.update(id, dataToUpdate);
             if(!updatedUser) {
                 return null;
             }
@@ -97,11 +103,11 @@ export default class UserService {
         
     }
 
-    static async delete(id: string): Promise<ServiceResponse> {
-        const user = await UserRepository.getById(id);
+    async delete(id: string): Promise<ServiceResponse> {
+        const user = await this._userRepository.getById(id);
 
         if(user) {
-            await UserRepository.delete(id);
+            await this._userRepository.delete(id);
             return {
                 data: null,
                 error: null,

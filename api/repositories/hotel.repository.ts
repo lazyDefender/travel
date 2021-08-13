@@ -3,7 +3,7 @@ import firebase from 'firebase-admin';
 import { Collections } from '../common/enum/collections';
 
 export default class HotelRepository {
-    static async create(newHotel) {
+    async create(newHotel) {
         const { id } = await firebase
             .firestore()
             .collection(Collections.HOTELS)
@@ -23,7 +23,7 @@ export default class HotelRepository {
         return hotel;
     }
 
-    static async getAll() {
+    async getAll() {
         const hotelsQuerySnapshot: FirebaseFirestore.QuerySnapshot = await firebase
             .firestore()
             .collection(Collections.HOTELS)
@@ -54,7 +54,7 @@ export default class HotelRepository {
         return hotels;
     }
 
-    static async getById(id: string) {
+    async getById(id: string) {
         const hotelDoc: FirebaseFirestore.DocumentSnapshot = await firebase
             .firestore()
             .collection(Collections.HOTELS)
@@ -85,7 +85,7 @@ export default class HotelRepository {
         return null;
     }
 
-    static async delete(id: string) {
+    async delete(id: string) {
         const hotelRef: FirebaseFirestore.DocumentReference = firebase
             .firestore()
             .collection(Collections.HOTELS)

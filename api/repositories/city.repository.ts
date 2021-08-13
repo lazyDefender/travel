@@ -3,7 +3,7 @@ import firebase from 'firebase-admin';
 import { Collections } from '../common/enum/collections';
 
 export default class CityRepository {
-    static async create(newCity) {
+    async create(newCity) {
         const { id } = await firebase
             .firestore()
             .collection(Collections.CITIES)
@@ -23,7 +23,7 @@ export default class CityRepository {
         return city;
     }
 
-    static async getAll() {
+    async getAll() {
         const citiesQuerySnapshot: FirebaseFirestore.QuerySnapshot = await firebase
             .firestore()
             .collection(Collections.CITIES)
@@ -42,7 +42,7 @@ export default class CityRepository {
         return cities;
     }
 
-    static async getById(id: string) {
+    async getById(id: string) {
         const cityDoc: FirebaseFirestore.DocumentSnapshot = await firebase
             .firestore()
             .collection(Collections.CITIES)
@@ -61,7 +61,7 @@ export default class CityRepository {
         return null;
     }
 
-    static async delete(id: string) {
+    async delete(id: string) {
         const cityRef: FirebaseFirestore.DocumentReference = firebase
             .firestore()
             .collection(Collections.CITIES)

@@ -1,9 +1,14 @@
 import { errors } from '../common/enum/errors';
-import CityRepository from '../repositories/city.repository';
 
 export default class CityService {
-    static async create(city): Promise<ServiceResponse> {
-        const createdCity = await CityRepository.create(city);
+    _cityRepository;
+
+    constructor({ cityRepository }) {
+        this._cityRepository = cityRepository;
+    }
+
+    async create(city): Promise<ServiceResponse> {
+        const createdCity = await this._cityRepository.create(city);
 
         return {
             data: createdCity,
@@ -11,8 +16,8 @@ export default class CityService {
         };
     }
 
-    static async getAll(): Promise<ServiceResponse> {
-        const cities = await CityRepository.getAll();
+    async getAll(): Promise<ServiceResponse> {
+        const cities = await this._cityRepository.getAll();
 
         return {
             data: cities,
@@ -20,8 +25,8 @@ export default class CityService {
         };
     }
 
-    static async getById(id: string): Promise<ServiceResponse> {
-        const city = await CityRepository.getById(id);
+    async getById(id: string): Promise<ServiceResponse> {
+        const city = await this._cityRepository.getById(id);
         if(!city) {
             return {
                 data: null,
@@ -35,11 +40,11 @@ export default class CityService {
         };
     }
 
-    static async delete(id: string): Promise<ServiceResponse> {
-        const city = await CityRepository.getById(id);
+    async delete(id: string): Promise<ServiceResponse> {
+        const city = await this._cityRepository.getById(id);
 
         if(city) {
-            await CityRepository.delete(id);
+            await this._cityRepository.delete(id);
             return {
                 data: null,
                 error: null,

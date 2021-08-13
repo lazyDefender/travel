@@ -1,10 +1,16 @@
 import { errors } from '../common/enum/errors';
-import HotelRepository from '../repositories/hotel.repository';
-import TourRepository from '../repositories/tour.repository';
 
 export default class HotelService {
-    static async create(hotel): Promise<ServiceResponse> {
-        const createdHotel = await HotelRepository.create(hotel);
+    _hotelRepository;
+    _tourRepository;
+
+    constructor({ hotelRepository, tourRepository }) {
+        this._hotelRepository = hotelRepository;
+        this._tourRepository = tourRepository;
+    }
+
+    async create(hotel): Promise<ServiceResponse> {
+        const createdHotel = await this._hotelRepository.create(hotel);
 
         return {
             data: createdHotel,
@@ -12,8 +18,8 @@ export default class HotelService {
         };
     }
 
-    static async getAll(): Promise<ServiceResponse> {
-        const hotels = await HotelRepository.getAll();
+    async getAll(): Promise<ServiceResponse> {
+        const hotels = await this._hotelRepository.getAll();
 
         return {
             data: hotels,
@@ -21,8 +27,8 @@ export default class HotelService {
         };
     }
 
-    static async getById(id: string): Promise<ServiceResponse> {
-        const hotel = await HotelRepository.getById(id);
+    async getById(id: string): Promise<ServiceResponse> {
+        const hotel = await this._hotelRepository.getById(id);
         if(!hotel) {
             return {
                 data: null,
@@ -36,8 +42,8 @@ export default class HotelService {
         };
     }
 
-    static async getToursByHotel(id: string): Promise<ServiceResponse> {
-        const tours = await TourRepository.getByHotel(id);
+    async getToursByHotel(id: string): Promise<ServiceResponse> {
+        const tours = await this._tourRepository.getByHotel(id);
 
         return {
             data: tours,
@@ -45,10 +51,10 @@ export default class HotelService {
         }
     }
 
-    // static async update(id: string, dataToUpdate): Promise<ServiceResponse> {
-    //     const hotel = await HotelRepository.getById(id);
+    // async update(id: string, dataToUpdate): Promise<ServiceResponse> {
+    //     const hotel = await this._hotelRepository.getById(id);
     //     if(hotel) {
-    //         const updatedHotel = await HotelRepository.update(id, dataToUpdate);
+    //         const updatedHotel = await this._hotelRepository.update(id, dataToUpdate);
     //         if(!updatedHotel) {
     //             return null;
     //         }
@@ -67,11 +73,11 @@ export default class HotelService {
         
     // }
 
-    static async delete(id: string): Promise<ServiceResponse> {
-        const hotel = await HotelRepository.getById(id);
+    async delete(id: string): Promise<ServiceResponse> {
+        const hotel = await this._hotelRepository.getById(id);
 
         if(hotel) {
-            await HotelRepository.delete(id);
+            await this._hotelRepository.delete(id);
             return {
                 data: null,
                 error: null,

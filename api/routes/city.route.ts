@@ -1,93 +1,94 @@
-import { Router } from 'express';
-import CityService from '../services/city.service';
 import { cityValidation } from '../middlewares/validation';
 import { errorCodes } from '../common/enum/errors/error-codes';
 import { validationResult } from 'express-validator';
 import { validationError } from '../utils/validation-error';
 
-const router = Router();
+export const initCity = (Router, services) => {
+    const router = Router();
+    const { cityService } = services;
 
-router.post('/', cityValidation.save, async (req, res, next) => {
-    const errors = validationResult(req)
-        .array()
-        .map(error => validationError(error));
+    router.post('/', cityValidation.save, async (req, res, next) => {
+        const errors = validationResult(req)
+            .array()
+            .map(error => validationError(error));
 
-    if(errors.length > 0) {
-        req.validationErrors = errors;
-    }
-    
-    if(req.validationErrors) {
-        next();
-    }
-
-    else {
-        const { data: createdCity, error } = await CityService.create(req.body);
-        req.result = {
-            status: 201,
-            body: createdCity,
-        };
+        if(errors.length > 0) {
+            req.validationErrors = errors;
+        }
         
-        next(); 
-    }
-});
-
-router.get('/', async (req, res, next) => {
-    const { data: cities } = await CityService.getAll();
-    req.result = {
-        status: 200,
-        body: cities,
-    }
-    
-    next();
-});
-
-router.get('/:id', async (req, res, next) => {
-    const { id } = req.params;  
-    const { data: city, error } = await CityService.getById(id);
-
-    if(error && error.code === errorCodes.CITIES.CITY_NOT_FOUND_BY_ID) {
-        const body = {
-            errors: [error],
+        if(req.validationErrors) {
+            next();
         }
 
-        req.result = {
-            body,
-            status: 404,
+        else {
+            const { data: createdCity, error } = await cityService.create(req.body);
+            req.result = {
+                status: 201,
+                body: createdCity,
+            };
+            
+            next(); 
         }
-    }
+    });
 
-    else {
+    router.get('/', async (req, res, next) => {
+        const { data: cities } = await cityService.getAll();
         req.result = {
             status: 200,
-            body: city,
+            body: cities,
         }
-    }
-     
-    next();
-});
+        
+        next();
+    });
 
-router.delete('/:id', async (req, res, next) => {
-    const { id } = req.params;
-    const { error } = await CityService.delete(id);
+    router.get('/:id', async (req, res, next) => {
+        const { id } = req.params;  
+        const { data: city, error } = await cityService.getById(id);
 
-    if(error && error.code === errorCodes.CITIES.CITY_NOT_FOUND_BY_ID) {
-        const body = {
-            errors: [error],
+        if(error && error.code === errorCodes.CITIES.CITY_NOT_FOUND_BY_ID) {
+            const body = {
+                errors: [error],
+            }
+
+            req.result = {
+                body,
+                status: 404,
+            }
         }
 
-        req.result = {
-            body,
-            status: 404,
+        else {
+            req.result = {
+                status: 200,
+                body: city,
+            }
         }
-    }
+        
+        next();
+    });
 
-    else {
-        req.result = {
-            status: 204,
+    router.delete('/:id', async (req, res, next) => {
+        const { id } = req.params;
+        const { error } = await cityService.delete(id);
+
+        if(error && error.code === errorCodes.CITIES.CITY_NOT_FOUND_BY_ID) {
+            const body = {
+                errors: [error],
+            }
+
+            req.result = {
+                body,
+                status: 404,
+            }
         }
-    }
-    
-    next();
-});
 
-export { router };
+        else {
+            req.result = {
+                status: 204,
+            }
+        }
+        
+        next();
+    });
+
+    return router;
+};

@@ -1,15 +1,66 @@
-import { router as authRoute } from './auth.route';
-import { router as userRoute } from './user.route';
-import { router as cityRoute } from './city.route';
-import { router as hotelRoute } from './hotel.route';
-import { router as tourRoute } from './tour.route';
-import { router as orderRoute } from './order.route';
+import { ApiPath } from '../common/enum/api/api-path';
 
-export default (app) => {
-    app.use('/api/auth', authRoute);
-    app.use('/api/users', userRoute);
-    app.use('/api/cities', cityRoute);
-    app.use('/api/hotels', hotelRoute);
-    app.use('/api/tours', tourRoute);
-    app.use('/api/orders', orderRoute);
+import {
+    authService,
+    cityService,
+    hotelService,
+    orderService,
+    tourService,
+    userService,
+} from '../services';
+
+import { initAuth } from './auth.route';
+import { initCity } from './city.route';
+import { initHotel } from './hotel.route';
+import { initOrder } from './order.route';
+import { initTour } from './tour.route';
+import { initUser } from './user.route';
+
+
+export const initApi = Router => {
+    const router = Router();
+
+    router.use(
+        ApiPath.AUTH,
+        initAuth(Router, {
+            authService,
+        })
+    );
+    
+    router.use(
+        ApiPath.CITIES,
+        initCity(Router, {
+            cityService,
+        })
+    );
+    
+    router.use(
+        ApiPath.HOTELS,
+        initHotel(Router, {
+            hotelService,
+        })
+    );
+
+    router.use(
+        ApiPath.ORDERS,
+        initOrder(Router, {
+            orderService,
+        })
+    );
+
+    router.use(
+        ApiPath.TOURS,
+        initTour(Router, {
+            tourService,
+        })
+    );
+
+    router.use(
+        ApiPath.USERS,
+        initUser(Router, {
+            userService,
+        })
+    );
+
+    return router;
 };
