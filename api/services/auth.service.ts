@@ -2,8 +2,6 @@ import firebase from 'firebase-admin';
 import { errors } from '../common/enum/errors';
 import { errorCodes } from '../common/enum/errors/error-codes';
 
-import UserService from './user.service';
-
 export default class AuthService {
     _userRepository;
 
