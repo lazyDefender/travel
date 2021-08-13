@@ -9,6 +9,7 @@ import { swaggerSpec } from './config/swagger';
 import { initializeFirebase} from './firebase';
 import { responseMiddleware } from './middlewares/response.middleware';
 import { initApi } from './routes';
+import { ApiPath } from './common/enum/api';
 
 dotenv.config();
 
@@ -19,9 +20,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
+app.use(ApiPath.API_DOCS, swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
-app.use('/api', initApi(Router));
+app.use(ApiPath.API, initApi(Router));
 app.use(responseMiddleware);
 
 const port = 3050;

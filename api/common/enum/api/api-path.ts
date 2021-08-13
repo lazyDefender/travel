@@ -1,4 +1,6 @@
 export const ApiPath = {
+    API_DOCS: '/api-docs',
+    API: '/api',
     AUTH: '/auth',
     USERS: '/users',
     CITIES: '/cities',
