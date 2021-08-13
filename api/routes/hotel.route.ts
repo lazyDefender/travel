@@ -2,12 +2,13 @@ import { hotelValidation } from '../middlewares/validation';
 import { errorCodes } from '../common/enum/errors/error-codes';
 import { validationResult } from 'express-validator';
 import { validationError } from '../utils/validation-error';
+import { HotelsApiPath } from '../common/enum/api';
 
 export const initHotel = (Router, services) => {
     const router = Router();
     const { hotelService } = services;
 
-    router.post('/', hotelValidation.save, async (req, res, next) => {
+    router.post(HotelsApiPath.ROOT, hotelValidation.save, async (req, res, next) => {
         const errors = validationResult(req)
             .array()
             .map(error => validationError(error));
@@ -31,7 +32,7 @@ export const initHotel = (Router, services) => {
         }
     });
 
-    router.get('/', async (req, res, next) => {
+    router.get(HotelsApiPath.ROOT, async (req, res, next) => {
         const { data: hotels } = await hotelService.getAll();
         req.result = {
             status: 200,
@@ -41,7 +42,7 @@ export const initHotel = (Router, services) => {
         next();
     });
 
-    router.get('/:id', async (req, res, next) => {
+    router.get(HotelsApiPath.$ID, async (req, res, next) => {
         const { id } = req.params;  
         const { data: hotel, error } = await hotelService.getById(id);
 
@@ -66,7 +67,7 @@ export const initHotel = (Router, services) => {
         next();
     });
 
-    router.get('/:id/tours', async (req, res, next) => {
+    router.get(HotelsApiPath.$ID_TOURS, async (req, res, next) => {
         const { id } = req.params;
         const { data: tours, error } = await hotelService.getToursByHotel(id);
 
@@ -91,7 +92,7 @@ export const initHotel = (Router, services) => {
         next();
     })
 
-    router.delete('/:id', async (req, res, next) => {
+    router.delete(HotelsApiPath.$ID, async (req, res, next) => {
         const { id } = req.params;
         const { error } = await hotelService.delete(id);
 

@@ -1,10 +1,11 @@
 import { errorCodes } from '../common/enum/errors/error-codes';
+import { AuthApiPath } from '../common/enum/api';
 
 export const initAuth = (Router, services) => {
     const router = Router();
     const { authService } = services;
 
-    router.get('/currentUser', async (req, res, next) => {
+    router.get(AuthApiPath.CURRENT_USER, async (req, res, next) => {
         const token = req.header('authorization');
         const { data: user, error } = await authService.verifyToken(token);
 

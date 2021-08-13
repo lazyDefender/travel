@@ -4,12 +4,13 @@ import { userValidation } from '../middlewares/validation';
 import { errorCodes } from '../common/enum/errors/error-codes';
 import { validationResult } from 'express-validator';
 import { validationError } from '../utils/validation-error';
+import { UsersApiPath } from '../common/enum/api';
 
 export const initUser = (Router, services) => {
     const router = Router();
     const { userService } = services;
 
-    router.post('/', userValidation.save, async (req, res, next) => {
+    router.post(UsersApiPath.ROOT, userValidation.save, async (req, res, next) => {
         const errors = validationResult(req)
             .array()
             .map(error => validationError(error));
@@ -33,7 +34,7 @@ export const initUser = (Router, services) => {
         }
     });
 
-    router.get('/', async (req, res, next) => {
+    router.get(UsersApiPath.ROOT, async (req, res, next) => {
         const { data: users } = await userService.getAll();
         req.result = {
             status: 200,
@@ -43,7 +44,7 @@ export const initUser = (Router, services) => {
         next();
     });
 
-    router.get('/:id', async (req, res, next) => {
+    router.get(UsersApiPath.$ID, async (req, res, next) => {
         const { id } = req.params;  
         const { data: user, error } = await userService.getById(id);
 
@@ -68,7 +69,7 @@ export const initUser = (Router, services) => {
         next();
     });
 
-    router.get('/:id/orders', async (req, res, next) => {
+    router.get(UsersApiPath.$ID_ORDERS, async (req, res, next) => {
         const { id } = req.params;  
         const { data: orders, error } = await userService.getOrdersByUser(id);
 
@@ -93,7 +94,7 @@ export const initUser = (Router, services) => {
         next();
     });
 
-    router.get('/search', async (req, res, next) => {
+    router.get(UsersApiPath.SEARCH, async (req, res, next) => {
         const { data: users, error } = await userService.search(req.query);
 
         req.result = {
@@ -104,7 +105,7 @@ export const initUser = (Router, services) => {
         next();
     });
 
-    router.patch('/:id', userValidation.update, async (req, res, next) => {
+    router.patch(UsersApiPath.$ID, userValidation.update, async (req, res, next) => {
         const errors = validationResult(req)
             .array()
             .map(error => validationError(error));
@@ -141,7 +142,7 @@ export const initUser = (Router, services) => {
         next();
     });
 
-    router.delete('/:id', async (req, res, next) => {
+    router.delete(UsersApiPath.$ID, async (req, res, next) => {
         const { id } = req.params;
         const { error } = await userService.delete(id);
 

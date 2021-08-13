@@ -4,12 +4,13 @@ import { hotelValidation } from '../middlewares/validation';
 import { errorCodes } from '../common/enum/errors/error-codes';
 import { validationResult } from 'express-validator';
 import { validationError } from '../utils/validation-error';
+import { ToursApiPath } from '../common/enum/api';
 
 export const initTour = (Router, services) => {
     const router = Router();
     const { tourService } = services;
 
-    router.get('/', async (req, res, next) => {
+    router.get(ToursApiPath.ROOT, async (req, res, next) => {
         const { data: tours, error } = await tourService.getAll(req.query);
         
         req.result = {
@@ -20,7 +21,7 @@ export const initTour = (Router, services) => {
         next();
     })
 
-    router.get('/:id', async (req, res, next) => {
+    router.get(ToursApiPath.$ID, async (req, res, next) => {
         const { id } = req.params;  
         const { data: tour, error } = await tourService.getById(id);
 

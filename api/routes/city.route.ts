@@ -2,12 +2,13 @@ import { cityValidation } from '../middlewares/validation';
 import { errorCodes } from '../common/enum/errors/error-codes';
 import { validationResult } from 'express-validator';
 import { validationError } from '../utils/validation-error';
+import { CitiesApiPath } from '../common/enum/api';
 
 export const initCity = (Router, services) => {
     const router = Router();
     const { cityService } = services;
 
-    router.post('/', cityValidation.save, async (req, res, next) => {
+    router.post(CitiesApiPath.ROOT, cityValidation.save, async (req, res, next) => {
         const errors = validationResult(req)
             .array()
             .map(error => validationError(error));
@@ -31,7 +32,7 @@ export const initCity = (Router, services) => {
         }
     });
 
-    router.get('/', async (req, res, next) => {
+    router.get(CitiesApiPath.ROOT, async (req, res, next) => {
         const { data: cities } = await cityService.getAll();
         req.result = {
             status: 200,
@@ -41,7 +42,7 @@ export const initCity = (Router, services) => {
         next();
     });
 
-    router.get('/:id', async (req, res, next) => {
+    router.get(CitiesApiPath.$ID, async (req, res, next) => {
         const { id } = req.params;  
         const { data: city, error } = await cityService.getById(id);
 
@@ -66,7 +67,7 @@ export const initCity = (Router, services) => {
         next();
     });
 
-    router.delete('/:id', async (req, res, next) => {
+    router.delete(CitiesApiPath.$ID, async (req, res, next) => {
         const { id } = req.params;
         const { error } = await cityService.delete(id);
 

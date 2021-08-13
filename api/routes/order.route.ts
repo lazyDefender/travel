@@ -3,12 +3,13 @@ import { errorCodes } from '../common/enum/errors/error-codes';
 import { validationResult } from 'express-validator';
 import { validationError } from '../utils/validation-error';
 import { isAuth } from '../middlewares/auth.middleware';
+import { OrdersApiPath } from '../common/enum/api';
 
 export const initOrder = (Router, services) => {
     const router = Router();
     const { orderService } = services;
 
-    router.post('/', isAuth, orderValidation.save, async (req, res, next) => {
+    router.post(OrdersApiPath.ROOT, isAuth, orderValidation.save, async (req, res, next) => {
         if(!req.userId) {
             next();
         }
