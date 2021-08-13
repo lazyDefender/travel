@@ -10,7 +10,7 @@ export class AuthService {
     async getCurrentUser() {
         const token = await getBearerToken();
             
-        return axios.get(`${this.apiUrl}/auth/currentUser`, {
+        return axios.get(`${this.apiUrl}/auth/current-user`, {
             headers: {
                 'Authorization': token,
             },
