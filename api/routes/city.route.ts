@@ -1,35 +1,21 @@
-import { cityValidation } from '../middlewares/validation';
+import { cityValidation } from '../validation';
 import { errorCodes } from '../common/enum/errors/error-codes';
-import { validationResult } from 'express-validator';
-import { validationError } from '../utils/validation-error';
 import { CitiesApiPath } from '../common/enum/api';
+import { validate } from '../middlewares/validation.middleware';
 
 export const initCity = (Router, services) => {
     const router = Router();
     const { cityService } = services;
 
-    router.post(CitiesApiPath.ROOT, cityValidation.save, async (req, res, next) => {
-        const errors = validationResult(req)
-            .array()
-            .map(error => validationError(error));
-
-        if(errors.length > 0) {
-            req.validationErrors = errors;
-        }
-        
-        if(req.validationErrors) {
-            next();
-        }
-
-        else {
-            const { data: createdCity, error } = await cityService.create(req.body);
-            req.result = {
-                status: 201,
-                body: createdCity,
-            };
+    router.post(CitiesApiPath.ROOT, validate(cityValidation.save), async (req, res, next) => {
+        const { data: createdCity, error } = await cityService.create(req.body);
+        req.result = {
+            status: 201,
+            body: createdCity,
+        };
             
-            next(); 
-        }
+        next(); 
+        
     });
 
     router.get(CitiesApiPath.ROOT, async (req, res, next) => {

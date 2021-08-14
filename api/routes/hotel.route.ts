@@ -1,35 +1,20 @@
-import { hotelValidation } from '../middlewares/validation';
+import { hotelValidation } from '../validation';
 import { errorCodes } from '../common/enum/errors/error-codes';
-import { validationResult } from 'express-validator';
-import { validationError } from '../utils/validation-error';
 import { HotelsApiPath } from '../common/enum/api';
+import { validate } from '../middlewares/validation.middleware';
 
 export const initHotel = (Router, services) => {
     const router = Router();
     const { hotelService } = services;
 
-    router.post(HotelsApiPath.ROOT, hotelValidation.save, async (req, res, next) => {
-        const errors = validationResult(req)
-            .array()
-            .map(error => validationError(error));
-
-        if(errors.length > 0) {
-            req.validationErrors = errors;
-        }
+    router.post(HotelsApiPath.ROOT, validate(hotelValidation.save), async (req, res, next) => {
+        const { data: createdHotel, error } = await hotelService.create(req.body);
+        req.result = {
+            status: 201,
+            body: createdHotel,
+        };
         
-        if(req.validationErrors) {
-            next();
-        }
-
-        else {
-            const { data: createdHotel, error } = await hotelService.create(req.body);
-            req.result = {
-                status: 201,
-                body: createdHotel,
-            };
-            
-            next(); 
-        }
+        next(); 
     });
 
     router.get(HotelsApiPath.ROOT, async (req, res, next) => {

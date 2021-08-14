@@ -10,4 +10,5 @@ export const errorCodes = {
     AUTH: AuthErrorCodes,
     HOTELS: HotelErrorCodes,
     TOURS: TourErrorCodes,
+    VALIDATION_ERROR: 'VALIDATION_ERROR',
 };

@@ -3,12 +3,14 @@ import { body, param } from 'express-validator';
 export const validation = {
     save: [
         body('firstName')
+            .isString()
             .isLength({
                 min: 1,
                 max: 255,
             }).withMessage('firstName should be 1 to 255 characters long'),
 
         body('lastName')
+            .isString()
             .isLength({
                 min: 1,
                 max: 255,
@@ -23,6 +25,7 @@ export const validation = {
     update: [
         body('firstName')
             .optional()
+            .isString()
             .isLength({
                 min: 1,
                 max: 255,
@@ -30,6 +33,7 @@ export const validation = {
 
         body('lastName')
             .optional()
+            .isString()
             .isLength({
                 min: 1,
                 max: 255,

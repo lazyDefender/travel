@@ -1,9 +1,4 @@
-import { Router } from 'express';
-import TourService from '../services/tour.service';
-import { hotelValidation } from '../middlewares/validation';
 import { errorCodes } from '../common/enum/errors/error-codes';
-import { validationResult } from 'express-validator';
-import { validationError } from '../utils/validation-error';
 import { ToursApiPath } from '../common/enum/api';
 
 export const initTour = (Router, services) => {

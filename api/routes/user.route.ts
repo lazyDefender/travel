@@ -1,38 +1,21 @@
-import { Router } from 'express';
-import UserService from '../services/user.service';
-import { userValidation } from '../middlewares/validation';
+import { userValidation } from '../validation';
 import { errorCodes } from '../common/enum/errors/error-codes';
-import { validationResult } from 'express-validator';
-import { validationError } from '../utils/validation-error';
 import { UsersApiPath } from '../common/enum/api';
 import { isAuth } from '../middlewares/auth.middleware';
+import { validate } from '../middlewares/validation.middleware';
 
 export const initUser = (Router, services) => {
     const router = Router();
     const { userService } = services;
 
-    router.post(UsersApiPath.ROOT, userValidation.save, async (req, res, next) => {
-        const errors = validationResult(req)
-            .array()
-            .map(error => validationError(error));
-
-        if(errors.length > 0) {
-            req.validationErrors = errors;
-        }
-        
-        if(req.validationErrors) {
-            next();
-        }
-
-        else {
-            const { data: createdUser, error } = await userService.create(req.body);
-            req.result = {
-                status: 201,
-                body: createdUser,
-            };
+    router.post(UsersApiPath.ROOT, validate(userValidation.save), async (req, res, next) => {
+        const { data: createdUser, error } = await userService.create(req.body);
+        req.result = {
+            status: 201,
+            body: createdUser,
+        };
             
-            next(); 
-        }
+        next(); 
     });
 
     router.get(UsersApiPath.ROOT, async (req, res, next) => {
@@ -106,19 +89,7 @@ export const initUser = (Router, services) => {
         next();
     });
 
-    router.patch(UsersApiPath.$ID, isAuth, userValidation.update, async (req, res, next) => {    
-        const errors = validationResult(req)
-            .array()
-            .map(error => validationError(error));
-
-        if(errors.length > 0) {
-            req.validationErrors = errors;
-        }
-            
-        if(req.validationErrors) {
-            next();
-        }
-        
+    router.patch(UsersApiPath.$ID, isAuth, validate(userValidation.update), async (req, res, next) => {    
         const { id } = req.params;
         const { data: updatedUser, error } = await userService.update(id, req.body);
 
