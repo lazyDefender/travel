@@ -5,6 +5,7 @@ import { errorCodes } from '../common/enum/errors/error-codes';
 import { validationResult } from 'express-validator';
 import { validationError } from '../utils/validation-error';
 import { UsersApiPath } from '../common/enum/api';
+import { isAuth } from '../middlewares/auth.middleware';
 
 export const initUser = (Router, services) => {
     const router = Router();
@@ -105,7 +106,7 @@ export const initUser = (Router, services) => {
         next();
     });
 
-    router.patch(UsersApiPath.$ID, userValidation.update, async (req, res, next) => {
+    router.patch(UsersApiPath.$ID, isAuth, userValidation.update, async (req, res, next) => {    
         const errors = validationResult(req)
             .array()
             .map(error => validationError(error));
@@ -142,7 +143,7 @@ export const initUser = (Router, services) => {
         next();
     });
 
-    router.delete(UsersApiPath.$ID, async (req, res, next) => {
+    router.delete(UsersApiPath.$ID, isAuth, async (req, res, next) => {
         const { id } = req.params;
         const { error } = await userService.delete(id);
 

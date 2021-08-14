@@ -1,18 +1,26 @@
+import UserRepository from '../repositories/user.repository';
 import AuthService from '../services/auth.service';
 
 export const isAuth = async (req, res, next) => {
     const token = req.header('authorization');
+    const userRepository = new UserRepository();
+    const authService = new AuthService({ userRepository });
 
-    const { data: user, error } = await AuthService.verifyToken(token);
+    const { data: user, error } = await authService.verifyToken(token);
+
+    console.log(user, error);
+    
+
     if(error) {
-        req.result = {
-            body: error,
-            status: 401,
+        const body = {
+            errors: [error],
         };
+        return res.status(401).json(body);
     }
     else {
-        req.userId = user.id;
+        req.user = user;
+        next();
     }
 
-    next();
+    
 };

@@ -60,6 +60,7 @@ export default class UserService {
 
     async getByUid(uid: string): Promise<ServiceResponse> {
         const user = await this._userRepository.getByUid(uid);
+        console.log(user)
         if(!user) {
             return {
                 data: null,

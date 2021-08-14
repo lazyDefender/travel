@@ -16,18 +16,21 @@ export default class AuthService {
             .auth()
             .verifyIdToken(token);
 
-            const { data: user, error } = await this._userRepository.getByUid(uid);
+            const user = await this._userRepository.getByUid(uid);
 
-            if(error && error.code === errorCodes.USERS.USER_NOT_FOUND_BY_UID) {
+            if(user) {
                 return {
-                    errors: [error],
+                    data: user,
+                    error: null,
+                }
+            }
+            else {
+                const error = errors.USERS.notFoundByUid(uid);
+                return {
+                    data: null,
+                    error,
                 };
             }
-
-            return {
-                data: user,
-                error: null,
-            };
         }
         catch(e) {
             const error = errors.AUTH.invalidToken();

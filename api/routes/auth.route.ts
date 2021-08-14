@@ -7,6 +7,7 @@ export const initAuth = (Router, services) => {
 
     router.get(AuthApiPath.CURRENT_USER, async (req, res, next) => {
         const token = req.header('authorization');
+        
         const { data: user, error } = await authService.verifyToken(token);
 
         switch(error?.code) {
