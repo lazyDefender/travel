@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react';
 import {
     Card,
-    CardMedia,
     CardContent,
     Typography,
-} from '@material-ui/core'
-import { Rating } from '@material-ui/lab'
+} from '@material-ui/core';
+import { Rating } from '@material-ui/lab';
 
-import ImageWithFallback from '../../../global/components/ImageWithFallback'
+import ImageWithFallback from '../../../global/components/ImageWithFallback';
 
 const HotelMain = ({ hotel }) => {
     const {
@@ -18,7 +17,7 @@ const HotelMain = ({ hotel }) => {
         rating,
         photos,
         image,
-    } = hotel || {}
+    } = hotel || {};
 
     return (
         <Card>
@@ -42,7 +41,7 @@ const HotelMain = ({ hotel }) => {
                 />
             </CardContent>
         </Card>
-    )
-}
+    );
+};
 
-export default HotelMain
+export default HotelMain;
