@@ -82,7 +82,7 @@ const AuthBar = (props) => {
                             disableElevation
                             color="primary"
                         >
-                            <Link to={Book.profile}>Мій профіль</Link>
+                            <Link to={Book.PROFILE}>Мій профіль</Link>
                         </Button>
             
                         <Button 
