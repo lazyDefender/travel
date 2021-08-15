@@ -1,32 +1,31 @@
-import React, { useEffect, useCallback } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useEffect, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Formik, 
   Form, 
   Field,
-} from 'formik'
+} from 'formik';
 import {
   Button,
   Typography,
-} from '@material-ui/core'
+} from '@material-ui/core';
 import {
   TextField,
-} from 'formik-material-ui'
-import MomentUtils from '@date-io/moment'
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import Box from '@material-ui/core/Box'
+} from 'formik-material-ui';
+import MomentUtils from '@date-io/moment';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import Box from '@material-ui/core/Box';
 
-import { authActions } from '../../../redux/auth.slice'
-import store from '../../../redux/store'
-// import { history } from '../../../navigation/history'
-import { book } from '../../../navigation/book'
-import useAuth from '../../../global/hooks/useAuth'
-import { initialValues } from '../initialValues/signIn'
-import { validationSchema } from '../validation/signIn'
-import useFirstLoadedPage from '../../../global/hooks/useFirstLoadedPage'
-import GoHomeBar from '../../../global/components/GoHomeBar'
-import { snackbarActions } from '../../../redux/snackbar.slice'
-import useSnackbar from '../../../global/hooks/useSnackbar'
+import { authActions } from '../../../redux/auth.slice';
+import store from '../../../redux/store';
+import { book } from '../../../navigation/book';
+import useAuth from '../../../global/hooks/useAuth';
+import { initialValues } from '../initialValues/signIn';
+import { validationSchema } from '../validation/signIn';
+import GoHomeBar from '../../../global/components/GoHomeBar';
+import { snackbarActions } from '../../../redux/snackbar.slice';
+import useSnackbar from '../../../global/hooks/useSnackbar';
+import { AuthProviders } from '../../../common/enums/authProviders';
 
 const SignUpForm = () => {
   const history = useHistory();
@@ -50,15 +49,15 @@ const SignUpForm = () => {
   }, [error]);
 
   const signInWithGoogle = useCallback(() => {
-    store.dispatch(authActions.signInWithProvider('google'));
+    store.dispatch(authActions.signInWithProvider(AuthProviders.GOOGLE));
   }, []);
   
   const signInWithFacebook = useCallback(() => {
-    store.dispatch(authActions.signInWithProvider('facebook'));
+    store.dispatch(authActions.signInWithProvider(AuthProviders.FACEBOOK));
   }, []);
 
   const onSignup = useCallback(() => {
-    history.replace('/signup');
+    history.replace(book.signup);
   }, []);
 
   const onSubmit = (values, { setSubmitting }) => {
