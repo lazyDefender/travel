@@ -1,50 +1,45 @@
-import React, { useState, useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Rating from '@material-ui/lab/Rating'
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Rating from '@material-ui/lab/Rating';
 import {
   Grid,
   Card,
   CardActionArea,
   CardContent,
-  CardMedia,
   Typography,
   Tooltip,
-} from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import classnames from 'classnames'
+} from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
-import { book } from '../../../navigation/book'
-import { getPhotoUri } from '../../../global/getPhotoUri'
-import ImageWithFallback from '../../../global/components/ImageWithFallback'
+import { book } from '../../../navigation/book';
+import ImageWithFallback from '../../../global/components/ImageWithFallback';
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
   },
   cardMedia: {
-        objectFit: 'contain',
+    objectFit: 'contain',
   },
-})
+});
 
-const ToursListItem = ({hotel, adultPrice, kidPrice}) => {
+const ToursListItem = ({ hotel, adultPrice, kidPrice }) => {
+  const classes = useStyles();
+  const [image, setImage] = useState(null);
 
-  const classes = useStyles()
-  const [image, setImage] = useState(null)
+  const { rating, id } = hotel;
 
-  const { rating, id } = hotel
+  const hotelURL = `${book.hotels}/${id}`;
   
   const onImageError = (e) => {
-    setImage(`${process.env.PUBLIC_URL}/image-not-found.svg`)
-  }
+    setImage(`${process.env.PUBLIC_URL}/image-not-found.svg`);
+  };
 
   return (
-    
       <Grid item xs={12} sm={6} md={4}>
-      
         <Tooltip title={hotel.name} interactive arrow>
-        
           <Card className={classes.root}>
-          <Link to={`${book.hotels}/${id}`}>
+          <Link to={hotelURL}>
             <CardActionArea>
               <ImageWithFallback
                 image={hotel?.image?.source || image}
@@ -73,10 +68,8 @@ const ToursListItem = ({hotel, adultPrice, kidPrice}) => {
             </Link>
           </Card>
         </Tooltip>
-      
     </Grid>
-   
-  )
-}
+  );
+};
 
-export default ToursListItem
+export default ToursListItem;
