@@ -29,7 +29,6 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
-      dispatch(authActions.setFetching(false));
       firebase.initializeApp(firebaseConfig);
       firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       firebase.auth().onAuthStateChanged(async (user) => {
@@ -37,6 +36,9 @@ const App = () => {
           const token = await user.getIdToken();
           console.log(token);
           dispatch(authActions.getCurrentUser());
+        }
+        else {
+          dispatch(authActions.setFetching(false));
         }
       });
     })();
