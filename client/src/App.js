@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Container, CssBaseline, ThemeProvider } from '@material-ui/core';
 import { BrowserRouter as Router } from 'react-router-dom';
 import firebase from 'firebase';
