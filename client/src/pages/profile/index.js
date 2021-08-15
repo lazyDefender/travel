@@ -8,9 +8,14 @@ import useFirstLoadedPage from '../../global/hooks/useFirstLoadedPage'
 const Profile = (props) => {
     const { user, isFetching } = useAuth()
     // const firstLoadedPage = useFirstLoadedPage()
-    const loaderJSX = isFetching ? 'loading' : null
-    const contentJSX = user && !isFetching ? <ProfileComponent/> : <Redirect to={book.login} /> 
-    const jsx = loaderJSX || contentJSX
+    let jsx = null;
+    if(isFetching) {
+        jsx = 'loading';
+    }
+    else {
+        jsx = user ? <ProfileComponent /> : <Redirect to={book.login} /> ;
+    }
+    
     return <>
         {jsx}
     </>

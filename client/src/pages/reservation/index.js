@@ -7,7 +7,7 @@ import { book } from '../../navigation/book'
 const Reservation = (props) => {
     const { user, isFetching} = useAuth()
     const loaderJSX = isFetching ? 'loading' : null
-    const contentJSX = user ? <ReservationComponent/> : <Redirect to={book.login} /> 
+    const contentJSX = user && !isFetching ? <ReservationComponent/> : <Redirect to={book.login} /> 
     const jsx = loaderJSX || contentJSX
     return <>
         {jsx}

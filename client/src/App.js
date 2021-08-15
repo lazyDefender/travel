@@ -18,8 +18,8 @@ import store from './redux/store'
 import { snackbarActions } from './redux/snackbar.slice'
 
 const App = () => {
-  const dispatch = useDispatch()
-  const { isFetching } = useAuth()
+  const dispatch = useDispatch();
+  const { isFetching } = useAuth();
   const snackbar = useSnackbar();
   
   const resetSnackbar = () => {
@@ -28,25 +28,19 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
-      firebase.initializeApp(firebaseConfig)
-      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-      const { currentUser } = firebase.auth();
-      
-      if(currentUser === null) {
-        dispatch(authActions.setFetching(false));
-      }
-
+      firebase.initializeApp(firebaseConfig);
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
           const token = await user.getIdToken();
           console.log(token);
-          dispatch(authActions.getCurrentUser())
+          dispatch(authActions.getCurrentUser());
         }
       });
     })();
-  }, [dispatch])
+  }, [dispatch]);
 
-  const appJSX = <Routes />
+  const appJSX = <Routes />;
   
   return (
     <ThemeProvider theme={theme}>
@@ -67,7 +61,7 @@ const App = () => {
           </Container>
         </Router>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;
