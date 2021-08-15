@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
     TableContainer,
     Table,
@@ -8,10 +8,10 @@ import {
     TableCell,
     Paper,
     Button,
-} from '@material-ui/core'
-import { Link } from 'react-router-dom'
+} from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
-import { book } from '../../../navigation/book'
+import { Book } from '../../../navigation/book';
 
 const HotelToursList = ({ tours }) => {
     return <>
@@ -33,7 +33,7 @@ const HotelToursList = ({ tours }) => {
                 <TableCell align="center">{tour.kidPrice}$</TableCell>
                 <TableCell align="center">
                   <Button color="primary" variant="contained">
-                    <Link to={`${book.reservation}?tourId=${encodeURIComponent(tour.id)}`}>
+                    <Link to={`${Book.RESERVATION}?tourId=${encodeURIComponent(tour.id)}`}>
                         Забронювати
                     </Link>
                   </Button>
@@ -44,6 +44,6 @@ const HotelToursList = ({ tours }) => {
       </Table>
     </TableContainer>
     </>
-}
+};
 
-export default HotelToursList
+export default HotelToursList;

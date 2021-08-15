@@ -1,34 +1,30 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import {
     Button,
     Box,
     Grid,
     AppBar,
     Toolbar,
-    IconButton,
-    Typography,
-    Avatar,
     makeStyles,
-    Container,
-} from '@material-ui/core'
-import { book } from '../../navigation/book'
-import useAuth from '../../global/hooks/useAuth'
-import { authActions } from '../../redux/auth.slice'
-import store from '../../redux/store'
-
-const signOut = () => {
-    store.dispatch(authActions.signOut())
-}
+} from '@material-ui/core';
+import { Book } from '../../navigation/book';
+import useAuth from '../../global/hooks/useAuth';
+import { authActions } from '../../redux/auth.slice';
+import store from '../../redux/store';
 
 const useStyles = makeStyles(theme => ({
     offset: theme.mixins.toolbar,
-}))
+}));
 
 const AuthBar = (props) => {
-    const classes = useStyles()
-    const auth = useAuth()
-    // const dispatch = 
+    const classes = useStyles();
+    const { user } = useAuth();
+
+    const signOut = useCallback(() => {
+        store.dispatch(authActions.signOut());
+    }, []);
+
     const defaultBar =
     <AppBar
         position="fixed"
@@ -40,31 +36,29 @@ const AuthBar = (props) => {
                 direction="row"
                 justify="space-between"
                 alignItems="center"
-            >
-                
-                    <Grid item>
-                        <Link to="/">Travel App</Link>
-                    </Grid>
-                    <Grid item>
-                        <Button
-                                variant="contained"
-                                disableElevation
-                                color="primary"
-                            >
-                            <Link to={book.signup}>Зареєструватись</Link>
-                        </Button> 
-                        <Button
-                            variant="contained"
-                            disableElevation
-                            color="primary"
-                        >
-                            <Link to={book.login}>Увійти</Link>
-                        </Button>
-                    </Grid>
+            >   
+                <Grid item>
+                    <Link to={Book.ROOT}>Travel App</Link>
                 </Grid>
-            </Toolbar>
-        
-      </AppBar>
+                <Grid item>
+                    <Button
+                        variant="contained"
+                        disableElevation
+                        color="primary"
+                    >
+                        <Link to={Book.SIGNUP}>Зареєструватись</Link>
+                    </Button> 
+                    <Button
+                        variant="contained"
+                        disableElevation
+                        color="primary"
+                    >
+                        <Link to={Book.LOGIN}>Увійти</Link>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Toolbar>    
+    </AppBar>;
     const signedInBar = <>
     <AppBar
         position="fixed"
@@ -79,7 +73,7 @@ const AuthBar = (props) => {
             >
                 
                     <Grid item>
-                        <Link to="/">Travel App</Link>
+                        <Link to={Book.ROOT}>Travel App</Link>
                         
                     </Grid>
                     <Grid item>
@@ -88,7 +82,7 @@ const AuthBar = (props) => {
                             disableElevation
                             color="primary"
                         >
-                            <Link to={book.profile}>Мій профіль</Link>
+                            <Link to={Book.profile}>Мій профіль</Link>
                         </Button>
             
                         <Button 
@@ -105,16 +99,13 @@ const AuthBar = (props) => {
         
     </>
 
-    const { user } = auth
-    const authBarJSX = user ? signedInBar : defaultBar 
+    const authBarJSX = user ? signedInBar : defaultBar;
     return <>
-    {/* <Container> */}
         <Box pt={2} pb={2}>
             {authBarJSX}
             <div className={classes.offset}/>
         </Box>
-    {/* </Container> */}
-    </>
-}
+    </>;
+};
 
-export default AuthBar
+export default AuthBar;

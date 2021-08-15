@@ -18,7 +18,7 @@ import Box from '@material-ui/core/Box';
 
 import { authActions } from '../../../redux/auth.slice';
 import store from '../../../redux/store';
-import { book } from '../../../navigation/book';
+import { Book } from '../../../navigation/book';
 import useAuth from '../../../global/hooks/useAuth';
 import { initialValues } from '../initialValues/signIn';
 import { validationSchema } from '../validation/signIn';
@@ -57,7 +57,7 @@ const SignUpForm = () => {
   }, []);
 
   const onSignup = useCallback(() => {
-    history.replace(book.signup);
+    history.replace(Book.SIGNUP);
   }, []);
 
   const onSubmit = (values, { setSubmitting }) => {

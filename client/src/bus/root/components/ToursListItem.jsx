@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-import { book } from '../../../navigation/book';
+import { Book } from '../../../navigation/book';
 import ImageWithFallback from '../../../global/components/ImageWithFallback';
 
 const useStyles = makeStyles({
@@ -29,7 +29,7 @@ const ToursListItem = ({ hotel, adultPrice, kidPrice }) => {
 
   const { rating, id } = hotel;
 
-  const hotelURL = `${book.hotels}/${id}`;
+  const hotelURL = `${Book.HOTELS}/${id}`;
   
   const onImageError = (e) => {
     setImage(`${process.env.PUBLIC_URL}/image-not-found.svg`);

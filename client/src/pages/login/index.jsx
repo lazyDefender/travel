@@ -2,12 +2,10 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import LoginComponent from '../../bus/root/components/LoginForm';
 import useAuth from '../../global/hooks/useAuth';
-import { book } from '../../navigation/book';
+import { Book } from '../../navigation/book';
 
-const Login = (props) => {
+export const LoginPage = (props) => {
     const { user } = useAuth();
-    const jsx = user ? <Redirect to={book.root} /> : <LoginComponent />
+    const jsx = user ? <Redirect to={Book.ROOT} /> : <LoginComponent />
     return jsx;
 };
-
-export default Login;
