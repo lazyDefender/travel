@@ -3,8 +3,6 @@ import { Redirect, useLocation } from 'react-router-dom'
 
 import ReservationForm from './components/ReservationForm'
 import AuthBar from '../../global/components/AuthBar'
-import useAuth from '../../global/hooks/useAuth'
-import { book } from '../../navigation/book'
 
 const Reservation = (props) => {
     const query = new URLSearchParams(useLocation().search)

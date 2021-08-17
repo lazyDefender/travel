@@ -1,0 +1,87 @@
+/api/hotels:
+  post:
+    tags:
+      - Hotels
+    summary: Create a hotel
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateHotelInput'
+    responses:
+      201:
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hotel'
+  get:
+    tags:
+      - Hotels
+    summary: Retrieve a list of hotels
+    responses:
+      200:
+        description: A list of hotels
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Hotel'
+
+/api/hotels/{id}:  
+  get:
+      tags:
+        - Hotels
+      summary: Retrieve a hotel by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the hotel
+      responses:
+        200:
+          description: The found hotel
+          content:
+            application/json:
+              schema: 
+                  $ref: '#/components/schemas/Hotel'
+  delete:
+        tags:
+          - Hotels
+        summary: Delete a hotel
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: string
+            required: true
+            description: ID of the hotel to delete
+        responses:
+          204:
+            description: Deleted
+
+/api/hotels/{id}/tours:  
+  get:
+      tags:
+        - Hotels
+      summary: Retrieve a list of tours by hotel
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the hotel
+      responses:
+        200:
+          description: The found tours
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tour'

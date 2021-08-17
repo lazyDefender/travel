@@ -1,0 +1,18 @@
+/api/orders:
+  post:
+    tags:
+      - Orders
+    summary: Create an order
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateOrderInput'
+    responses:
+      201:
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'

@@ -45,9 +45,6 @@ export const reservationSlice = createSlice({
 });
 
 export const reservation = reservationSlice.reducer;
-// const {
-//     setFormState,
-// } = toursFilterSlice.actions;
 
 export const reservationActions = {
     getTour,

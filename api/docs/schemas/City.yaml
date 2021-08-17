@@ -1,0 +1,39 @@
+components:
+  schemas:
+    City:
+      type: object
+      properties:
+        id:
+          type: string
+          example: saefefs
+        name:
+          type: string
+          example: Antalya
+        continent:
+          type: number
+          example: 1
+        country:
+          type: string
+          example: Turkey
+        hotelsCount:
+          type: number
+          example: 2
+        isFrom:
+          type: boolean
+          example: false
+    
+    CreateCityInput:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Antalya
+        continent:
+          type: number
+          example: 1
+        country:
+          type: string
+          example: Turkey
+        isFrom:
+          type: boolean
+          example: false

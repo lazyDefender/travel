@@ -11,7 +11,6 @@ import useOrdersByUser from './hooks/useOrdersByUser'
 import UserForm from './components/UserForm'
 import useAuth from '../../global/hooks/useAuth'
 import { Redirect } from 'react-router-dom'
-import { book } from '../../navigation/book'
 import OrdersList from './components/OrdersList'
 import AuthBar from '../../global/components/AuthBar'
 

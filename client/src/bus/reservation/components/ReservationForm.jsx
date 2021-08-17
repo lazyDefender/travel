@@ -17,23 +17,10 @@ import moment from 'moment'
 import useTour from '../hooks/useTour'
 import useAuth from '../../../global/hooks/useAuth'
 import { reservationActions } from '../../../redux/reservation.slice'
+import { snackbarActions } from '../../../redux/snackbar.slice'
 import { useDispatch } from 'react-redux'
 import { history } from '../../../navigation/history'
 import Progress from '../../../global/components/Progress'
-
-const disableBookedDays = (date) => {
-    // const bookedDays = store.getState().reservation.data?.bookedDays || []
-    
-    // const jsDate = date.toDate() 
-    // jsDate.setHours(0)
-    // jsDate.setMinutes(0)
-    // jsDate.setSeconds(0)
-    // jsDate.setMilliseconds(0)
-    // console.log('jsDate',jsDate)
-    
-    // const jsBookedDays = bookedDays.map(d => d.toDate())
-    // return jsBookedDays.includes(jsDate)
-}
 
 const initialDate = moment()
 initialDate.set({
@@ -48,26 +35,33 @@ const ReservationForm = ({tourId}) => {
     const { data: tour, isFetching } = useTour(tourId)
     const { user: { id } } = useAuth()
 
-    const formJsx = <Formik
-    initialValues={{
+    const initialValues = {
       toCity: '',
       datetime: initialDate,
       duration: '',
       adultsCount: 1,
       kidsCount: 1,
-    }}
-    validate={(values) => {
+    };
+
+    const validate = (values) => {
       const errors = {}
       return errors
-    }}
-    onSubmit={(values, {setSubmitting}) => {
+    };
+
+    const onSubmit = (values, { setSubmitting }) => {
       dispatch(reservationActions.createOrder({
         ...values,
         tourId,
         userId: id,
-      }))
-      history.back()
-    }}
+      }));
+
+      history.back();
+    };
+
+    const formJsx = <Formik
+    initialValues={initialValues}
+    validate={validate}
+    onSubmit={onSubmit}
   >
     {({submitForm, isSubmitting, touched, errors}) => (
       <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -109,8 +103,7 @@ const ReservationForm = ({tourId}) => {
                 component={DatePicker} 
                 disablePast
                 name="datetime" 
-                label="Початок туру" 
-                shouldDisableDate={disableBookedDays}
+                label="Початок туру"
               />
           </Box>
           <Box margin={1}>

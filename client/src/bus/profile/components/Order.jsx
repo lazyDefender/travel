@@ -9,7 +9,7 @@ import {
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 
-import { book } from '../../../navigation/book'
+import { Book } from '../../../common/enums/book';
 
 const Order = (props) => {
     const { 
@@ -36,7 +36,7 @@ const Order = (props) => {
     const date = new Date(datetime._seconds * 1000)
     
     return <>
-        <Link to={`${book.hotels}/${id}`}>
+        <Link to={`${Book.HOTELS}/${id}`}>
           <Card>
             <CardActionArea>
               <CardMedia

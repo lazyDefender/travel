@@ -1,34 +1,36 @@
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import { book } from './book'
-import RootPage from '../pages/root'
-import SignUpPage from '../pages/signup'
-import LoginPage from '../pages/login'
-import HotelPage from '../pages/hotels'
-import ReservationPage from '../pages/reservation'
-import ProfilePage from '../pages/profile'
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { Book } from '../common/enums/book';
+import {
+    RootPage,
+    SignUpPage,
+    LoginPage,
+    HotelPage,
+    ReservationPage,
+    ProfilePage,
+} from '../pages';
 
 export const Routes = () => {
     return <>
         <Switch>
-            <Route exact path={book.root}>
+            <Route exact path={Book.ROOT}>
                 <RootPage />
             </Route>
-            <Route path={book.signup}>
+            <Route path={Book.SIGNUP}>
                 <SignUpPage />
             </Route>
-            <Route path={book.login}>
+            <Route path={Book.LOGIN}>
                 <LoginPage />
             </Route>
-            <Route path={book.hotelsById}>
+            <Route path={Book.HOTELS_$ID}>
                 <HotelPage />
             </Route>
-            <Route path={book.reservation}>
+            <Route path={Book.RESERVATION}>
                 <ReservationPage />
             </Route>
-            <Route path={book.profile}>
+            <Route path={Book.PROFILE}>
                 <ProfilePage />
             </Route>
         </Switch>
     </>
-}
+};

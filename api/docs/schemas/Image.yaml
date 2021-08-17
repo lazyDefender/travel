@@ -1,0 +1,11 @@
+components:
+  schemas:
+    Image:
+      type: object
+      properties:
+        filename:
+          type: string
+          example: hotelPhotos/5R8SPcNWqMY9PRcfp0iE.jpg
+        source:
+          type: string
+          example: https://storage.googleapis.com/F5R8SPcNWqMY9PRcfp0iE.jpg

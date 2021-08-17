@@ -1,0 +1,19 @@
+components:
+  schemas:
+    Tour:
+      type: object
+      properties:
+        id:
+          type: string
+          example: saefefs
+        adultPrice:
+          type: number
+          example: 340
+        kidPrice:
+          type: number
+          example: 190
+        duration:
+          type: number
+          example: 8
+        toCity:
+            $ref: '#/components/schemas/City'

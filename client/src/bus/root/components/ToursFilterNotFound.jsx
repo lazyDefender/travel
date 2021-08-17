@@ -1,12 +1,11 @@
-import React from 'react'
+import React from 'react';
 import {
     Grid, 
     Typography,
-} from '@material-ui/core'
+} from '@material-ui/core';
 import {
-    Search,
     Cancel,
-} from '@material-ui/icons'
+} from '@material-ui/icons';
 
 const ToursFilterNotFound = () => {
     return (
@@ -18,7 +17,7 @@ const ToursFilterNotFound = () => {
                 justify="center"
             >
                 <Grid item>
-                    <Cancel/>
+                    <Cancel />
                 </Grid>
                 <Grid item>
                     <Typography>
@@ -26,10 +25,8 @@ const ToursFilterNotFound = () => {
                     </Typography>
                 </Grid>
             </Grid>
-            
-            
-        </div>
-    )
-}
+        </div> 
+    );
+};
 
-export default ToursFilterNotFound
+export default ToursFilterNotFound;
