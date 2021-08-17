@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { authService, cityService, tourService, userService } from '../services';
+import { authService, userService } from '../services';
 
 const ActionTypes = {
     SIGN_UP: 'auth/sign-up',
