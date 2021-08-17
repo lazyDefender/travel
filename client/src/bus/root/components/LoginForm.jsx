@@ -32,21 +32,21 @@ const SignUpForm = () => {
   const { error } = useAuth();
   const snackbar = useSnackbar();
 
-  useEffect(() => {
-    if(!snackbar.open) {
-      store.dispatch(authActions.setError(null));
-    }
-  }, [snackbar]);
+  // useEffect(() => {
+  //   if(!snackbar.open) {
+  //     store.dispatch(authActions.setError(null));
+  //   }
+  // }, [snackbar]);
 
-  useEffect(() => {
-    if(error) {
-      store.dispatch(snackbarActions.show({
-        message: error.message,
-        severity: 'error',
-        open: true,
-      }));
-    }
-  }, [error]);
+  // useEffect(() => {
+  //   if(error) {
+  //     store.dispatch(snackbarActions.show({
+  //       message: error.message,
+  //       severity: 'error',
+  //       open: true,
+  //     }));
+  //   }
+  // }, [error]);
 
   const signInWithGoogle = useCallback(() => {
     store.dispatch(authActions.signInWithProvider(AuthProviders.GOOGLE));

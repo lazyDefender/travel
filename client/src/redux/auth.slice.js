@@ -120,7 +120,6 @@ export const authSlice = createSlice({
     initialState: {
         user: null,
         isFetching: true,
-        error: null,
     },
     reducers: {
         setFetching: (state, action) => {
@@ -140,7 +139,6 @@ export const authSlice = createSlice({
         [signUp.rejected]: (state, action) => {
             state.isFetching = false;
             state.user = null;
-            state.error = action.error;
         },
 
         [signIn.pending]: (state, action) => {
@@ -152,7 +150,6 @@ export const authSlice = createSlice({
         [signIn.rejected]: (state, action) => {
             state.isFetching = false;
             state.user = null;
-            state.error = action.error;
         },
 
         [signInWithProvider.pending]: (state, action) => {
@@ -165,7 +162,6 @@ export const authSlice = createSlice({
         [signInWithProvider.rejected]: (state, action) => {
             state.isFetching = false;
             state.user = null;
-            state.error = action.error;
         },
 
         [signOut.pending]: (state, action) => {
