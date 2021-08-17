@@ -1,23 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {
-    Button,
     Box,
     Grid,
     AppBar,
     Toolbar,
-    IconButton,
-    Typography,
-    Avatar,
     makeStyles,
-    Container,
 } from '@material-ui/core'
-import { book } from '../../navigation/book'
+import { Book } from '../../common/enums/book';
 import useAuth from '../../global/hooks/useAuth'
-
-const signOut = () => {
-    // store.dispatch(authActions.signOut())
-}
 
 const useStyles = makeStyles(theme => ({
     offset: theme.mixins.toolbar,
@@ -40,7 +31,7 @@ const GoHomeBar = (props) => {
             >
                 
                     <Grid item>
-                        <Link to="/">На головну</Link>
+                        <Link to={Book.ROOT}>На головну</Link>
                     </Grid>
                 </Grid>
             </Toolbar>

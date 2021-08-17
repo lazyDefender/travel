@@ -9,7 +9,7 @@ import {
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 
-import { Book } from '../../../navigation/book'
+import { Book } from '../../../common/enums/book';
 
 const Order = (props) => {
     const { 

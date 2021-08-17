@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Book } from './book';
+import { Book } from '../common/enums/book';
 import {
     RootPage,
     SignUpPage,

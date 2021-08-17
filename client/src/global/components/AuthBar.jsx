@@ -8,7 +8,7 @@ import {
     Toolbar,
     makeStyles,
 } from '@material-ui/core';
-import { Book } from '../../navigation/book';
+import { Book } from '../../common/enums/book';
 import useAuth from '../../global/hooks/useAuth';
 import { authActions } from '../../redux/auth.slice';
 import store from '../../redux/store';

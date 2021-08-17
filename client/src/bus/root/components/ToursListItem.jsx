@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-import { Book } from '../../../navigation/book';
+import { Book } from '../../../common/enums/book';
 import ImageWithFallback from '../../../global/components/ImageWithFallback';
 
 const useStyles = makeStyles({

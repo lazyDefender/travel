@@ -18,7 +18,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import { authActions } from '../../../redux/auth.slice';
 import useAuth from '../../../global/hooks/useAuth';
-import { Book } from '../../../navigation/book';
+import { Book } from '../../../common/enums/book';
 import { initialValues } from '../initialValues/signUp';
 import { validationSchema } from '../validation/signUp';
 import GoHomeBar from '../../../global/components/GoHomeBar';

@@ -18,7 +18,7 @@ import Box from '@material-ui/core/Box';
 
 import { authActions } from '../../../redux/auth.slice';
 import store from '../../../redux/store';
-import { Book } from '../../../navigation/book';
+import { Book } from '../../../common/enums/book';
 import useAuth from '../../../global/hooks/useAuth';
 import { initialValues } from '../initialValues/signIn';
 import { validationSchema } from '../validation/signIn';

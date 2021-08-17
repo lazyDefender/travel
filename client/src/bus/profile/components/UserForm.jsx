@@ -10,7 +10,6 @@ import {
 import MomentUtils from '@date-io/moment'
 import {MuiPickersUtilsProvider} from '@material-ui/pickers'
 
-import useAuth from '../../../global/hooks/useAuth'
 import { authActions } from '../../../redux/auth.slice'
 import store from '../../../redux/store'
 
