@@ -37,7 +37,7 @@ const ToursFilterForm = ({ cities }) => {
   const formState = useToursFilterFormState();
 
   const initialValues = {
-    toCity: formState?.toCity || cities[0],
+    toCity: formState?.toCity || cities[0]?.id,
     datetime: formState?.datetime || initialDate,
     duration: formState?.duration || 8,
     adultsCount: formState?.adultsCount || 1,
@@ -46,6 +46,7 @@ const ToursFilterForm = ({ cities }) => {
 
   const validate = (values) => {
     const errors = {};
+    console.log(values)
     if(!values.toCity) errors.toCity = 'Виберіть місто';
     return errors;
   };
