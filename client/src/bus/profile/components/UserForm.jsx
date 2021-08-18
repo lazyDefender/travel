@@ -1,22 +1,20 @@
-import React from 'react'
-import {Formik, Form, Field} from 'formik'
+import React from 'react';
+import {Formik, Form, Field} from 'formik';
 import {
     Button,
     Box,
-} from '@material-ui/core'
+} from '@material-ui/core';
 import {
   TextField,
-} from 'formik-material-ui'
-import MomentUtils from '@date-io/moment'
-import {MuiPickersUtilsProvider} from '@material-ui/pickers'
+} from 'formik-material-ui';
+import MomentUtils from '@date-io/moment';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
-import { authActions } from '../../../redux/auth.slice'
-import store from '../../../redux/store'
-
-const UserForm = ({ 
-        id,
+const UserForm = ({
         firstName,
         lastName,
+        onUpdateUser,
+        onDeleteUser,
     }) => {
     return <>
         <Formik
@@ -28,61 +26,52 @@ const UserForm = ({
                 const errors = {}
                 return errors
             }}
-            onSubmit={(values, {setSubmitting}) => {
-                const payload = {
-                    id,
-                    ...values,
-                };
-                store.dispatch(authActions.updateUser(payload));
-                // store.dispatch(ordersActions.fetchByUser(id))
-            }}
+            onSubmit={onUpdateUser}
         >
-        {({submitForm, isSubmitting, touched, errors}) => (
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-            <Form>
-                <Box margin={1}>
-                    <Field
-                    component={TextField}
-                    type="text"
-                    name="firstName"
-                    label="Ім'я"
-                    disabled={false}
-                    />
-                </Box>
-                <Box margin={1}>
-                    <Field
-                    component={TextField}
-                    type="text"
-                    name="lastName"
-                    label="Прізвище"
-                    disabled={false}
-                    />
-                </Box>
-                <Box margin={1}>
-                    <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={submitForm}
-                    >
-                    Готово
-                    </Button>
-                </Box>
-                <Box margin={1}>
-                    <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                        // store.dispatch(authActions.deleteUser())
-                    }}
-                    >
-                    Видалити акаунт
-                    </Button>
-                </Box>
-            </Form>
-        </MuiPickersUtilsProvider>
-        )}
-    </Formik>
-    </>
-}
+            {({submitForm, isSubmitting, touched, errors}) => (
+                <MuiPickersUtilsProvider utils={MomentUtils}>
+                    <Form>
+                        <Box margin={1}>
+                            <Field
+                            component={TextField}
+                            type="text"
+                            name="firstName"
+                            label="Ім'я"
+                            disabled={false}
+                            />
+                        </Box>
+                        <Box margin={1}>
+                            <Field
+                            component={TextField}
+                            type="text"
+                            name="lastName"
+                            label="Прізвище"
+                            disabled={false}
+                            />
+                        </Box>
+                        <Box margin={1}>
+                            <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={submitForm}
+                            >
+                            Готово
+                            </Button>
+                        </Box>
+                        <Box margin={1}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={onDeleteUser}
+                            >
+                                Видалити акаунт
+                            </Button>
+                        </Box>
+                    </Form>
+                </MuiPickersUtilsProvider>
+            )}
+        </Formik>
+    </>;
+};
 
-export default UserForm
+export default UserForm;

@@ -1,17 +1,18 @@
-import React from 'react'
+import React from 'react';
 import {
     Grid,
     Typography
-} from '@material-ui/core'
+} from '@material-ui/core';
 import {
     Cancel,
-} from '@material-ui/icons'
-import OrdersListItem from './OrdersListItem'
+} from '@material-ui/icons';
 
-const OrdersList = ({orders}) => {
+import OrdersListItem from './OrdersListItem';
+
+const OrdersList = ({ orders }) => {
     const listJSX = <Grid container spacing={3}>
             {orders?.map(o =>  <OrdersListItem order={o} key={o.id} />)}
-        </Grid>
+        </Grid>;
     
     const emptyJSX = <div>
         <Grid 
@@ -27,8 +28,9 @@ const OrdersList = ({orders}) => {
                 </Typography>
             </Grid>
         </Grid>  
-    </div>
-    return orders?.length ? listJSX : emptyJSX
-}
+    </div>;
 
-export default OrdersList
+    return orders?.length ? listJSX : emptyJSX;
+};
+
+export default OrdersList;
