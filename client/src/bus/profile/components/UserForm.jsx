@@ -4,11 +4,21 @@ import {
     Button,
     Box,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import {
   TextField,
 } from 'formik-material-ui';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+
+const useStyles = makeStyles(theme => ({
+    form: {
+      width: '300px',
+    },
+    formElement: {
+      width: '100%',
+    }
+  }));
 
 const UserForm = ({
         firstName,
@@ -16,6 +26,8 @@ const UserForm = ({
         onUpdateUser,
         onDeleteUser,
     }) => {
+    const classes = useStyles();
+
     return <>
         <Formik
             initialValues={{
@@ -30,39 +42,47 @@ const UserForm = ({
         >
             {({submitForm, isSubmitting, touched, errors}) => (
                 <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <Form>
+                    <Form className={classes.form}>
                         <Box margin={1}>
                             <Field
-                            component={TextField}
-                            type="text"
-                            name="firstName"
-                            label="Ім'я"
-                            disabled={false}
+                                className={classes.formElement}
+                                component={TextField}
+                                type="text"
+                                name="firstName"
+                                label="Ім'я"
+                                disabled={false}
+                                variant="outlined"
                             />
                         </Box>
                         <Box margin={1}>
                             <Field
-                            component={TextField}
-                            type="text"
-                            name="lastName"
-                            label="Прізвище"
-                            disabled={false}
+                                className={classes.formElement}
+                                component={TextField}
+                                type="text"
+                                name="lastName"
+                                label="Прізвище"
+                                disabled={false}
+                                variant="outlined"
                             />
                         </Box>
                         <Box margin={1}>
                             <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={submitForm}
+                                className={classes.formElement}
+                                variant="contained"
+                                color="primary"
+                                onClick={submitForm}
+                                disableElevation
                             >
                             Готово
                             </Button>
                         </Box>
                         <Box margin={1}>
                             <Button
+                                className={classes.formElement}
                                 variant="contained"
                                 color="primary"
                                 onClick={onDeleteUser}
+                                disableElevation
                             >
                                 Видалити акаунт
                             </Button>

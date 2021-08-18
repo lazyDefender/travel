@@ -3,6 +3,7 @@ import {
     Tabs,
     Tab,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import useOrdersByUser from './hooks/useOrdersByUser';
 import UserForm from './components/UserForm';
@@ -13,7 +14,15 @@ import store from '../../redux/store';
 import { authActions } from '../../redux/auth.slice';
 import CenteredCircularProgress from '../../global/components/CenteredCircularProgress';
 
+const useStyles = makeStyles(theme => ({
+    tabs: {
+        marginBottom: '30px',
+    }
+}));
+
 const Profile = (props) => {
+    const classes = useStyles();
+
     const [tabIndex, setTabIndex] = useState(0);
 
     const handleTabChange = (e, newValue) => {
@@ -40,6 +49,7 @@ const Profile = (props) => {
         onChange={handleTabChange}
         indicatorColor="primary"
         textColor="primary"
+        className={classes.tabs}
     >
         <Tab value={0} label="Редагувати профіль"/>
         <Tab value={1} label="Мої замовлення"/>
