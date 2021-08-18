@@ -8,7 +8,6 @@ import useToursByHotel from './hooks/useToursByHotel';
 import AuthBar from '../../global/components/AuthBar';
 import Progress from '../../global/components/Progress';
 
-
 const Hotel = () => {
     let { id } = useParams();
     const { 
