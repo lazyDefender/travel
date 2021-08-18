@@ -18,7 +18,7 @@ import useToursFilterCities from './hooks/useToursFilterCities';
 import useToursFilterTours from './hooks/useToursFilterTours';
 
 const Root = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const { 
         isFetching: citiesFetching, 
