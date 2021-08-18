@@ -1,64 +1,48 @@
-import React from 'react'
-import {Formik, Form, Field} from 'formik'
+import React from 'react';
+import {
+  Formik, 
+  Form, 
+  Field
+} from 'formik';
 import {
   Button,
   Box
-} from '@material-ui/core'
+} from '@material-ui/core';
 import {
   TextField,
-} from 'formik-material-ui'
+} from 'formik-material-ui';
 import {
   DatePicker,
-} from 'formik-material-ui-pickers'
-import MomentUtils from '@date-io/moment'
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import moment from 'moment'
+} from 'formik-material-ui-pickers';
+import MomentUtils from '@date-io/moment';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import moment from 'moment';
 
-import useTour from '../hooks/useTour'
-import useAuth from '../../../global/hooks/useAuth'
-import { reservationActions } from '../../../redux/reservation.slice'
-import { snackbarActions } from '../../../redux/snackbar.slice'
-import { useDispatch } from 'react-redux'
-import { history } from '../../../navigation/history'
 import Progress from '../../../global/components/Progress'
 
-const initialDate = moment()
+const initialDate = moment();
 initialDate.set({
     hour: 0,
     minute: 0,
     second: 0,
     millisecond: 0,
-})
+});
 
-const ReservationForm = ({tourId}) => {
-  const dispatch = useDispatch()
-    const { data: tour, isFetching } = useTour(tourId)
-    const { user: { id } } = useAuth()
+const ReservationForm = ({ tour, onSubmit, isFetching }) => {
+  const initialValues = {
+    toCity: '',
+    datetime: initialDate,
+    duration: '',
+    adultsCount: 1,
+    kidsCount: 1,
+  };
 
-    const initialValues = {
-      toCity: '',
-      datetime: initialDate,
-      duration: '',
-      adultsCount: 1,
-      kidsCount: 1,
-    };
+  const validate = (values) => {
+    const errors = {}
+    return errors
+  };
 
-    const validate = (values) => {
-      const errors = {}
-      return errors
-    };
-
-    const onSubmit = (values, { setSubmitting }) => {
-      dispatch(reservationActions.createOrder({
-        ...values,
-        tourId,
-        userId: id,
-      }));
-
-      history.back();
-    };
-
-    const formJsx = <Formik
+  const formJsx = <Formik
     initialValues={initialValues}
     validate={validate}
     onSubmit={onSubmit}
@@ -150,7 +134,6 @@ const ReservationForm = ({tourId}) => {
             <Button
               variant="contained"
               color="primary"
-              // disabled={isSubmitting}
               onClick={submitForm}
             >
               Забронювати
@@ -161,10 +144,9 @@ const ReservationForm = ({tourId}) => {
     )}
   </Formik>
 
-    const jsx = isFetching ? <Progress /> : formJsx
+    const jsx = isFetching ? <Progress /> : formJsx;
 
-    return jsx
+    return jsx;
 }
 
-export default ReservationForm
-
+export default ReservationForm;
