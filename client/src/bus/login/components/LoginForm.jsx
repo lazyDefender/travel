@@ -16,54 +16,20 @@ import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import Box from '@material-ui/core/Box';
 
-import { authActions } from '../../../redux/auth.slice';
-import store from '../../../redux/store';
-import { Book } from '../../../common/enums/book';
-import useAuth from '../../../global/hooks/useAuth';
-import { initialValues } from '../initialValues/signIn';
-import { validationSchema } from '../validation/signIn';
+import { validationSchema } from '../validation/login';
 import GoHomeBar from '../../../global/components/GoHomeBar';
-import { snackbarActions } from '../../../redux/snackbar.slice';
-import useSnackbar from '../../../global/hooks/useSnackbar';
-import { AuthProviders } from '../../../common/enums/authProviders';
 
-const SignUpForm = () => {
-  const history = useHistory();
-  const { error } = useAuth();
-  const snackbar = useSnackbar();
+const initialValues = {
+  email: '',
+  password: '',
+};
 
-  // useEffect(() => {
-  //   if(!snackbar.open) {
-  //     store.dispatch(authActions.setError(null));
-  //   }
-  // }, [snackbar]);
-
-  // useEffect(() => {
-  //   if(error) {
-  //     store.dispatch(snackbarActions.show({
-  //       message: error.message,
-  //       severity: 'error',
-  //       open: true,
-  //     }));
-  //   }
-  // }, [error]);
-
-  const signInWithGoogle = useCallback(() => {
-    store.dispatch(authActions.signInWithProvider(AuthProviders.GOOGLE));
-  }, []);
-  
-  const signInWithFacebook = useCallback(() => {
-    store.dispatch(authActions.signInWithProvider(AuthProviders.FACEBOOK));
-  }, []);
-
-  const onSignup = useCallback(() => {
-    history.replace(Book.SIGNUP);
-  }, []);
-
-  const onSubmit = (values, { setSubmitting }) => {
-    store.dispatch(authActions.signIn(values));
-  };
-
+const LoginForm = ({ 
+  onSignInWithGoogle,
+  onSignInWithFacebook,
+  onSubmit,
+  onSignup,
+}) => {
   const formJSX = (
     <div>
       <Typography>Вхід</Typography>
@@ -112,7 +78,7 @@ const SignUpForm = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={signInWithGoogle}
+                  onClick={onSignInWithGoogle}
                 >
                   Увійти через Google
                 </Button>
@@ -121,7 +87,7 @@ const SignUpForm = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={signInWithFacebook}
+                  onClick={onSignInWithFacebook}
                 >
                   Увійти через Facebook
                 </Button>                
@@ -141,4 +107,4 @@ const SignUpForm = () => {
   return page;
 }
 
-export default SignUpForm;
+export default LoginForm;
