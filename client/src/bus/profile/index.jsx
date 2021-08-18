@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-    CircularProgress,
     Tabs,
     Tab,
 } from '@material-ui/core';
@@ -12,6 +11,7 @@ import OrdersList from './components/OrdersList';
 import AuthBar from '../../global/components/AuthBar';
 import store from '../../redux/store';
 import { authActions } from '../../redux/auth.slice';
+import CenteredCircularProgress from '../../global/components/CenteredCircularProgress';
 
 const Profile = (props) => {
     const [tabIndex, setTabIndex] = useState(0);
@@ -30,7 +30,10 @@ const Profile = (props) => {
 
     const { user } = useAuth();
     const { data: orders, isFetching } = useOrdersByUser(user.id);
-    const ordersJSX = isFetching ? <CircularProgress/> : <OrdersList orders={orders}/>;
+
+    const ordersJSX = isFetching ? 
+        <CenteredCircularProgress /> : 
+        <OrdersList orders={orders}/>;
 
     const tabsJSX = <Tabs
         value={tabIndex}
