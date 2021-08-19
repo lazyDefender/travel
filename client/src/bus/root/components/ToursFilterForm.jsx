@@ -10,13 +10,11 @@ import {
 import {
   TextField,
 } from 'formik-material-ui';
-import {
-  DatePicker,
-} from 'formik-material-ui-pickers';
 import MomentUtils from '@date-io/moment';
 import moment from 'moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
+import DatePicker from '../../../global/components/DatePicker';
 import '../../../moment-locales/uk';
 
 moment.locale('uk');
@@ -90,16 +88,11 @@ const ToursFilterForm = ({
                   </Grid>
                   
                   <Grid item>
-                    <Box margin={1}>
-                      <Field 
-                        component={DatePicker} 
-                        inputVariant="outlined"
-                        disablePast={true} 
-                        name="datetime" 
-                        label="Початок туру"
-                        cancelLabel="Скасувати" 
-                      />
-                    </Box>
+                    <DatePicker
+                      name="datetime" 
+                      label="Початок туру"
+                      cancelLabel="Скасувати" 
+                    />
                   </Grid>
                   
                   <Grid item>
