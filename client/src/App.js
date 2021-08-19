@@ -34,7 +34,6 @@ const App = () => {
       firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
           const token = await user.getIdToken();
-          console.log(token);
           dispatch(authActions.getCurrentUser());
         }
         else {
