@@ -5,7 +5,7 @@ import { DatePicker as MuiDatePicker } from 'formik-material-ui-pickers';
 
 const DatePicker = (props) => {
     return (
-        <Box margin={1}>
+        <Box marginBottom={1}>
           <Field 
             component={MuiDatePicker} 
             inputVariant="outlined"

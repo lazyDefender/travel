@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/styles';
 const useStyles = makeStyles(theme => ({
     field: {
         width: '100%',
+        margin: '0',
     },
 }));
 
@@ -14,7 +15,7 @@ const TextField = (props) => {
     const classes = useStyles();
 
     return (
-        <Box margin={1}>
+        <Box marginBottom={1}>
             <Field className={classes.field}
                 component={FMuiTextField}
                 type="text"

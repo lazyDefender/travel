@@ -19,7 +19,7 @@ function Button({
     const classes = useStyles();
 
     return (
-        <Box margin={1}>
+        <Box marginBottom={1}>
             <MuiButton className={classes.button}
                 variant="contained"
                 color={color}

@@ -1,20 +1,17 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import {Formik, Form, Field} from 'formik';
+import { Formik, Form } from 'formik';
 import {
-  Button,
   MenuItem,
   Grid,
   Box,
 } from '@material-ui/core';
-import {
-  TextField,
-} from 'formik-material-ui';
 import MomentUtils from '@date-io/moment';
 import moment from 'moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import DatePicker from '../../../global/components/DatePicker';
+import TextField from '../../../global/components/TextField';
+import Button from '../../../global/components/Button';
 import '../../../moment-locales/uk';
 
 moment.locale('uk');
@@ -58,7 +55,6 @@ const ToursFilterForm = ({
           return (
             <MuiPickersUtilsProvider locale="uk" utils={MomentUtils}>
               <Form>
-                
                 <Grid 
                   container 
                   direction="row" 
@@ -66,25 +62,20 @@ const ToursFilterForm = ({
                   justify="space-between"
                 >
                   <Grid item>
-                    <Box margin={1}>
-                      <Field
-                        component={TextField}
-                        type="text"
-                        name="toCity"
-                        label="Куди"
-                        select
-                        variant="outlined"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      >
-                        {cities?.map((city) => (
-                          <MenuItem key={city.id} value={city.id}>
-                            {city.name}
-                          </MenuItem>
-                        ))}
-                      </Field>
-                    </Box>
+                    <TextField
+                      name="toCity"
+                      label="Куди"
+                      select
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    >
+                      {cities?.map((city) => (
+                        <MenuItem key={city.id} value={city.id}>
+                          {city.name}
+                        </MenuItem>
+                      ))}
+                    </TextField>
                   </Grid>
                   
                   <Grid item>
@@ -96,46 +87,36 @@ const ToursFilterForm = ({
                   </Grid>
                   
                   <Grid item>
-                    <Box margin={1}>
-                      <Field
-                        component={TextField}
-                        type="text"
-                        name="duration"
-                        label="Ночей"
-                        select
-                        variant="outlined"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      >
-                        <MenuItem value={8}>
-                          8
-                        </MenuItem>
-                      </Field>
-                    </Box>
+                    <TextField
+                      name="duration"
+                      label="Ночей"
+                      select
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    >
+                      <MenuItem value={8}>
+                        8
+                      </MenuItem>
+                    </TextField>
                   </Grid>
-  
+
                   <Grid item>
-                    <Box margin={1}>
-                      <Field
-                      component={TextField}
-                      variant="outlined"
-                        name="adultsCount"
-                        type="number"
-                        label="К-сть дорослих"
-                        inputProps={{
-                          min: 1,
-                          max: 6,
-                        }}
-                      />
-                    </Box>
+                    <TextField
+                      name="duration"
+                      label="К-сть дорослих"
+                      name="adultsCount"
+                      type="number"
+                      label="К-сть дорослих"
+                      inputProps={{
+                        min: 1,
+                        max: 6,
+                      }}
+                    />
                   </Grid>
-  
+
                   <Grid item>
-                    <Box margin={1}>
-                      <Field
-                        component={TextField}
-                        variant="outlined"
+                    <TextField
                         name="kidsCount"
                         type="number"
                         label="К-сть дітей"
@@ -143,21 +124,18 @@ const ToursFilterForm = ({
                           min: 0,
                           max: 6,
                         }}
-                      />
-                    </Box>
+                    />
                   </Grid>
-                  
-                  <Box margin={1}>
+
+                  <Grid item>
                     <Button
-                      variant="contained"
-                      disableElevation
-                      color="primary"
-                      disabled={isSubmitting}
-                      onClick={submitForm}
-                    >
-                      Знайти
-                    </Button>
-                  </Box>
+                        color="primary"
+                        disabled={isSubmitting}
+                        onClick={submitForm}
+                        text="Знайти"
+                    />
+                  </Grid>
+
                 </Grid>
               </Form>
             </MuiPickersUtilsProvider>
