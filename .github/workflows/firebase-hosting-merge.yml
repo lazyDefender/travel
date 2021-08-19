@@ -19,7 +19,7 @@ jobs:
       - run: npm ci && npm run build
 
       - name: Create .env file
-      - run: |
+        run: |
           touch .env
           echo REACT_APP_FIRE_KEY=${{ secrets.REACT_APP_FIRE_KEY }} >> .env
           echo REACT_APP_AUTH_DOMAIN=${{ secrets.REACT_APP_AUTH_DOMAIN }} >> .env
