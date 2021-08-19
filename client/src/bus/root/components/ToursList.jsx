@@ -8,7 +8,7 @@ import ToursListItem from './ToursListItem';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        marginTop: '30px',
+        marginTop: '20px',
     },
 }));
 

@@ -15,6 +15,7 @@ function Button({
     color,
     onClick,
     text,
+    disabled,
 }) {
     const classes = useStyles();
 
@@ -24,6 +25,7 @@ function Button({
                 variant="contained"
                 color={color}
                 onClick={onClick}
+                disabled={disabled}
                 disableElevation
             >
               {text}
