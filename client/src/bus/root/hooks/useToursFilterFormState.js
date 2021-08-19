@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
 const useToursFilterFormState = () => {
-    const { formState } = useSelector(state => state.toursFilter)
-    return formState
-}
+    const { formState } = useSelector(state => state.toursFilter);
+    return formState;
+};
 
-export default useToursFilterFormState
+export default useToursFilterFormState;

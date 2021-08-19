@@ -1,4 +1,4 @@
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 
 export const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -7,4 +7,4 @@ export const validationSchema = Yup.object().shape({
   password: Yup.string()
     .min(6, 'Пароль має містити щонайменше 6 символів')
     .required('Введіть пароль'),
-})
+});

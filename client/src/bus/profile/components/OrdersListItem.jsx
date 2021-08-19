@@ -1,17 +1,17 @@
-import React from 'react'
+import React from 'react';
 import {
     Grid
-} from '@material-ui/core'
+} from '@material-ui/core';
 
-import Order from './Order'
+import Order from './Order';
 
 const OrdersListItem = (props) => {
-    const { order } = props
+    const { order } = props;
     return <Grid item 
         xs={12} sm={6} md={4}
     >
         <Order {...order}/>
-    </Grid>
-} 
+    </Grid>;
+}; 
 
-export default OrdersListItem
+export default OrdersListItem;

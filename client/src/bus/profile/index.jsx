@@ -1,60 +1,84 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
-    CircularProgress,
-    Typography,
     Tabs,
     Tab,
-} from '@material-ui/core'
-import { useSelector } from 'react-redux'
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
-import useOrdersByUser from './hooks/useOrdersByUser'
-import UserForm from './components/UserForm'
-import useAuth from '../../global/hooks/useAuth'
-import { Redirect } from 'react-router-dom'
-import OrdersList from './components/OrdersList'
-import AuthBar from '../../global/components/AuthBar'
+import useOrdersByUser from './hooks/useOrdersByUser';
+import UserForm from './components/UserForm';
+import useAuth from '../../global/hooks/useAuth';
+import OrdersList from './components/OrdersList';
+import AuthBar from '../../global/components/AuthBar';
+import store from '../../redux/store';
+import { authActions } from '../../redux/auth.slice';
+import CenteredCircularProgress from '../../global/components/CenteredCircularProgress';
 
-
+const useStyles = makeStyles(theme => ({
+    tabs: {
+        marginBottom: '30px',
+    }
+}));
 
 const Profile = (props) => {
-    const [value, setValue] = useState(0)
-    const handleChange = (e, newValue) => {
-        setValue(newValue)
+    const classes = useStyles();
+
+    const [tabIndex, setTabIndex] = useState(0);
+
+    const handleTabChange = (e, newValue) => {
+        setTabIndex(newValue);
+    };
+
+    const updateUser = (data) => {
+        const updatedUser = {
+            id: user.id,
+            ...data,
+        };
+        store.dispatch(authActions.updateUser(updatedUser));
     }
 
-    const { user } = useAuth()
-    const { data: orders, isFetching } = useOrdersByUser(user.id)
-    const ordersJSX = isFetching ? <CircularProgress/> : <OrdersList orders={orders}/>
+    const { user } = useAuth();
+    const { data: orders, isFetching } = useOrdersByUser(user.id);
+
+    const ordersJSX = isFetching ? 
+        <CenteredCircularProgress /> : 
+        <OrdersList orders={orders}/>;
+
     const tabsJSX = <Tabs
-        value={value}
-        onChange={handleChange}
+        value={tabIndex}
+        onChange={handleTabChange}
         indicatorColor="primary"
         textColor="primary"
+        className={classes.tabs}
     >
         <Tab value={0} label="Редагувати профіль"/>
         <Tab value={1} label="Мої замовлення"/>
-    </Tabs>
-    let tabContentJSX = null
+    </Tabs>;
 
-    switch(value) {
+    let tabContentJSX = null;
+
+    switch(tabIndex) {
         case 0:
-            tabContentJSX = <UserForm {...user}/>
-            break
+            tabContentJSX = <UserForm 
+                {...user}
+                onUpdateUser={updateUser}
+            />;
+            break;
         case 1:
             tabContentJSX = <>
                 {ordersJSX}
-            </>
-            break
+            </>;
+            break;
         default:
-            tabContentJSX = null
+            tabContentJSX = null;
     }
     const page = <>
-                    <AuthBar/>
-                    {tabsJSX}
-                    {tabContentJSX}
-                </>
+        <AuthBar/>
+        {tabsJSX}
+        {tabContentJSX}
+    </>;
                 
-    return page
+    return page;
 }
 
-export default Profile
+export default Profile;

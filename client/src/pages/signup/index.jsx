@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router';
-import SignUpComponent from '../../bus/root/components/SignUpForm';
+import SignUpComponent from '../../bus/signup';
 import useAuth from '../../global/hooks/useAuth';
 import { Book } from '../../common/enums/book';
 

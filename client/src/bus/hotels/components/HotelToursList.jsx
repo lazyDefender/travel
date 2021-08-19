@@ -9,12 +9,22 @@ import {
     Paper,
     Button,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import { Link } from 'react-router-dom';
 
 import { Book } from '../../../common/enums/book';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    paddingTop: '32px',
+    paddingBottom: '32px',
+  },
+}));
+
 const HotelToursList = ({ tours }) => {
-    return <>
+  const classes = useStyles();
+
+    return <div className={classes.root}>
         <TableContainer component={Paper}>
       <Table aria-label="simple table">
       <TableHead>
@@ -43,7 +53,7 @@ const HotelToursList = ({ tours }) => {
         </TableBody>
       </Table>
     </TableContainer>
-    </>
+    </div>
 };
 
 export default HotelToursList;

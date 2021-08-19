@@ -144,9 +144,7 @@ export const authSlice = createSlice({
         [signIn.pending]: (state, action) => {
             state.isFetching = true;
         },
-        [signIn.fulfilled]: (state, action) => {
-            state.isFetching = false;
-        },
+        
         [signIn.rejected]: (state, action) => {
             state.isFetching = false;
             state.user = null;

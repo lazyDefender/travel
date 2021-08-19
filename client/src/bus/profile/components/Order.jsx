@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import {
     Typography,
     Card,
     CardMedia,
     CardActionArea,
     CardContent,
-} from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import moment from 'moment'
+} from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 import { Book } from '../../../common/enums/book';
 
@@ -17,23 +17,23 @@ const Order = (props) => {
       kidsCount,
       datetime,
       tour, 
-    } = props
+    } = props;
     
     const {
       duration,
       kidPrice,
       adultPrice,
       hotel,
-    } = tour
+    } = tour;
 
     const { 
       name,
       id,
-    } = hotel
+    } = hotel;
 
-    const total = kidPrice * kidsCount + adultPrice * adultsCount 
+    const total = kidPrice * kidsCount + adultPrice * adultsCount;
 
-    const date = new Date(datetime._seconds * 1000)
+    const date = new Date(datetime._seconds * 1000);
     
     return <>
         <Link to={`${Book.HOTELS}/${id}`}>
@@ -69,6 +69,7 @@ const Order = (props) => {
             </CardActionArea>
           </Card>
         </Link>
-    </>
-}
-export default Order
+    </>;
+};
+
+export default Order;
