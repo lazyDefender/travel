@@ -1,24 +1,19 @@
-import React, { useEffect, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 import {
   Formik, 
-  Form, 
-  Field,
+  Form,
 } from 'formik';
 import {
-  Button,
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import {
-  TextField,
-} from 'formik-material-ui';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import Box from '@material-ui/core/Box';
 
 import { validationSchema } from '../validation/login';
 import GoHomeBar from '../../../global/components/GoHomeBar';
+import TextField from '../../../global/components/TextField';
+import Button from '../../../global/components/Button';
 
 const initialValues = {
   email: '',
@@ -60,66 +55,35 @@ const LoginForm = ({
         {({submitForm, isSubmitting, touched, errors}) => (
           <MuiPickersUtilsProvider utils={MomentUtils}>
               <Form className={classes.form}>
-                <Box margin={1}>
-                  <Field className={classes.formElement}
-                    component={TextField}
-                    name="email"
-                    label="Email"
-                    disabled={false}
-                    variant="outlined"
-                  />
-                </Box>
-                <Box margin={1}>
-                  <Field className={classes.formElement}
-                    component={TextField}
-                    type="password"
-                    name="password"
-                    label="Пароль"
-                    disabled={false}
-                    variant="outlined"
-                  />
-                </Box>
-                <Box margin={1}>
-                  <Button className={classes.formElement}
-                    variant="contained"
-                    color="primary"
-                    onClick={submitForm}
-                    disableElevation
-                  >
-                    Готово
-                  </Button>
-                  
-                </Box>
-                <Box margin={1}>
-                  <Button className={classes.formElement}
-                    variant="contained"
-                    color="default"
-                    onClick={onSignup}
-                    disableElevation
-                  >
-                    Зареєструватись
-                  </Button>
-                </Box>
-                <Box margin={1}>
-                  <Button className={classes.formElement}
-                    variant="contained"
-                    color="primary"
-                    onClick={onSignInWithGoogle}
-                    disableElevation
-                  >
-                    Увійти через Google
-                  </Button>
-                </Box>
-                <Box margin={1}>
-                  <Button className={classes.formElement}
-                    variant="contained"
-                    color="primary"
-                    onClick={onSignInWithFacebook}
-                    disableElevation
-                  >
-                    Увійти через Facebook
-                  </Button>
-                </Box>    
+                <TextField
+                  name="email"
+                  label="Email"
+                />
+                <TextField
+                  type="password"
+                  name="password"
+                  label="Пароль"
+                />
+                <Button
+                  color="primary"
+                  onClick={submitForm}
+                  text="Готово"
+                />
+                <Button
+                  color="default"
+                  onClick={onSignup}
+                  text="Зареєструватись"
+                />
+                <Button
+                  color="primary"
+                  onClick={onSignInWithGoogle}
+                  text="Увійти через Google"
+                />
+                <Button
+                  color="primary"
+                  onClick={onSignInWithFacebook}
+                  text="Увійти через Facebook"
+                />   
               </Form>
           </MuiPickersUtilsProvider>
         )}
