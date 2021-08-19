@@ -33,7 +33,6 @@ const App = () => {
       firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
-          const token = await user.getIdToken();
           dispatch(authActions.getCurrentUser());
         }
         else {

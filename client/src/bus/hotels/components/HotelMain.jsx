@@ -12,10 +12,7 @@ const HotelMain = ({ hotel }) => {
     const {
         name,
         description,
-        maxKidsCount,
-        maxAdultsCount,
         rating,
-        photos,
         image,
     } = hotel || {};
 

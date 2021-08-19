@@ -81,7 +81,6 @@ const ReservationForm = ({ tour, onSubmit, isFetching }) => {
               type="text"
               name="toCity"
               label="Місто"
-              variant="standard"
               margin="normal"
               value={tour?.toCity?.name || ''}
               InputLabelProps={{
@@ -99,7 +98,6 @@ const ReservationForm = ({ tour, onSubmit, isFetching }) => {
               type="text"
               name="hotel"
               label="Готель"
-              variant="standard"
               margin="normal"
               value={tour?.hotel?.name || ''}
               InputLabelProps={{
@@ -127,7 +125,6 @@ const ReservationForm = ({ tour, onSubmit, isFetching }) => {
               type="text"
               name="duration"
               label="Тривалість туру"
-              variant="standard"
               margin="normal"
               value={`${tour?.duration || ''}`}
               InputLabelProps={{

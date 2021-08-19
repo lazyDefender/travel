@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import ReservationForm from './components/ReservationForm'
 import AuthBar from '../../global/components/AuthBar'

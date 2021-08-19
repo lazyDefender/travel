@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { CardMedia, makeStyles } from '@material-ui/core'
 import classnames from 'classnames'
 

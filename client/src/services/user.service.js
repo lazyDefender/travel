@@ -32,7 +32,7 @@ export class UserService {
     }
 
     async signIn(email, password) {
-        const authRes = await firebase
+        await firebase
             .auth()
             .signInWithEmailAndPassword(email, password);
     }

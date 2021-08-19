@@ -40,7 +40,7 @@ const GoHomeBar = (props) => {
    
 
     const loadingJSX = 'loing auth...'
-    const { data, isFetching } = auth
+    const { isFetching } = auth
     const authBarContent = isFetching ? loadingJSX : barJSX 
     return <>
     {/* <Container> */}

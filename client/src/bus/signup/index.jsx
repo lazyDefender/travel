@@ -13,15 +13,15 @@ const SignUp = () => {
 
     const signInWithGoogle = useCallback(() => {
         dispatch(authActions.signInWithProvider(AuthProviders.GOOGLE));
-    }, []);
+    }, [dispatch]);
       
     const signInWithFacebook = useCallback(() => {
         dispatch(authActions.signInWithProvider(AuthProviders.FACEBOOK));
-    }, []);
+    }, [dispatch]);
     
     const onLogin = useCallback(() => {
         history.replace(Book.LOGIN);
-    }, []);
+    }, [history]);
     
     const onSubmit = (values, { setSubmitting }) => {
         dispatch(authActions.signUp(values));

@@ -103,8 +103,6 @@ const ToursFilterForm = ({
 
                   <Grid item>
                     <TextField
-                      name="duration"
-                      label="К-сть дорослих"
                       name="adultsCount"
                       type="number"
                       label="К-сть дорослих"
