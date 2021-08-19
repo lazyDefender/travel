@@ -23,6 +23,6 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TRAVEL_APP_6B3EB }}'
           channelId: live
           projectId: travel-app-6b3eb
-          entryPoint: './client'
+          entryPoint: ./client
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
