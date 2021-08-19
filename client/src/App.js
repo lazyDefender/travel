@@ -29,7 +29,8 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
-      console.log(process.env)
+      console.log(process.env);
+      
       firebase.initializeApp(firebaseConfig);
       firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       firebase.auth().onAuthStateChanged(async (user) => {
