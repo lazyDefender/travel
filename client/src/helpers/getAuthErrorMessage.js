@@ -12,5 +12,7 @@ export const getAuthErrorMessage = (code) => {
             return 'Неправильний пароль';
         case AuthErrorCodes.EMAIL_ALREADY_IN_USE:
             return 'Користувач із введеним email існує';
+        default:
+            return;
     } 
 };

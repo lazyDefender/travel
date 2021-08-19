@@ -40,7 +40,7 @@ const signIn = createAsyncThunk(
             password,
         } = payload;
 
-        const response = await authService.signIn(email, password);
+        await authService.signIn(email, password);
     } 
 )
 

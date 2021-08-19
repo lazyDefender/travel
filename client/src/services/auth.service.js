@@ -27,7 +27,7 @@ export class AuthService {
     }
 
     async signIn(email, password) {
-        const authRes = await firebase
+        await firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
     }
@@ -41,6 +41,8 @@ export class AuthService {
             case AuthProviders.GOOGLE:
                 provider = new firebase.auth.GoogleAuthProvider();
                 break;
+            default:
+                return;
         }
 
         provider.addScope('email');
