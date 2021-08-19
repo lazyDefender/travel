@@ -16,7 +16,6 @@ jobs:
         working-directory: client
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci && npm run build
 
       - name: Create .env file
         run: |
@@ -30,6 +29,8 @@ jobs:
           echo REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }} >> .env
           echo REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} >> .env
           cat .env
+
+      - run: npm ci && npm run build
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
