@@ -1,15 +1,11 @@
 import React from 'react';
-import {Formik, Form, Field} from 'formik';
-import {
-    Button,
-    Box,
-} from '@material-ui/core';
+import { Formik, Form } from 'formik';
 import { makeStyles } from '@material-ui/styles';
-import {
-  TextField,
-} from 'formik-material-ui';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+
+import TextField from '../../../global/components/TextField';
+import Button from '../../../global/components/Button';
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -43,50 +39,24 @@ const UserForm = ({
             {({submitForm, isSubmitting, touched, errors}) => (
                 <MuiPickersUtilsProvider utils={MomentUtils}>
                     <Form className={classes.form}>
-                        <Box margin={1}>
-                            <Field
-                                className={classes.formElement}
-                                component={TextField}
-                                type="text"
-                                name="firstName"
-                                label="Ім'я"
-                                disabled={false}
-                                variant="outlined"
-                            />
-                        </Box>
-                        <Box margin={1}>
-                            <Field
-                                className={classes.formElement}
-                                component={TextField}
-                                type="text"
-                                name="lastName"
-                                label="Прізвище"
-                                disabled={false}
-                                variant="outlined"
-                            />
-                        </Box>
-                        <Box margin={1}>
-                            <Button
-                                className={classes.formElement}
-                                variant="contained"
-                                color="primary"
-                                onClick={submitForm}
-                                disableElevation
-                            >
-                            Готово
-                            </Button>
-                        </Box>
-                        <Box margin={1}>
-                            <Button
-                                className={classes.formElement}
-                                variant="contained"
-                                color="primary"
-                                onClick={onDeleteUser}
-                                disableElevation
-                            >
-                                Видалити акаунт
-                            </Button>
-                        </Box>
+                        <TextField
+                            name="firstName"
+                            label="Ім'я"
+                        />
+                        <TextField
+                            name="lastName"
+                            label="Прізвище"
+                        />
+                        <Button
+                            color="primary"
+                            onClick={submitForm}
+                            text="Готово"
+                        />
+                        <Button
+                            color="primary"
+                            onClick={onDeleteUser}
+                            text="Видалити акаунт"
+                        />
                     </Form>
                 </MuiPickersUtilsProvider>
             )}
