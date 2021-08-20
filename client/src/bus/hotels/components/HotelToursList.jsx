@@ -21,39 +21,39 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HotelToursList = ({ tours }) => {
+export const HotelToursList = ({ tours }) => {
   const classes = useStyles();
 
-    return <div className={classes.root}>
-        <TableContainer component={Paper}>
-      <Table aria-label="simple table">
-      <TableHead>
-          <TableRow>
-            <TableCell align="center">Тривалість</TableCell>
-            <TableCell align="center">За 1 дорослого</TableCell>
-            <TableCell align="center">За 1 дитину</TableCell>
-            <TableCell align="center"></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {tours.map((tour) => (
-            <TableRow key={tour.id}>
-                <TableCell align="center">{tour.duration} ночей</TableCell>
-                <TableCell align="center">{tour.adultPrice}$</TableCell>
-                <TableCell align="center">{tour.kidPrice}$</TableCell>
-                <TableCell align="center">
-                  <Button color="primary" variant="contained">
-                    <Link to={`${Book.RESERVATION}?tourId=${encodeURIComponent(tour.id)}`}>
-                        Забронювати
-                    </Link>
-                  </Button>
-                </TableCell>
+  return (
+    <div className={classes.root}>
+      <TableContainer component={Paper}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">Тривалість</TableCell>
+              <TableCell align="center">За 1 дорослого</TableCell>
+              <TableCell align="center">За 1 дитину</TableCell>
+              <TableCell align="center"></TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {tours.map((tour) => (
+              <TableRow key={tour.id}>
+                  <TableCell align="center">{tour.duration} ночей</TableCell>
+                  <TableCell align="center">{tour.adultPrice}$</TableCell>
+                  <TableCell align="center">{tour.kidPrice}$</TableCell>
+                  <TableCell align="center">
+                    <Button color="primary" variant="contained">
+                      <Link to={`${Book.RESERVATION}?tourId=${encodeURIComponent(tour.id)}`}>
+                          Забронювати
+                      </Link>
+                    </Button>
+                  </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
+  );
 };
-
-export default HotelToursList;
