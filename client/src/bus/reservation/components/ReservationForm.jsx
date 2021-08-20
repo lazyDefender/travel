@@ -1,25 +1,19 @@
 import React from 'react';
 import {
   Formik, 
-  Form, 
-  Field
+  Form,
 } from 'formik';
-import {
-  Button,
-  Box
-} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import {
-  TextField,
-} from 'formik-material-ui';
-import {
-  DatePicker,
-} from 'formik-material-ui-pickers';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import moment from 'moment';
 
-import Progress from '../../../global/components/Progress'
+import {
+  Progress,
+  Button,
+  TextField,
+  DatePicker,
+} from '../../../global/components';
 
 import '../../../moment-locales/uk';
 
@@ -44,9 +38,6 @@ const useStyles = makeStyles(theme => ({
   form: {
     width: '300px',
   },
-  formElement: {
-    width: '100%',
-  }
 }));
 
 const ReservationForm = ({ tour, onSubmit, isFetching }) => {
@@ -74,106 +65,70 @@ const ReservationForm = ({ tour, onSubmit, isFetching }) => {
     {({submitForm, isSubmitting, touched, errors}) => (
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <Form className={classes.form}>
-          <Box margin={1}>
-            <Field
-              className={classes.formElement}
-              component={TextField}
-              type="text"
-              name="toCity"
-              label="Місто"
-              margin="normal"
-              value={tour?.toCity?.name || ''}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              disabled
-              variant="outlined"
-            >  
-            </Field>
-          </Box>
-          <Box margin={1}>
-            <Field
-              className={classes.formElement}
-              component={TextField}
-              type="text"
-              name="hotel"
-              label="Готель"
-              margin="normal"
-              value={tour?.hotel?.name || ''}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              disabled
-              variant="outlined"
-            >  
-            </Field>
-          </Box>
-          <Box margin={1}>
-              <Field 
-                className={classes.formElement}
-                component={DatePicker} 
-                disablePast
-                name="datetime" 
-                label="Початок туру"
-                inputVariant="outlined"
-              />
-          </Box>
-          <Box margin={1}>
-            <Field
-              className={classes.formElement}
-              component={TextField}
-              type="text"
-              name="duration"
-              label="Тривалість туру"
-              margin="normal"
-              value={`${tour?.duration || ''}`}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              disabled
-              variant="outlined"
-            >
-            </Field>
-          </Box>
-          <Box margin={1}>
-            <Field
-              className={classes.formElement}
-              component={TextField}
-              name="adultsCount"
-              type="number"
-              label="К-сть дорослих"
-              inputProps={{
-                  min: 1,
-                  max: tour?.hotel?.maxAdultsCount || 6
-              }}
-              variant="outlined"
-            />
-          </Box>
-          <Box margin={1}>
-            <Field
-              className={classes.formElement}
-              component={TextField}
-              name="kidsCount"
-              type="number"
-              label="К-сть дітей"
-              inputProps={{
-                  min: 0,
-                  max: tour?.hotel?.maxKidsCount || 6
-              }}
-              variant="outlined"
-            />
-          </Box>
-          <Box margin={1}>
-            <Button
-              className={classes.formElement}
-              variant="contained"
-              color="primary"
-              onClick={submitForm}
-              disableElevation
-            >
-              Забронювати
-            </Button>
-          </Box>
+          <TextField
+            name="toCity"
+            label="Місто"
+            margin="normal"
+            value={tour?.toCity?.name || ''}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            disabled
+          />
+          <TextField
+            type="text"
+            name="hotel"
+            label="Готель"
+            margin="normal"
+            value={tour?.hotel?.name || ''}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            disabled
+          />
+          <DatePicker
+            disablePast
+            name="datetime" 
+            label="Початок туру"
+          />
+          <TextField
+            name="duration"
+            label="Тривалість туру"
+            margin="normal"
+            value={`${tour?.duration || ''}`}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            disabled
+          />
+          <TextField
+            type="number"
+            name="adultsCount"
+            label="К-сть дорослих"
+            margin="normal"
+            value={`${tour?.duration || ''}`}
+            inputProps={{
+              min: 1,
+              max: tour?.hotel?.maxAdultsCount || 6
+            }}
+          />
+          <TextField
+            type="number"
+            name="kidsCount"
+            label="К-сть дітей"
+            margin="normal"
+            value={`${tour?.duration || ''}`}
+            inputProps={{
+              min: 0,
+              max: tour?.hotel?.maxKidsCount || 6
+            }}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={submitForm}
+            text="Забронювати"
+          />
         </Form>
       </MuiPickersUtilsProvider>
     )}

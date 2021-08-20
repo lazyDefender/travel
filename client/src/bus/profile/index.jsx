@@ -9,10 +9,10 @@ import useOrdersByUser from './hooks/useOrdersByUser';
 import UserForm from './components/UserForm';
 import useAuth from '../../global/hooks/useAuth';
 import OrdersList from './components/OrdersList';
-import AuthBar from '../../global/components/AuthBar';
+import { AuthBar } from '../../global/components/AuthBar';
 import store from '../../redux/store';
 import { authActions } from '../../redux/auth.slice';
-import CenteredCircularProgress from '../../global/components/CenteredCircularProgress';
+import { CenteredCircularProgress } from '../../global/components';
 
 const useStyles = makeStyles(theme => ({
     tabs: {

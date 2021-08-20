@@ -5,8 +5,10 @@ import HotelsToursList from './components/HotelToursList';
 import HotelMain from './components/HotelMain';
 import useHotel from './hooks/useHotel';
 import useToursByHotel from './hooks/useToursByHotel';
-import AuthBar from '../../global/components/AuthBar';
-import Progress from '../../global/components/Progress';
+import {
+    AuthBar, 
+    Progress,
+} from '../../global/components';
 
 const Hotel = () => {
     let { id } = useParams();

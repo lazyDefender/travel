@@ -7,8 +7,10 @@ import {
 } from '@material-ui/core';
 import firebase from 'firebase';
 
-import AuthBar from '../../global/components/AuthBar';
-import Progress from '../../global/components/Progress';
+import { 
+    AuthBar,
+    Progress,
+} from '../../global/components';
 import ToursFilterForm from './components/ToursFilterForm';
 import ToursList from './components/ToursList';
 import ToursFilterNotFound from './components/ToursFilterNotFound';

@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     offset: theme.mixins.toolbar,
 }));
 
-const AuthBar = (props) => {
+export const AuthBar = (props) => {
     const classes = useStyles();
     const { user } = useAuth();
 
@@ -107,5 +107,3 @@ const AuthBar = (props) => {
         </Box>
     </>;
 };
-
-export default AuthBar;

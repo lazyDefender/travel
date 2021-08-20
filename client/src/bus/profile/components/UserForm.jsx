@@ -4,8 +4,10 @@ import { makeStyles } from '@material-ui/styles';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
-import TextField from '../../../global/components/TextField';
-import Button from '../../../global/components/Button';
+import {
+    TextField,
+    Button,
+} from '../../../global/components';
 
 const useStyles = makeStyles(theme => ({
     form: {

@@ -9,9 +9,12 @@ import MomentUtils from '@date-io/moment';
 import moment from 'moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
-import DatePicker from '../../../global/components/DatePicker';
-import TextField from '../../../global/components/TextField';
-import Button from '../../../global/components/Button';
+import {
+  DatePicker,
+  TextField,
+  Button,
+} from '../../../global/components';
+
 import '../../../moment-locales/uk';
 
 moment.locale('uk');

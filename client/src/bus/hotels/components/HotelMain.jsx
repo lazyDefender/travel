@@ -6,7 +6,7 @@ import {
 } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 
-import ImageWithFallback from '../../../global/components/ImageWithFallback';
+import { ImageWithFallback } from '../../../global/components';
 
 const HotelMain = ({ hotel }) => {
     const {

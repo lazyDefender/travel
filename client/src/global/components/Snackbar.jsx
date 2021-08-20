@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import Alert from "@material-ui/lab/Alert";
 
-function Snackbar(props) {
+export const Snackbar = (props) => {
     const {
         severity,
         open,
@@ -47,5 +47,3 @@ function Snackbar(props) {
       </MuiSnackbar>
     );
 };
-
-export default Snackbar;

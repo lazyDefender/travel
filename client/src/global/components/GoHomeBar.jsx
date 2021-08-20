@@ -1,22 +1,22 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {
     Box,
     Grid,
     AppBar,
     Toolbar,
     makeStyles,
-} from '@material-ui/core'
+} from '@material-ui/core';
 import { Book } from '../../common/enums/book';
-import useAuth from '../../global/hooks/useAuth'
+import useAuth from '../../global/hooks/useAuth';
 
 const useStyles = makeStyles(theme => ({
     offset: theme.mixins.toolbar,
-}))
+}));
 
-const GoHomeBar = (props) => {
-    const classes = useStyles()
-    const auth = useAuth()
+export const GoHomeBar = (props) => {
+    const classes = useStyles();
+    const auth = useAuth();
     const barJSX =
     <AppBar
         position="fixed"
@@ -36,20 +36,16 @@ const GoHomeBar = (props) => {
                 </Grid>
             </Toolbar>
         
-      </AppBar>
+    </AppBar>;
    
 
-    const loadingJSX = 'loing auth...'
-    const { isFetching } = auth
-    const authBarContent = isFetching ? loadingJSX : barJSX 
+    const loadingJSX = 'loing auth...';
+    const { isFetching } = auth;
+    const authBarContent = isFetching ? loadingJSX : barJSX; 
     return <>
-    {/* <Container> */}
         <Box pt={2} pb={2}>
             {authBarContent}
             <div className={classes.offset}/>
         </Box>
-    {/* </Container> */}
-    </>
+    </>;
 }
-
-export default GoHomeBar

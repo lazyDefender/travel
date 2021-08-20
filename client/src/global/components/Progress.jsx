@@ -1,13 +1,11 @@
-import React from 'react'
+import React from 'react';
 import {
     Backdrop,
     CircularProgress,
-} from '@material-ui/core'
+} from '@material-ui/core';
 
-const Progress = () => {
+export const Progress = () => {
     return <Backdrop  open={true} >
         <CircularProgress color="inherit" />
-    </Backdrop>
+    </Backdrop>;
 }
-
-export default Progress

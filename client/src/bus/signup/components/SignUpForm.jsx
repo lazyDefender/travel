@@ -11,9 +11,11 @@ import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import { validationSchema } from '../validation/signUp';
-import GoHomeBar from '../../../global/components/GoHomeBar';
-import TextField from '../../../global/components/TextField';
-import Button from '../../../global/components/Button';
+import {
+  GoHomeBar, 
+  TextField,
+  Button,
+} from '../../../global/components';
 
 const initialValues = {
   firstName: '',

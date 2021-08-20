@@ -12,7 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 
 import { Book } from '../../../common/enums/book';
-import ImageWithFallback from '../../../global/components/ImageWithFallback';
+import { ImageWithFallback } from '../../../global/components';
 
 const useStyles = makeStyles({
   root: {
