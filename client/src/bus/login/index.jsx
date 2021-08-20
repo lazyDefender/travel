@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { authActions } from '../../redux/auth.slice';
 import { AuthProviders } from '../../common/enums/authProviders';
 import { Book } from '../../common/enums/book';
-import LoginForm from './components/LoginForm';
+import { LoginForm } from './components';
 
 const Login = () => {
     const dispatch = useDispatch();
