@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-const SignUpForm = ({ 
+export const SignUpForm = ({ 
   onSignInWithGoogle,
   onSignInWithFacebook,
   onLogin,
@@ -110,5 +110,3 @@ const SignUpForm = ({
    
   return page;
 };
-
-export default SignUpForm;
