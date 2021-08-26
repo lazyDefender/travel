@@ -10,12 +10,25 @@ export const initReview = (Router, services) => {
 
     router.post(ReviewsApiPath.ROOT, isAuth, validate(reviewValidation.save), async (req, res, next) => {
         const { data: createdReview, error } = await reviewService.create(req.body);
-        req.result = {
-            status: 201,
-            body: createdReview,
-        };
-            
-        next(); 
+        
+        if(error && error.code === errorCodes.HOTELS.HOTEL_NOT_FOUND_BY_ID) {
+            const body = {
+                errors: [error],
+            }
+
+            req.result = {
+                body,
+                status: 404,
+            }
+        }
+        else {
+            req.result = {
+                status: 201,
+                body: createdReview,
+            };
+        }
+
+        next();
     });
 
     router.delete(ReviewsApiPath.$ID, isAuth, async (req, res, next) => {

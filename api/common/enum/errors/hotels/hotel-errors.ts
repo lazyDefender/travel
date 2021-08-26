@@ -1,4 +1,4 @@
-const ErrorCodes = require("./hotel-error-codes");
+import { ErrorCodes } from './hotel-error-codes';
 
 export const Errors = {
     notFoundById: (id: string) => {
