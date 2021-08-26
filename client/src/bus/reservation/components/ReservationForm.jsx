@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ReservationForm = ({ tour, onSubmit, isFetching }) => {
+export const ReservationForm = ({ tour, onSubmit, isFetching }) => {
   const classes = useStyles();
 
   const initialValues = {
@@ -139,5 +139,3 @@ const ReservationForm = ({ tour, onSubmit, isFetching }) => {
 
     return jsx;
 }
-
-export default ReservationForm;
