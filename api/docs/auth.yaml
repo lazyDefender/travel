@@ -1,4 +1,4 @@
-/api/auth/currentUser:
+/api/auth/current-user:
   get:
     tags:
       - Auth
