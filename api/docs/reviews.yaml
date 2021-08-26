@@ -1,0 +1,34 @@
+/api/reviews:
+  post:
+    tags:
+      - Reviews
+    summary: Create a review
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateReviewInput'
+    responses:
+      201:
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+
+/api/reviews/{id}:
+  delete:
+        tags:
+          - Reviews
+        summary: Delete a review
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: string
+            required: true
+            description: ID of the review to delete
+        responses:
+          204:
+            description: Deleted

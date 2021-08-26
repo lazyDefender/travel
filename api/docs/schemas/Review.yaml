@@ -1,0 +1,36 @@
+components:
+  schemas:
+    Review:
+      type: object
+      properties:
+        id:
+          type: string
+          example: saefefs
+        userId:
+          type: string
+          example: 79878789yhjh
+        hotelId:
+          type: string
+          example: ohoiuy98g;jkbkj
+        content:
+          type: string
+          example: A beatiful place
+        rating:
+          type: number
+          example: 5
+    
+    CreateReviewInput:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: 79878789yhjh
+        hotelId:
+          type: string
+          example: ohoiuy98g;jkbkj
+        content:
+          type: string
+          example: A beatiful place
+        rating:
+          type: number
+          example: 5
