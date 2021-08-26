@@ -11,7 +11,7 @@ import moment from 'moment';
 
 import { Book } from '../../../common/enums/book';
 
-const Order = (props) => {
+export const Order = (props) => {
     const { 
       adultsCount,
       kidsCount,
@@ -71,5 +71,3 @@ const Order = (props) => {
         </Link>
     </>;
 };
-
-export default Order;

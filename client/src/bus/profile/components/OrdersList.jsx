@@ -9,7 +9,7 @@ import {
 } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
 
-import OrdersListItem from './OrdersListItem';
+import { OrdersListItem } from './OrdersListItem';
 
 const useStyles = makeStyles(theme => ({
     box: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const OrdersList = ({ orders }) => {
+export const OrdersList = ({ orders }) => {
     const classes = useStyles();
     const listJSX = (
         <Grid 
@@ -64,5 +64,3 @@ const OrdersList = ({ orders }) => {
 
     return orders?.length ? listJSX : emptyJSX;
 };
-
-export default OrdersList;

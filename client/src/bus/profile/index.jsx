@@ -6,10 +6,12 @@ import {
 import { makeStyles } from '@material-ui/styles';
 
 import useOrdersByUser from './hooks/useOrdersByUser';
-import UserForm from './components/UserForm';
 import useAuth from '../../global/hooks/useAuth';
-import OrdersList from './components/OrdersList';
-import { AuthBar } from '../../global/components/AuthBar';
+import { 
+    OrdersList,
+    UserForm,
+} from './components';
+import { AuthBar } from '../../global/components';
 import store from '../../redux/store';
 import { authActions } from '../../redux/auth.slice';
 import { CenteredCircularProgress } from '../../global/components';

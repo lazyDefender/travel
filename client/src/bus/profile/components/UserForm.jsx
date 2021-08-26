@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-const UserForm = ({
+export const UserForm = ({
         firstName,
         lastName,
         onUpdateUser,
@@ -65,5 +65,3 @@ const UserForm = ({
         </Formik>
     </>;
 };
-
-export default UserForm;
