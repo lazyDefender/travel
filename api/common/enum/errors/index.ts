@@ -3,6 +3,7 @@ import { Errors as CityErrors } from './cities/city-errors';
 import { Errors as AuthErrors } from './auth/auth-errors';
 import { Errors as HotelErrors } from './hotels/hotel-errors';
 import { Errors as TourErrors } from './tours/tour-errors';
+import { Errors as ReviewErrors } from './reviews/review-errors';
 
 export const errors = {
     USERS: UserErrors,
@@ -10,4 +11,5 @@ export const errors = {
     AUTH: AuthErrors,
     HOTELS: HotelErrors, 
     TOURS: TourErrors,
+    REVIEWS: ReviewErrors,
 };

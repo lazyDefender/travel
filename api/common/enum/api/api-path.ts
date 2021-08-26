@@ -7,4 +7,5 @@ export const ApiPath = {
     HOTELS: '/hotels',
     TOURS: '/tours',
     ORDERS: '/orders',
+    REVIEWS: '/reviews',
 };

@@ -7,6 +7,7 @@ import {
     orderService,
     tourService,
     userService,
+    reviewService,
 } from '../services';
 
 import { initAuth } from './auth.route';
@@ -15,6 +16,7 @@ import { initHotel } from './hotel.route';
 import { initOrder } from './order.route';
 import { initTour } from './tour.route';
 import { initUser } from './user.route';
+import { initReview } from './review.route';
 
 
 export const initApi = Router => {
@@ -59,6 +61,13 @@ export const initApi = Router => {
         ApiPath.USERS,
         initUser(Router, {
             userService,
+        })
+    );
+
+    router.use(
+        ApiPath.REVIEWS,
+        initReview(Router, {
+            reviewService,
         })
     );
 

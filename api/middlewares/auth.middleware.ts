@@ -8,9 +8,6 @@ export const isAuth = async (req, res, next) => {
 
     const { data: user, error } = await authService.verifyToken(token);
 
-    console.log(user, error);
-    
-
     if(error) {
         const body = {
             errors: [error],

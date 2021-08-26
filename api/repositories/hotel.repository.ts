@@ -85,6 +85,15 @@ export default class HotelRepository {
         return null;
     }
 
+    async updateWithBatch(id, updatedHotel, batch: FirebaseFirestore.WriteBatch) {
+        const hotelRef: FirebaseFirestore.DocumentReference = firebase
+            .firestore()
+            .collection(Collections.HOTELS)
+            .doc(id);
+            
+        batch.update(hotelRef, updatedHotel);
+    }
+
     async delete(id: string) {
         const hotelRef: FirebaseFirestore.DocumentReference = firebase
             .firestore()

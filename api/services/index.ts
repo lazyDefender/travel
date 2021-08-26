@@ -4,6 +4,7 @@ import {
     orderRepository,
     tourRepository,
     userRepository,
+    reviewRepository,
 } from '../repositories';
 
 import AuthService from './auth.service';
@@ -12,6 +13,7 @@ import HotelService from './hotel.service';
 import OrderService from './order.service';
 import TourService from './tour.service';
 import UserService from './user.service';
+import ReviewService from './review.service';
 
 const authService = new AuthService({
     userRepository,
@@ -30,6 +32,11 @@ const orderService = new OrderService({
     orderRepository,
 });
 
+const reviewService = new ReviewService({
+    hotelRepository,
+    reviewRepository,
+});
+
 const tourService = new TourService({
     tourRepository,
 });
@@ -44,6 +51,7 @@ export {
     cityService,
     hotelService,
     orderService,
+    reviewService,
     tourService,
     userService,
 };
