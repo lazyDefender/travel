@@ -27,7 +27,7 @@ initialDate.set({
     millisecond: 0,
 });
 
-const ToursFilterForm = ({ 
+export const ToursFilterForm = ({ 
   cities,
   formState,
   onSubmit,
@@ -146,5 +146,3 @@ const ToursFilterForm = ({
     </Box>
   );
 };
-
-export default ToursFilterForm;

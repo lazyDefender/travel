@@ -7,7 +7,7 @@ import {
     Cancel,
 } from '@material-ui/icons';
 
-const ToursFilterNotFound = () => {
+export const ToursFilterNotFound = () => {
     return (
         <div>
             <Grid 
@@ -28,5 +28,3 @@ const ToursFilterNotFound = () => {
         </div> 
     );
 };
-
-export default ToursFilterNotFound;

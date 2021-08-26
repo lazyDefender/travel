@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ToursListItem = ({ hotel, adultPrice, kidPrice }) => {
+export const ToursListItem = ({ hotel, adultPrice, kidPrice }) => {
   const classes = useStyles();
   const [image, setImage] = useState(null);
 
@@ -71,5 +71,3 @@ const ToursListItem = ({ hotel, adultPrice, kidPrice }) => {
     </Grid>
   );
 };
-
-export default ToursListItem;

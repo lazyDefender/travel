@@ -11,9 +11,11 @@ import {
     AuthBar,
     Progress,
 } from '../../global/components';
-import ToursFilterForm from './components/ToursFilterForm';
-import ToursList from './components/ToursList';
-import ToursFilterNotFound from './components/ToursFilterNotFound';
+import { 
+    ToursFilterForm,
+    ToursList,
+    ToursFilterNotFound,
+} from './components';
 import { toursFilterActions } from '../../redux/toursFilter.slice';
 import useToursFilterFormState from './hooks/useToursFilterFormState';
 import useToursFilterCities from './hooks/useToursFilterCities';
