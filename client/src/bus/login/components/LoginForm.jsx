@@ -11,9 +11,11 @@ import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import { validationSchema } from '../validation/login';
-import GoHomeBar from '../../../global/components/GoHomeBar';
-import TextField from '../../../global/components/TextField';
-import Button from '../../../global/components/Button';
+import {
+  GoHomeBar,
+  TextField,
+  Button,
+} from '../../../global/components';
 
 const initialValues = {
   email: '',
@@ -36,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LoginForm = ({ 
+export const LoginForm = ({ 
   onSignInWithGoogle,
   onSignInWithFacebook,
   onSubmit,
@@ -98,5 +100,3 @@ const LoginForm = ({
 
   return page;
 }
-
-export default LoginForm;

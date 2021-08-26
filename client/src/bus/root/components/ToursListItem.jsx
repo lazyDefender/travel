@@ -12,7 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 
 import { Book } from '../../../common/enums/book';
-import ImageWithFallback from '../../../global/components/ImageWithFallback';
+import { ImageWithFallback } from '../../../global/components';
 
 const useStyles = makeStyles({
   root: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ToursListItem = ({ hotel, adultPrice, kidPrice }) => {
+export const ToursListItem = ({ hotel, adultPrice, kidPrice }) => {
   const classes = useStyles();
   const [image, setImage] = useState(null);
 
@@ -71,5 +71,3 @@ const ToursListItem = ({ hotel, adultPrice, kidPrice }) => {
     </Grid>
   );
 };
-
-export default ToursListItem;

@@ -11,12 +11,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function Button({
+export const Button = ({
     color,
     onClick,
     text,
     disabled,
-}) {
+}) => {
     const classes = useStyles();
 
     return (
@@ -33,5 +33,3 @@ function Button({
         </Box>
     );
 };
-
-export default Button;

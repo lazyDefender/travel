@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const TextField = (props) => {
+export const TextField = (props) => {
     const classes = useStyles();
 
     return (
@@ -25,5 +25,3 @@ const TextField = (props) => {
         </Box>
     );
 };
-
-export default TextField;

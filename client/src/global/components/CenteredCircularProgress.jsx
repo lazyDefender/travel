@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-function CenteredCircularProgress() {
+export const CenteredCircularProgress = () => {
     const classes = useStyles();
 
     return (
@@ -23,5 +23,3 @@ function CenteredCircularProgress() {
         </Box>
     );
 };
-
-export default CenteredCircularProgress;

@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import ToursListItem from './ToursListItem';
+import { ToursListItem } from './ToursListItem';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const ToursList = ({ tours }) => {
+export const ToursList = ({ tours }) => {
     const classes = useStyles();
 
     return (
@@ -25,5 +25,3 @@ const ToursList = ({ tours }) => {
         </Grid>   
     );
 };
-
-export default ToursList;

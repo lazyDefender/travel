@@ -7,11 +7,15 @@ import {
 } from '@material-ui/core';
 import firebase from 'firebase';
 
-import AuthBar from '../../global/components/AuthBar';
-import Progress from '../../global/components/Progress';
-import ToursFilterForm from './components/ToursFilterForm';
-import ToursList from './components/ToursList';
-import ToursFilterNotFound from './components/ToursFilterNotFound';
+import { 
+    AuthBar,
+    Progress,
+} from '../../global/components';
+import { 
+    ToursFilterForm,
+    ToursList,
+    ToursFilterNotFound,
+} from './components';
 import { toursFilterActions } from '../../redux/toursFilter.slice';
 import useToursFilterFormState from './hooks/useToursFilterFormState';
 import useToursFilterCities from './hooks/useToursFilterCities';

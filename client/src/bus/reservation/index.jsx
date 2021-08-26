@@ -1,13 +1,13 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 
-import ReservationForm from './components/ReservationForm'
-import AuthBar from '../../global/components/AuthBar'
-import useTour from './hooks/useTour'
-import useAuth from '../../global/hooks/useAuth'
-import { reservationActions } from '../../redux/reservation.slice'
-import { useDispatch } from 'react-redux'
-import { history } from '../../navigation/history'
+import { ReservationForm } from './components';
+import { AuthBar } from '../../global/components';
+import useTour from './hooks/useTour';
+import useAuth from '../../global/hooks/useAuth';
+import { reservationActions } from '../../redux/reservation.slice';
+import { useDispatch } from 'react-redux';
+import { history } from '../../navigation/history';
 
 const Reservation = (props) => {
     const dispatch = useDispatch();

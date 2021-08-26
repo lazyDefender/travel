@@ -9,9 +9,11 @@ import { Routes } from './navigation';
 import { history } from './navigation/history';
 import { authActions } from './redux/auth.slice';
 import useAuth from './global/hooks/useAuth';
-import Progress from './global/components/Progress';
+import { 
+  Progress,
+  Snackbar,
+} from './global/components';
 import { firebaseConfig } from './firebase';
-import Snackbar from './global/components/Snackbar';
 import useSnackbar from './global/hooks/useSnackbar';
 import store from './redux/store';
 import { snackbarActions } from './redux/snackbar.slice';
