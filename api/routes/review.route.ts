@@ -18,7 +18,7 @@ export const initReview = (Router, services) => {
         next(); 
     });
 
-    router.delete(ReviewsApiPath.$ID, async (req, res, next) => {
+    router.delete(ReviewsApiPath.$ID, isAuth, async (req, res, next) => {
         const { id } = req.params;
         const { error } = await reviewService.delete(id);
 
